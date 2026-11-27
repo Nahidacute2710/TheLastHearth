@@ -59,4 +59,7 @@
 | 2026-11-27 | C2 | `Pickup` là Area2D layer 6 (Interactable), mask 2: chạm là nhặt, không cần bấm E; túi đầy thì phần dư nằm lại | Nhặt nhanh trong lúc đánh | Claude |
 | 2026-11-27 | C2 | HUD: biểu tượng Nấm Hang và số nấm trong túi (`×3`) dưới thanh máu | UI tạm, không có chữ | Claude |
 | 2026-11-27 | C2 | Phím debug thêm (chỉ bản debug): Shift+F1 +5 Nấm Hang vào túi, Shift+F2 +5 vào kho, Shift+F3 sang ngày mới, Shift+F4 +50 vàng | Theo yêu cầu; tránh F5–F8 | Claude |
+| 2026-11-27 | C3 | Panel túi đồ: túi 6×2 ô, kho 10×3 ô, ô 20×20 px, giữa màn hình; chỉ xem, chưa kéo thả 🧪 | UI tạm đúng phạm vi MVP | Claude |
+| 2026-11-27 | C3 | Mở panel thì thế giới tạm dừng (`get_tree().paused`), panel chạy ở `PROCESS_MODE_ALWAYS`; Esc cũng đóng panel; không mở được khi đang chuyển cảnh 🧪 | Mở túi giữa trận không bị đánh lén; đổi được nếu muốn xem túi trong lúc chạy | Claude |
+| 2026-11-27 | C3 | TECH-006: panel đọc `inventory` trong `_input` (trước GUI) và đánh dấu đã xử lý, mọi ô đặt `FOCUS_NONE`; không sửa `ui_focus_next` trong `project.godot` | Tab không bao giờ tới phần chuyển focus; không đụng cấu hình | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

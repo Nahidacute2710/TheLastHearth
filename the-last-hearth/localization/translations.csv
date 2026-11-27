@@ -7,3 +7,5 @@ ITEM_RUSTY_PICKAXE_NAME,Pickaxe,Cuốc Chim
 ENEMY_HOLLOW_MINER_NAME,Hollow Miner,Thợ Mỏ Rỗng
 TOAST_ITEMS_STORED,Stored %d %s,Đã cất %d %s
 ITEM_CAVE_MUSHROOM_NAME,Cave Mushroom,Nấm Hang
+UI_INVENTORY_BAG,Bag (lost on death),Túi (mất khi chết)
+UI_INVENTORY_STASH,Tavern stash,Kho quán

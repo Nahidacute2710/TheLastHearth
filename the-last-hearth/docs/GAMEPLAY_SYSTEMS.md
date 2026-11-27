@@ -50,7 +50,7 @@
 ### 2.3 Inventory
 - **Mục đích:** Lưu vật phẩm player mang theo.
 - **Chi tiết:** Class `Inventory` (`RefCounted`) giữ danh sách `ItemStack {item: ItemData, quantity: int}`. API: `add_item`, `remove_item`, `has_item`, `get_quantity`, signal `changed`. Logic tách khỏi UI. Inventory thuộc `GameState`, nên tồn tại xuyên suốt khi chuyển cảnh.
-- **MVP:** ✅ Danh sách đơn giản, số ô giới hạn, UI hiển thị dạng lưới. ❌ Kéo thả, kho chứa, phân loại.
+- **MVP:** ✅ Danh sách đơn giản, số ô giới hạn, UI hiển thị dạng lưới. ✅ Kho quán (chủ dự án chốt ở CP-C). ❌ Kéo thả, phân loại. **Đã làm ở C3:** Tab/I mở panel hiện túi (12 ô) và kho (30 ô), thế giới tạm dừng khi panel mở.
 - **Hệ quả của luật chết (✅ ĐÃ CHỐT, bảng ở GDD mục 6):** khi chết, mất mọi thứ player đang mang trong chuyến (loot, tài nguyên, tiền nhặt được, đồ tiêu hao, trang bị chưa mặc); giữ trang bị đang mặc và vật phẩm cốt truyện/quest. Vì vậy inventory phải phân biệt được: *đồ cất ở quán*, *đồ đang mang theo*, *slot trang bị đang mặc*, và cờ *vật phẩm quest* trên `ItemData`.
 - **Cách làm (✅ ĐÃ CHỐT 2026-11-27, làm ở C1):** `GameState.bag` (túi, 12 ô 🧪) chỉ chứa đồ trong chuyến; `GameState.stash` (kho quán, 30 ô 🧪). Về quán an toàn: túi tự cất vào kho, hiện thông báo `TOAST_ITEMS_STORED`. Chết: túi bị xóa trừ vật phẩm có `ItemData.is_quest_item`; `equipped_weapon` và kho không đổi. Class `Inventory` có `add` (trả về số không vừa), `remove` (đủ hoặc không lấy gì), `count_of`, `get_stacks`, `get_totals`.
 

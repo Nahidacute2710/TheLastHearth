@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://scenes/main/debug_tools.gd" id="3_debug"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/toast.tscn" id="5_toast"]
+[ext_resource type="PackedScene" path="res://scenes/ui/inventory_panel.tscn" id="6_inventory"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_script")
@@ -21,6 +22,8 @@ layer = 10
 [node name="InteractionPrompt" parent="UILayer" instance=ExtResource("2_prompt")]
 
 [node name="Toast" parent="UILayer" instance=ExtResource("5_toast")]
+
+[node name="InventoryPanel" parent="UILayer" instance=ExtResource("6_inventory")]
 
 [node name="DebugTools" type="Node" parent="."]
 script = ExtResource("3_debug")
