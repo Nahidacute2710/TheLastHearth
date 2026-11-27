@@ -13,3 +13,9 @@ ITEM_MUSHROOM_STEW_NAME,Mushroom Stew,Súp Nấm
 PROMPT_COOK_STEW,Cook Mushroom Stew,Nấu Súp Nấm
 TOAST_MISSING_INGREDIENTS,Need %d %s in the stash,Cần %d %s trong kho
 TOAST_DISH_COOKED,Cooked %s,Đã nấu xong %s
+CUSTOMER_WEARY_TRAVELER_NAME,Weary Traveler,Lữ Khách
+PROMPT_SERVE_STEW,Serve Mushroom Stew,Mang Súp Nấm ra
+TOAST_CUSTOMER_WAITING,%s is waiting for %s,%s đang chờ %s
+TOAST_CUSTOMER_PAID,%s paid %d gold,%s trả %d vàng
+HUD_DAY,Day %d,Ngày %d
+HUD_GOLD,%d gold,%d vàng

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CustomerData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/customer_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/characters/customers/chr_weary_traveler_placeholder.png" id="2_sprite"]
+[ext_resource type="Resource" path="res://data/items/mushroom_stew.tres" id="3_stew"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"weary_traveler"
+name_key = &"CUSTOMER_WEARY_TRAVELER_NAME"
+sprite = ExtResource("2_sprite")
+wanted_item = ExtResource("3_stew")
+payment = 15

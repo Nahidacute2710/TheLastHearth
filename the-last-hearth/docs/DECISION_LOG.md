@@ -67,4 +67,7 @@
 | 2026-11-27 | C4 | Đang nấu thì bếp tắt tương tác; player đi lại tự do; rời quán giữa chừng thì món được nấu xong ngay (không mất nguyên liệu) | Tránh mất đồ vì chuyển cảnh | Claude |
 | 2026-11-27 | C4 | Thanh tiến trình vẽ bằng `_draw` trên đầu bếp (24×3 px, màu cam) | Placeholder | Claude |
 | 2026-11-27 | C4 | Thêm `EventBus.toast_requested(message)` cho thông báo chung; người gửi tự dịch bằng `tr()` | Một kênh thông báo cho mọi hệ thống | Claude |
+| 2026-11-27 | C5 | Lữ Khách đứng cạnh bàn (430, 330), trả 15 vàng cho 1 Súp Nấm 🧪; phục vụ xong thì biến mất đến ngày sau | Giá khởi đầu: 1 chuyến khoảng 4 bát nhưng khách chỉ mua 1 bát mỗi ngày | Claude |
+| 2026-11-27 | C5 | Ngày phục vụ khách lưu ở `GameState.customer_served_day` (id → ngày), nên tải lại quán trong cùng ngày khách không quay lại | Dữ liệu sẽ được lưu ở CP-D | Claude |
+| 2026-11-27 | C5 | HUD góc trên phải: "Ngày X" (trắng) và "X vàng" (vàng), khóa `HUD_DAY`, `HUD_GOLD`, cập nhật khi đổi ngôn ngữ | Theo yêu cầu | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

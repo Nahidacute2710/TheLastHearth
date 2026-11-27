@@ -12,6 +12,8 @@ var bag: Inventory = Inventory.new(BAG_SLOTS)
 var stash: Inventory = Inventory.new(STASH_SLOTS)
 var day: int = 1
 var gold: int = 0
+## Customer id -> last day it was served.
+var customer_served_day: Dictionary[StringName, int] = {}
 
 var _last_level_id: StringName = &""
 
@@ -31,6 +33,14 @@ func owns_item_id(id: StringName) -> bool:
 	if equipped_weapon != null and equipped_weapon.id == id:
 		return true
 	return bag.has_item_id(id) or stash.has_item_id(id)
+
+
+func is_customer_served_today(customer_id: StringName) -> bool:
+	return customer_served_day.get(customer_id, 0) >= day
+
+
+func mark_customer_served(customer_id: StringName) -> void:
+	customer_served_day[customer_id] = day
 
 
 func add_gold(amount: int) -> void:
@@ -65,6 +75,7 @@ func reset_session() -> void:
 	stash.clear()
 	day = 1
 	gold = 0
+	customer_served_day.clear()
 	_last_level_id = &""
 
 

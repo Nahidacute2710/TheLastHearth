@@ -5,6 +5,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 ## [Chưa phát hành] — CP-C: Túi đồ, nấu ăn, khách
 
 ### Thêm
+- C5: `CustomerData` + Lữ Khách (mỗi ngày 1 lần, trả vàng), HUD ngày và vàng + test.
 - C4: `RecipeData`, `RecipeIngredient`, `mushroom_stew` (món + công thức), bếp nấu trong quán có thanh tiến trình, `EventBus.toast_requested` + test.
 - C3: `InventoryPanel` (Tab/I, Esc đóng) hiện túi và kho, tạm dừng thế giới khi mở; sửa TECH-006 + test.
 - C2: `cave_mushroom.tres` + icon placeholder, `LootEntry` và `EnemyData.loot`, scene `Pickup`, 4 nấm mọc sẵn trong mỏ, HUD đếm nấm, phím debug Shift+F1..F4 + test.

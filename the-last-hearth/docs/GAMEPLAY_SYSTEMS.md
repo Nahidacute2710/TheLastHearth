@@ -105,11 +105,11 @@
 
 ### 4.2 Khách hàng (Customers)
 - **Chi tiết:** Khách đến, ngồi vào chỗ, yêu cầu món. Player mang món đến (tương tác) → nhận tiền. Khách có độ kiên nhẫn; hết kiên nhẫn thì bỏ đi.
-- **MVP:** ✅ 1 khách, xuất hiện cố định mỗi ngày, yêu cầu 1 món. ❌ Kiên nhẫn, danh tiếng, nhiều khách.
+- **MVP:** ✅ 1 khách, xuất hiện cố định mỗi ngày, yêu cầu 1 món. ❌ Kiên nhẫn, danh tiếng, nhiều khách. **Đã làm ở C5:** `CustomerData` + `weary_traveler.tres`; Lữ Khách mỗi ngày 1 lần, chưa có món thì đứng chờ mãi; giao Súp Nấm từ kho nhận 15 vàng 🧪.
 
 ### 4.3 Kinh tế (Economy)
 - **Chi tiết:** Tiền (`gold`) trong `GameState`. Nguồn thu: phục vụ khách, bán vật phẩm. Chi: mua nguyên liệu, nâng cấp, trang bị.
-- **MVP:** ✅ Chỉ thu tiền từ khách, hiển thị trên HUD. ❌ Cửa hàng, nâng cấp.
+- **MVP:** ✅ Chỉ thu tiền từ khách, hiển thị trên HUD. ❌ Cửa hàng, nâng cấp. **Đã làm ở C5:** HUD góc trên phải hiện ngày và vàng.
 
 ### 4.4 Chế tạo (Crafting)
 - **Chi tiết:** Tương tự nấu ăn nhưng ra trang bị/vật phẩm. Dùng chung khung `RecipeData` với trường `station_type` để phân biệt bếp/lò rèn.

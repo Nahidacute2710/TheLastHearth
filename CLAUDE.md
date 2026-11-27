@@ -165,7 +165,9 @@ Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình b�
 
 **CP-A (mốc 1.3 + 1.4): ✅ HOÀN THÀNH** (2026-11-27).
 
-**CP-B (mốc 1.5):** code xong 2026-11-27 (B1–B4: component combat, Cuốc Chim, Thợ Mỏ Rỗng, máu player, né, chết → về quán), chờ chủ dự án chơi thử. **Tiếp theo:** CP-C. Kế hoạch checkpoint ở `DEVELOPMENT_ROADMAP.md`.
+**CP-B (mốc 1.5):** code xong 2026-11-27 (B1–B4: component combat, Cuốc Chim, Thợ Mỏ Rỗng, máu player, né, chết → về quán), chờ chủ dự án chơi thử (gộp với CP-C).
+
+**CP-C (mốc 1.6 + 1.7):** code xong 2026-11-27 (C1–C5: túi và kho quán, luật chết, Nấm Hang, panel túi đồ, bếp và Súp Nấm, Lữ Khách, vàng và ngày), chờ chủ dự án chơi thử. **Tiếp theo:** CP-D. Kế hoạch checkpoint ở `DEVELOPMENT_ROADMAP.md`.
 
 **Kiểm tra headless phía Claude:** dùng bản Godot 4.7.2 Linux chính thức trên bản sao repo ở cloud (chủ dự án cho phép 2026-11-27).
 
