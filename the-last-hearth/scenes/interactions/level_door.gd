@@ -17,4 +17,4 @@ func _ready() -> void:
 
 
 func _on_interacted(_actor: Node2D) -> void:
-	print("LevelDoor: go to %s / %s" % [target_level, target_spawn])
+	SceneRouter.go_to(target_level, target_spawn)

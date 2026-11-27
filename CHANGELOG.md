@@ -6,6 +6,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 
 ### Thêm
 - `docs/DECISION_LOG.md`; kế hoạch checkpoint trong `DEVELOPMENT_ROADMAP.md`.
+- A3: `SceneRouter` có fade, script `Level` dùng chung, `main.gd` khởi động quán, Mỏ Bỏ Hoang bản 1 phòng có thang về quán, phím debug F1–F3.
 - A2: component `Interactable` + `Interactor`, `InteractionPrompt` trên `UILayer`, scene `level_door.tscn`, nắp hầm placeholder trong quán.
 - A1: `localization/translations.csv` (keys, en, vi), đăng ký bản dịch trong `project.godot` (`[internationalization]`).
 

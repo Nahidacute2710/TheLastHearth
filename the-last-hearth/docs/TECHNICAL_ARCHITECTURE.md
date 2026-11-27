@@ -71,6 +71,8 @@ res://
 
 Thứ tự load: `EventBus` → `GameState` → `SaveManager` → `SceneRouter`.
 
+**SceneRouter (đã làm ở A3):** `Main` gọi `SceneRouter.start(%LevelRoot, SceneRouter.TAVERN)` một lần. `go_to(level_id, spawn_id)` fade đen → tắt xử lý `LevelRoot` trong lúc chuyển → thay level → gọi `level.place_player(spawn_id)` → fade sáng → emit `EventBus.level_changed`. Overlay fade là `CanvasLayer` (layer 100) do SceneRouter tự tạo. Danh sách level nằm trong hằng `_LEVEL_PATHS`.
+
 > ✅ Đã đăng ký trong `project.godot` (`[autoload]`, bật Global Variable) ở mốc 1.1. Mọi thay đổi `project.godot` về sau vẫn phải giải thích lý do trước.
 >
 > Script autoload **không** khai báo `class_name` trùng tên autoload (Godot báo lỗi *"Class ... hides an autoload singleton"*). Autoload truy cập bằng tên toàn cục, ví dụ `EventBus.enemy_died`.
@@ -235,6 +237,8 @@ window/stretch/scale_mode="integer"  ; MỚI: chỉ phóng to theo bội số ng
 - Chướng ngại vật trong phòng là scene `StaticBody2D` riêng (layer 1, mask trống), không vẽ bằng tile, để y-sort cùng player.
 - **Camera:** `Camera2D` nằm trong Player. Phòng (cha) gọi `player.set_camera_limits(rect)` với khung phòng **tính bằng pixel**. `TileMapLayer.get_used_rect()` trả về tọa độ tile, phải nhân `tile_set.tile_size` trước khi truyền.
 - TileSet placeholder: `resources/tilesets/tavern_placeholder_tileset.tres`, tile 16×16, physics layer 0 = layer 1 `World`.
+- **Level (từ A3):** mọi scene phòng chơi được gắn script kế thừa `Level` (`scripts/core/level.gd`). Một tầng kế thừa duy nhất, chỉ chứa phần chung: giới hạn camera và `place_player(spawn_id)`. Phòng phải có `%Floor`, `%Player`, `%Spawns` (các `Marker2D`, luôn có `default`). Level tự chứa instance Player của mình.
+- Đồ vật nằm sát sàn (nắp hầm, thang) đặt trong `FloorProps`, vẽ dưới `Entities`.
 
 ## 10. Kiểm thử
 

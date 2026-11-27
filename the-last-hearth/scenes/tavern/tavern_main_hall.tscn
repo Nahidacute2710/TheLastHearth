@@ -43,3 +43,12 @@ position = Vector2(608, 96)
 [node name="Player" parent="Entities" instance=ExtResource("3_player")]
 unique_name_in_owner = true
 position = Vector2(384, 240)
+
+[node name="Spawns" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="default" type="Marker2D" parent="Spawns"]
+position = Vector2(384, 240)
+
+[node name="cellar_door" type="Marker2D" parent="Spawns"]
+position = Vector2(688, 380)

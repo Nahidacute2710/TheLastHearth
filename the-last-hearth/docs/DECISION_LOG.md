@@ -20,4 +20,8 @@
 | 2026-11-27 | A2 | Một scene `level_door.tscn` dùng chung cho cửa hầm và lối ra mỏ (export `target_level`, `target_spawn`, `prompt_key`, `texture`) | Tránh lặp scene | Claude |
 | 2026-11-27 | A2 | Cửa hầm là nắp sàn 32×16 đặt trong `FloorProps` (vẽ dưới `Entities`), vùng tương tác tròn bán kính 16 px 🧪 | Nắp sàn không được che player | Claude |
 | 2026-11-27 | A2 | Prompt: Label cỡ chữ 8, viền tối, đặt cách đối tượng 28 px phía trên, font mặc định của Godot 🧪 | UI tạm; pixel font chọn sau | Claude |
+| 2026-11-27 | A3 | Script `Level` dùng chung cho các phòng (1 tầng kế thừa) | Gom phần lặp (camera, điểm xuất hiện); vẫn theo composition cho hành vi | Claude |
+| 2026-11-27 | A3 | Mỗi level tự chứa Player; SceneRouter chỉ đặt vị trí theo `Marker2D` trong `%Spawns` | Đơn giản cho MVP; trạng thái player sau này nằm ở `GameState` | Claude |
+| 2026-11-27 | A3 | Fade 0,25 giây mỗi chiều, màu `#16141C`; `LevelRoot` bị tắt xử lý trong lúc fade 🧪 | Player không đi được khi màn hình đang tối | Claude |
+| 2026-11-27 | A3 | Phím debug (chỉ bản debug): F1 đổi EN/VI, F2 xuống mỏ, F3 về quán | Chơi thử nhanh | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

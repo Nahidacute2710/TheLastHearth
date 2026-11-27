@@ -6,3 +6,6 @@ signal interactable_available(interactable: Interactable)
 signal interactable_unavailable(interactable: Interactable)
 ## The interactable the player would use when pressing interact (null when none).
 signal interaction_focus_changed(interactable: Interactable)
+
+## SceneRouter finished swapping to a new level.
+signal level_changed(level_id: StringName)
