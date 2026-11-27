@@ -13,7 +13,7 @@ var main: Node = null
 
 
 func before_each() -> void:
-	pass
+	tree.root.get_node("GameState").call("reset_session")
 
 
 func after_each() -> void:

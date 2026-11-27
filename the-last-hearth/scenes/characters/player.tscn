@@ -3,9 +3,15 @@
 [ext_resource type="Script" path="res://scenes/characters/player.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/characters/innkeeper/chr_innkeeper_placeholder.png" id="2_sprite"]
 [ext_resource type="Script" path="res://scripts/components/interactor.gd" id="3_interactor"]
+[ext_resource type="Script" path="res://scenes/characters/player_attack.gd" id="4_attack"]
+[ext_resource type="Texture2D" path="res://assets/effects/vfx_swing_placeholder.png" id="5_swing"]
+[ext_resource type="Script" path="res://scripts/components/hitbox_component.gd" id="6_hitbox"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_feet"]
 radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_swing"]
+radius = 11.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -26,3 +32,23 @@ unique_name_in_owner = true
 
 [node name="Interactor" type="Node2D" parent="."]
 script = ExtResource("3_interactor")
+
+[node name="WeaponPivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -8)
+script = ExtResource("4_attack")
+
+[node name="SwingSprite" type="Sprite2D" parent="WeaponPivot"]
+position = Vector2(10, 0)
+texture = ExtResource("5_swing")
+
+[node name="Hitbox" type="Area2D" parent="WeaponPivot"]
+position = Vector2(14, 0)
+collision_layer = 0
+collision_mask = 16
+monitoring = false
+monitorable = false
+script = ExtResource("6_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Hitbox"]
+shape = SubResource("CircleShape2D_swing")

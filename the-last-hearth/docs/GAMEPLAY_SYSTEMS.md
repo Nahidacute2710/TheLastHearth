@@ -70,7 +70,7 @@
 - **Mục đích:** Hành động cận chiến ngắn, đọc được, có phản hồi mạnh.
 - **Chi tiết:**
   - `HitboxComponent` (Area2D gây sát thương) và `HurtboxComponent` (Area2D nhận sát thương) → `HealthComponent` (máu, signal `died`, `health_changed`). **Đã làm ở B1** (`scripts/components/`): hitbox chỉ dò khi `activate(duration)`, trúng mỗi hurtbox tối đa 1 lần mỗi lần kích hoạt; `HurtboxComponent.start_invulnerability()` tắt `monitorable` nên hitbox không thấy hurtbox (dùng chung cho i-frames khi bị đánh và khi né).
-  - Đòn đánh theo **hướng chuột** (✅ ĐÃ CHỐT 2026-11-27).
+  - Đòn đánh theo **hướng chuột** (✅ ĐÃ CHỐT 2026-11-27). **Đã làm ở B2:** `WeaponPivot` (script `PlayerAttack`) xoay theo hướng chuột, hiện vệt vung placeholder và bật hitbox trong `hit_active_time`. Lấy Cuốc Chim ở giá treo cạnh nắp hầm (`GameState.equipped_weapon`). Trúng đòn thì hit-stop: `Level.hit_stop()` tắt xử lý `%Entities` trong thời gian ngắn, không dùng `Engine.time_scale` nên fade và UI không bị ảnh hưởng. Không rung màn hình ở MVP (✅ chốt).
   - Có cooldown, knockback, i-frames ngắn sau khi bị đánh.
   - Phản hồi: nháy trắng, hitstop, rung camera.
 - **Đầu vào:** `WeaponData`. **Đầu ra:** Signal chết → rơi đồ, nhiệm vụ.

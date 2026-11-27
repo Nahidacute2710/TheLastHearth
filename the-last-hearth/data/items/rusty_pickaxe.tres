@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/weapon_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/items/itm_rusty_pickaxe_placeholder.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_script")
+damage = 1
+attack_cooldown = 0.35
+knockback = 160.0
+hit_active_time = 0.1
+swing_duration = 0.15
+swing_move_factor = 0.4
+hit_stop_time = 0.05
+id = &"rusty_pickaxe"
+name_key = &"ITEM_RUSTY_PICKAXE_NAME"
+icon = ExtResource("2_icon")
+max_stack = 1

@@ -9,3 +9,6 @@ signal interaction_focus_changed(interactable: Interactable)
 
 ## SceneRouter finished swapping to a new level.
 signal level_changed(level_id: StringName)
+
+## GameState equipped a weapon (null when unequipped).
+signal weapon_equipped(weapon: WeaponData)

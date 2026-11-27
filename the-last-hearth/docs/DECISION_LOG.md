@@ -30,4 +30,9 @@
 | 2026-11-27 | Test | Bộ test tự viết trong `tests/`, mỗi test khởi động `Main` mới; `SceneRouter.start()` reset trạng thái để chạy lại được | Không dùng addon theo yêu cầu | Claude |
 | 2026-11-27 | B1 | i-frames thực hiện bằng cách tắt `monitorable` của hurtbox trong thời gian bất tử; gọi lại thì lấy thời lượng dài hơn | Một cơ chế chung cho bị đánh và né như yêu cầu | Claude |
 | 2026-11-27 | B1 | Hướng knockback = từ thân người đánh tới hurtbox | Đơn giản, đọc được | Claude |
+| 2026-11-27 | B2 | Chủ dự án chốt cảm giác combat: quái không gây sát thương khi chạm thân; chỉ đòn có lấy đà gây sát thương, lấy đà phải nhìn thấy rõ; hit-stop ~50 ms; không rung màn hình; vệt vung theo hướng chuột; hitbox chỉ bật vài frame, mỗi cú trúng một quái tối đa 1 lần | Quyết định của chủ dự án | Chủ dự án |
+| 2026-11-27 | B2 | Cuốc Chim: sát thương 1, cooldown 0,35 s, knockback 160 px/s, hitbox bật 0,1 s, vệt vung 0,15 s, tốc độ đi khi đang vung ×0,4, hit-stop 0,05 s 🧪 | Giá trị khởi đầu, nằm trong `data/items/rusty_pickaxe.tres` | Claude |
+| 2026-11-27 | B2 | Hitbox của cuốc: hình tròn bán kính 11 px, cách tâm thân 14 px theo hướng chuột 🧪 | Tầm với ngắn, hợp vũ khí cận chiến | Claude |
+| 2026-11-27 | B2 | Hit-stop làm bằng cách tắt `process_mode` của `%Entities` trong level, timer bỏ qua time scale | Không dùng `Engine.time_scale`, nên fade và UI không bị ảnh hưởng | Claude |
+| 2026-11-27 | B2 | Giá treo vũ khí đặt cạnh nắp hầm; lấy được đúng 1 lần (trang bị nằm ở `GameState`); xuống mỏ không cần có cuốc | Theo kịch bản MVP; không chặn người chơi | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |
