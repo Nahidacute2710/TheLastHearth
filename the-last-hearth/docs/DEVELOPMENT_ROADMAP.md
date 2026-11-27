@@ -25,7 +25,8 @@
 - [x] Thiết kế phạm vi MVP
 - [x] Chủ dự án duyệt tài liệu và chốt quyết định Phase 0 (2026-11-27)
 - [x] Cập nhật tài liệu theo quyết định đã chốt, kiểm tra tính nhất quán
-- [ ] Commit và push lên GitHub, gắn tag `v0.0-init` (chờ chủ dự án yêu cầu)
+- [x] Commit (`docs: finalize phase 0 project foundation`, 2026-11-27)
+- [ ] Push lên GitHub, gắn tag `v0.0-init` (chờ chủ dự án yêu cầu)
 
 **Tiêu chí hoàn thành:** Chủ dự án xác nhận tài liệu, project mở được trong editor mà không có lỗi.
 
@@ -41,7 +42,7 @@ Chia thành các mốc nhỏ (mỗi mốc được duyệt riêng):
 
 | Mốc | Nội dung | Kiểm chứng |
 |---|---|---|
-| 1.1 | Cấu hình project: input map (8 action), collision layers (6 layer), 4 autoload rỗng, `main.tscn` làm scene chính, integer scaling (TECH-003) | Chạy F5 ra màn hình trống không lỗi |
+| 1.1 | Cấu hình project: input map (8 action), collision layers (6 layer), 4 autoload rỗng, `main.tscn` làm scene chính, integer scaling (TECH-003). ✅ **Hoàn thành 2026-11-27** (headless và editor đã kiểm tra) | Chạy F5 ra màn hình trống không lỗi |
 | 1.2 | Player di chuyển trong phòng quán (graybox) | Đi lại, va chạm tường |
 | 1.3 | Hệ thống tương tác (`Interactable` + prompt); tạo `translations.csv` và khóa dịch đầu tiên | Đứng gần bếp/cửa hiện chữ "E" |
 | 1.4 | Chuyển cảnh Quán ↔ Dungeon | Đi qua cửa sang dungeon và quay về |

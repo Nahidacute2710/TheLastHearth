@@ -132,7 +132,7 @@ Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình b�
 
 - Code thay đổi kiến trúc → cập nhật `TECHNICAL_ARCHITECTURE.md`.
 - Thêm/sửa hệ thống gameplay → cập nhật `GAMEPLAY_SYSTEMS.md` (và GDD nếu ảnh hưởng tầm nhìn).
-- Hoàn thành mốc → tick checklist trong `DEVELOPMENT_ROADMAP.md`.
+- Hoàn thành mốc → tick checklist trong `DEVELOPMENT_ROADMAP.md` và thêm mục vào `CHANGELOG.md`.
 - Phát hiện lỗi chưa sửa ngay → ghi vào `BUG_TRACKER.md`.
 - Mỗi tài liệu có bảng "Lịch sử thay đổi" ở cuối: thêm dòng khi sửa nội dung đáng kể.
 - Nhãn trạng thái: **✅ ĐÃ CHỐT** · **ĐỀ XUẤT** · **🧪 CẦN THỬ NGHIỆM** · **❓** câu hỏi mở.
@@ -141,6 +141,10 @@ Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình b�
 
 ## 12. Giai đoạn hiện tại
 
-**Giai đoạn 0 — Khởi tạo nền tảng: ✅ HOÀN THÀNH** (2026-11-27). Tài liệu đã được duyệt và cập nhật theo quyết định đã chốt. Commit/push và tag `v0.0-init` chờ chủ dự án yêu cầu.
+**Giai đoạn 0 — Khởi tạo nền tảng: ✅ HOÀN THÀNH** (2026-11-27), commit `docs: finalize phase 0 project foundation`.
 
-**Tiếp theo:** Giai đoạn 1 — MVP, mốc 1.1 (input map, collision layers, 4 autoload rỗng, `main.tscn`, integer scaling). Kế hoạch 1.1 đã trình bày, **chờ chủ dự án duyệt trước khi sửa `project.godot` hay tạo file**. Chưa có scene hay script gameplay nào.
+**Giai đoạn 1 — MVP, mốc 1.1 (cấu hình project): ✅ HOÀN THÀNH** (2026-11-27, headless và editor đã kiểm tra). Đã có: 9 input action, 6 collision layer, 4 autoload rỗng, `scenes/main/main.tscn` làm main scene, integer scaling, cảnh báo `untyped_declaration` = Warn. Chưa có gameplay.
+
+**Tiếp theo:** mốc 1.2 (player di chuyển trong phòng quán graybox), chỉ bắt đầu khi được duyệt.
+
+Lịch sử thay đổi theo mốc ghi ở `CHANGELOG.md` (gốc repo).

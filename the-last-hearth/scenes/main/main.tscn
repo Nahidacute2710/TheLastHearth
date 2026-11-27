@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[node name="Main" type="Node"]
+
+[node name="LevelRoot" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 10

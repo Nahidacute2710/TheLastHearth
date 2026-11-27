@@ -30,9 +30,11 @@
 
 | ID | Tiêu đề | Mức | Trạng thái | Phát hiện | Ghi chú |
 |---|---|---|---|---|---|
-| TECH-001 | `export_presets.cfg` bị liệt kê trong `.gitignore` ở gốc repo | Low | Open (đã có quyết định) | 2026-11-27 | **Quyết định 2026-11-27:** cho phép commit nếu file không chứa thông tin nhạy cảm hay dữ liệu cá nhân. **Kiểm tra 2026-11-27:** file chưa tồn tại (chưa có preset). Chưa sửa `.gitignore`. Xem chi tiết bên dưới. |
-| TECH-002 | Có hai file `.gitignore` (gốc repo và `the-last-hearth/`) với nội dung chồng lấn | Low | Open (đã có đề xuất) | 2026-11-27 | Không gây lỗi. Đã kiểm tra nội dung, đề xuất hợp nhất bên dưới. Chờ duyệt. |
-| TECH-003 | Chưa đặt `stretch/scale_mode = integer` | Low | Open (đã có cấu hình đề xuất) | 2026-11-27 | Cấu hình dự kiến ở TECHNICAL_ARCHITECTURE.md mục 9. Triển khai ở mốc 1.1 nếu được duyệt. |
+| TECH-001 | `export_presets.cfg` bị liệt kê trong `.gitignore` ở gốc repo | Low | Fixed | 2026-11-27 | Đã bỏ ignore (mốc 1.1, chưa commit). File chưa tồn tại nên chưa có gì để kiểm tra; khi tạo preset đầu tiên phải mở file kiểm tra trước khi commit. |
+| TECH-002 | Có hai file `.gitignore` (gốc repo và `the-last-hearth/`) với nội dung chồng lấn | Low | Fixed | 2026-11-27 | Đã gộp về `.gitignore` gốc và xóa file con (mốc 1.1, chưa commit). Đã chạy `git check-ignore`: `.godot/` và `android/` vẫn bị ignore. |
+| TECH-003 | Chưa đặt `stretch/scale_mode = integer` | Low | Verified | 2026-11-27 | Đã đặt `window/stretch/scale_mode="integer"` (mốc 1.1). Chủ dự án đã kiểm tra trong editor 2026-11-27. |
+| TECH-006 | Phím Tab của `inventory` trùng `ui_focus_next` | Low | Open | 2026-11-27 | Khi một `Control` có focus, Tab chuyển focus thay vì mở inventory. Xử lý khi làm UI inventory (mốc 1.6), chưa làm bây giờ. |
+| TECH-007 | Quy tắc đuôi dòng chưa thống nhất (CRLF/LF lẫn lộn) | Low | Open | 2026-11-27 | Chưa có `.gitattributes` ở gốc repo; file `the-last-hearth/.gitattributes` (`* text=auto eol=lf`) không áp dụng cho file ở gốc như `CLAUDE.md`, `CHANGELOG.md`, `.gitignore`. Đã gặp `.gitignore` gốc bị đổi sang CRLF trên máy Windows. Chưa sửa. |
 | TECH-005 | Git LFS chưa được thiết lập | Low | Open (hoãn có chủ đích) | 2026-11-27 | **Quyết định 2026-11-27:** chưa thiết lập. Điều kiện xem xét lại ở ASSET_GUIDELINES.md mục 7 (file > 50 MB, tổng nhị phân > ~500 MB, hoặc bắt đầu commit file nguồn lớn). |
 
 ## Đã đóng
@@ -60,7 +62,7 @@ Phân tích:
 - `.import/` là thư mục cache của Godot 3, không dùng ở Godot 4. Vô hại, có thể bỏ.
 - `export.cfg` không phải file chuẩn của Godot 4. Vô hại.
 
-Đề xuất hợp nhất thành một `.gitignore` ở gốc repo (chờ duyệt):
+**Đã thực hiện ở mốc 1.1** (chủ dự án duyệt 2026-11-27). Bản gộp thực tế giữ `.import/` và `export.cfg` (vô hại), bỏ `export_presets.cfg` (TECH-001). Đề xuất ban đầu:
 
 ```gitignore
 # Godot 4
@@ -77,7 +79,7 @@ export.cfg
 Thumbs.db
 ```
 
-Sau đó xóa `the-last-hearth/.gitignore` (thao tác xóa file, cần được duyệt). Phương án thay thế không cần xóa: giữ nguyên cả hai file, vì hiện không gây lỗi.
+`the-last-hearth/.gitignore` đã được xóa sau khi xác nhận mọi quy tắc của nó đã có ở file gốc.
 
 ---
 
@@ -108,4 +110,6 @@ Copy mẫu này khi lỗi cần mô tả dài:
 | Ngày | Nội dung |
 |---|---|
 | 2026-11-27 | Bản khởi tạo: TECH-001 đến TECH-004 |
+| 2026-11-27 | Thêm TECH-007 (đuôi dòng CRLF/LF) |
+| 2026-11-27 | Mốc 1.1: sửa TECH-001, TECH-002, TECH-003; thêm TECH-006 (Tab) |
 | 2026-11-27 | Chốt quyết định TECH-001; phân tích và đề xuất TECH-002, TECH-003; đóng TECH-004; thêm TECH-005 (Git LFS) |

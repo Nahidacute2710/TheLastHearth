@@ -1,6 +1,6 @@
 # THE LAST HEARTH — Kiến trúc kỹ thuật
 
-> Phiên bản: 0.3 · Cập nhật: 2026-11-27
+> Phiên bản: 0.4 · Cập nhật: 2026-11-27
 > Quy ước nhãn: **✅ ĐÃ CHỐT** = chủ dự án đã xác nhận · **ĐỀ XUẤT** = gợi ý, chưa duyệt · **🧪 CẦN THỬ NGHIỆM** = chốt qua playtest/mockup · **❓** = câu hỏi mở.
 > Engine: Godot 4.7.2 stable · Ngôn ngữ: GDScript (static typing)
 
@@ -71,7 +71,7 @@ res://
 
 Thứ tự load: `EventBus` → `GameState` → `SaveManager` → `SceneRouter`.
 
-> Autoload **chưa được đăng ký** trong `project.godot`. Việc đăng ký sẽ làm ở mốc 1.1, và mỗi thay đổi `project.godot` đều phải giải thích lý do trước.
+> ✅ Đã đăng ký trong `project.godot` (`[autoload]`, bật Global Variable) ở mốc 1.1. Mọi thay đổi `project.godot` về sau vẫn phải giải thích lý do trước.
 >
 > Script autoload **không** khai báo `class_name` trùng tên autoload (Godot báo lỗi *"Class ... hides an autoload singleton"*). Autoload truy cập bằng tên toàn cục, ví dụ `EventBus.enemy_died`.
 
@@ -199,13 +199,17 @@ Tra cứu từ `id` sang Resource qua một `DataRegistry` (dự kiến nằm �
 |---|---|---|
 | Viewport | 640×360 | Tốt cho pixel art, scale đúng tỉ lệ 2× lên 1280×720, 3× lên 1920×1080 |
 | Window override | 1280×720 | Hợp lý khi phát triển |
-| Stretch mode | `canvas_items` | Chạy được; xem đề xuất bên dưới |
+| Stretch mode | `canvas_items` | Giữ nguyên |
+| Stretch aspect | mặc định `keep` | Giữ tỉ lệ 16:9 |
+| Scale mode | `integer` | ✅ Áp dụng ở mốc 1.1 (TECH-003) |
+| Cảnh báo `untyped_declaration` | 1 = Warn | ✅ Áp dụng ở mốc 1.1; xem lại cuối Giai đoạn 1 có nâng lên Error không |
+| Main scene | `res://scenes/main/main.tscn` | ✅ Mốc 1.1 |
 | Default texture filter | Nearest (0) | Đúng cho pixel art |
 | Renderer | GL Compatibility | Phù hợp game 2D, chạy được trên máy yếu |
 | `rendering_device/driver.windows` | d3d12 | Chỉ có tác dụng với renderer Forward+/Mobile; hiện không ảnh hưởng |
 | 3D physics | Jolt | Không ảnh hưởng game 2D |
 
-**Đề xuất TECH-003 — integer scaling (CHƯA áp dụng, dự kiến làm ở mốc 1.1 nếu được duyệt):**
+**TECH-003 — integer scaling (✅ đã áp dụng ở mốc 1.1).** Tên setting đã đối chiếu với tài liệu `ProjectSettings` của Godot 4.7.2:
 
 ```ini
 [display]
@@ -218,7 +222,7 @@ window/stretch/scale_mode="integer"  ; MỚI: chỉ phóng to theo bội số ng
 - Lý do: mỗi pixel nghệ thuật luôn hiện bằng đúng N×N pixel màn hình, không có pixel to nhỏ không đều.
 - 🧪 Cần thử ở mốc 1.2 khi có chuyển động: `rendering/2d/snap/snap_2d_transforms_to_pixel` để tránh sprite rung khi camera di chuyển ở tọa độ lẻ.
 - Cân nhắc `stretch/mode = "viewport"` nếu muốn mọi thứ, kể cả UI và chuyển động, khớp lưới pixel tuyệt đối. Đánh đổi là chữ UI và chuyển động camera kém mượt hơn. Nên thử cả hai ở MVP rồi mới chốt.
-- Bật cảnh báo `untyped_declaration` ở mức Warning để ép static typing.
+- ✅ Đã bật cảnh báo `debug/gdscript/warnings/untyped_declaration = 1` (Warn).
 
 ## 10. Kiểm thử
 
@@ -241,5 +245,6 @@ window/stretch/scale_mode="integer"  ; MỚI: chỉ phóng to theo bội số ng
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
 | 2026-11-27 | 0.1 | Bản khởi tạo |
+| 2026-11-27 | 0.4 | Mốc 1.1: autoload đã đăng ký, integer scaling, cảnh báo untyped, main scene |
 | 2026-11-27 | 0.3 | Chốt collision layers (6 layer, hitbox dò hurtbox) và Input Map (9 action, thêm `pause`); ghi rủi ro Tab |
 | 2026-11-27 | 0.2 | Chốt nguyên tắc kiến trúc, 4 autoload, Resource + ID, save JSON, static typing; thêm mục 5.1 Localization; đề xuất collision 6 layer, input `movement_*`, cấu hình TECH-003 |
