@@ -54,4 +54,9 @@
 | 2026-11-27 | C1 | Giá treo vũ khí trống khi `GameState.owns_item_id(id)` đúng (đang trang bị, trong túi hoặc trong kho) | Sửa theo yêu cầu: không hiện lại cuốc sau khi chết hay đi lại | Claude |
 | 2026-11-27 | C1 | Thông báo: dòng chữ cỡ 8 ở giữa phía dưới màn hình, mỗi loại đồ một dòng, hiện 2 s rồi mờ 0,4 s, tối đa 4 dòng 🧪 | UI tạm | Claude |
 | 2026-11-27 | C1 | Vàng chưa nhặt được trong mỏ nên luật "mất vàng nhặt trong chuyến" chưa có gì để áp dụng; `gold` của quán không bao giờ mất khi chết | Đúng bảng mất/giữ | Claude |
+| 2026-11-27 | C2 | Thợ Mỏ Rỗng rơi 1 Nấm Hang với tỉ lệ 50%; mỏ có 4 nấm mọc sẵn (1 mỗi phòng); chồng nấm tối đa 20; giá bán tham khảo 2 🧪 | Trung bình 1 chuyến có khoảng 9 nấm (5 từ quái + 4 mọc sẵn), đủ khoảng 4 bát; ít nhất 4 nấm (2 bát) dù không giết quái nào | Claude |
+| 2026-11-27 | C2 | Bảng rơi đồ nằm trong `EnemyData.loot` (danh sách `LootEntry`); `Level` nghe `EventBus.enemy_died` và đặt `Pickup` vào `%Entities` | Data-driven; quái không cần biết gì về đồ rơi | Claude |
+| 2026-11-27 | C2 | `Pickup` là Area2D layer 6 (Interactable), mask 2: chạm là nhặt, không cần bấm E; túi đầy thì phần dư nằm lại | Nhặt nhanh trong lúc đánh | Claude |
+| 2026-11-27 | C2 | HUD: biểu tượng Nấm Hang và số nấm trong túi (`×3`) dưới thanh máu | UI tạm, không có chữ | Claude |
+| 2026-11-27 | C2 | Phím debug thêm (chỉ bản debug): Shift+F1 +5 Nấm Hang vào túi, Shift+F2 +5 vào kho, Shift+F3 sang ngày mới, Shift+F4 +50 vàng | Theo yêu cầu; tránh F5–F8 | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

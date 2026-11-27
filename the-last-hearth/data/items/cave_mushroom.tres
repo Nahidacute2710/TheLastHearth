@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/items/itm_cave_mushroom_placeholder.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"cave_mushroom"
+name_key = &"ITEM_CAVE_MUSHROOM_NAME"
+icon = ExtResource("2_icon")
+max_stack = 20
+sell_price = 2

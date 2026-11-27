@@ -61,8 +61,8 @@ func apply_death_penalty() -> void:
 ## Clears all session data (new game, tests).
 func reset_session() -> void:
 	equipped_weapon = null
-	bag = Inventory.new(BAG_SLOTS)
-	stash = Inventory.new(STASH_SLOTS)
+	bag.clear()
+	stash.clear()
 	day = 1
 	gold = 0
 	_last_level_id = &""

@@ -4,6 +4,8 @@ extends Resource
 
 @export var id: StringName = &""
 @export var name_key: StringName = &""
+## Drops rolled when this enemy dies.
+@export var loot: Array[LootEntry] = []
 @export var max_health: int = 3
 ## Chase speed in px/s.
 @export var move_speed: float = 38.0

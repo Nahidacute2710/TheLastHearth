@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" path="res://scenes/interactions/level_door.tscn" id="4_door"]
 [ext_resource type="Texture2D" path="res://assets/environments/mine/env_mine_ladder_placeholder.png" id="5_ladder"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/hollow_miner.tscn" id="6_miner"]
+[ext_resource type="PackedScene" path="res://scenes/items/pickup.tscn" id="7_pickup"]
+[ext_resource type="Resource" path="res://data/items/cave_mushroom.tres" id="8_mushroom"]
 
 [node name="AbandonedMine" type="Node2D"]
 script = ExtResource("1_script")
@@ -31,6 +33,22 @@ prompt_key = &"PROMPT_RETURN_TAVERN"
 [node name="Entities" type="Node2D" parent="."]
 unique_name_in_owner = true
 y_sort_enabled = true
+
+[node name="MushroomR1" parent="Entities" instance=ExtResource("7_pickup")]
+position = Vector2(220, 290)
+item = ExtResource("8_mushroom")
+
+[node name="MushroomR2" parent="Entities" instance=ExtResource("7_pickup")]
+position = Vector2(600, 180)
+item = ExtResource("8_mushroom")
+
+[node name="MushroomR3" parent="Entities" instance=ExtResource("7_pickup")]
+position = Vector2(200, 520)
+item = ExtResource("8_mushroom")
+
+[node name="MushroomR4" parent="Entities" instance=ExtResource("7_pickup")]
+position = Vector2(700, 660)
+item = ExtResource("8_mushroom")
 
 [node name="MinerR1_1" parent="Entities" instance=ExtResource("6_miner")]
 position = Vector2(300, 120)

@@ -5,6 +5,9 @@ extends Node2D
 ## The level owns its player instance and passes the room bounds down to the player camera.
 
 const DEFAULT_SPAWN: StringName = &"default"
+const PICKUP_SCENE: PackedScene = preload("res://scenes/items/pickup.tscn")
+## Random offset of dropped loot around the enemy (px).
+const LOOT_SCATTER: float = 6.0
 
 @onready var _floor: TileMapLayer = %Floor
 @onready var _player: Player = %Player
@@ -12,12 +15,14 @@ const DEFAULT_SPAWN: StringName = &"default"
 @onready var _entities: Node2D = %Entities
 
 var _hit_stop_active: bool = false
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
 	_player.set_camera_limits(_get_room_rect_px())
 	_player.attack_landed.connect(_on_player_attack_landed)
 	_player.died.connect(_on_player_died)
+	EventBus.enemy_died.connect(_on_enemy_died)
 	for child: Node in _entities.get_children():
 		if child.has_method(&"set_target"):
 			child.call(&"set_target", _player)
@@ -82,3 +87,21 @@ func _on_player_attack_landed(_hurtbox: HurtboxComponent) -> void:
 func _on_player_died() -> void:
 	await get_tree().create_timer(_player.data.death_delay, false).timeout
 	SceneRouter.go_to(SceneRouter.TAVERN, DEFAULT_SPAWN)
+
+
+## Drops one pickup on the floor (used for enemy loot).
+func spawn_pickup(item: ItemData, count: int, at: Vector2) -> Pickup:
+	var pickup: Pickup = PICKUP_SCENE.instantiate() as Pickup
+	pickup.item = item
+	pickup.count = count
+	pickup.position = at
+	_entities.add_child.call_deferred(pickup)
+	return pickup
+
+
+func _on_enemy_died(enemy_data: EnemyData, at: Vector2) -> void:
+	for entry: LootEntry in enemy_data.loot:
+		var amount: int = entry.roll(_rng)
+		if amount > 0:
+			var offset: Vector2 = Vector2(_rng.randf_range(-LOOT_SCATTER, LOOT_SCATTER), _rng.randf_range(-LOOT_SCATTER, LOOT_SCATTER))
+			spawn_pickup(entry.item, amount, _entities.to_local(at) + offset)

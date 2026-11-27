@@ -85,7 +85,7 @@
 
 ### 3.3 Rơi đồ (Loot)
 - **Chi tiết:** `EnemyData.loot_table` gồm các cặp `{item, chance, min_qty, max_qty}`. Khi chết, sinh `Pickup` trên mặt đất; player chạm vào thì nhặt.
-- **MVP:** ✅ 1 loại tài nguyên, tỉ lệ rơi cố định.
+- **MVP:** ✅ 1 loại tài nguyên, tỉ lệ rơi cố định. **Đã làm ở C2:** tên thực tế là `EnemyData.loot: Array[LootEntry]` (`item`, `chance`, `min_count`, `max_count`); Thợ Mỏ Rỗng rơi 1 Nấm Hang 50% 🧪; 4 nấm mọc sẵn trong mỏ 🧪.
 
 ### 3.4 Sinh dungeon
 - **Chi tiết dài hạn:** Ghép các phòng thiết kế sẵn (room templates) theo graph, có phòng chiến đấu, phòng thưởng, phòng boss.

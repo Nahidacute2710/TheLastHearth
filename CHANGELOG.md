@@ -5,6 +5,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 ## [Chưa phát hành] — CP-C: Túi đồ, nấu ăn, khách
 
 ### Thêm
+- C2: `cave_mushroom.tres` + icon placeholder, `LootEntry` và `EnemyData.loot`, scene `Pickup`, 4 nấm mọc sẵn trong mỏ, HUD đếm nấm, phím debug Shift+F1..F4 + test.
 - C1: `ItemStack`, `Inventory`; túi và kho trong `GameState`, cất túi khi về quán, luật chết (giữ vật phẩm quest), bộ đếm ngày, thông báo `Toast`; giá treo cuốc đọc `GameState` + test.
 
 ## [Chưa phát hành] — CP-B: Combat
