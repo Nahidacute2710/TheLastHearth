@@ -28,4 +28,6 @@
 | 2026-11-27 | A4 | Lối ra về quán là chính cái thang ở lối vào (phòng 1) 🧪 | Đi xa thì phải quay về, tạo rủi ro trên đường về; đổi được nếu chơi thấy dài | Claude |
 | 2026-11-27 | A4 | Cột đá trong mỏ vẽ bằng tile tường (khác quán: chướng ngại quán là scene riêng) | Đá là địa hình, không cần y-sort với player | Claude |
 | 2026-11-27 | Test | Bộ test tự viết trong `tests/`, mỗi test khởi động `Main` mới; `SceneRouter.start()` reset trạng thái để chạy lại được | Không dùng addon theo yêu cầu | Claude |
+| 2026-11-27 | B1 | i-frames thực hiện bằng cách tắt `monitorable` của hurtbox trong thời gian bất tử; gọi lại thì lấy thời lượng dài hơn | Một cơ chế chung cho bị đánh và né như yêu cầu | Claude |
+| 2026-11-27 | B1 | Hướng knockback = từ thân người đánh tới hurtbox | Đơn giản, đọc được | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

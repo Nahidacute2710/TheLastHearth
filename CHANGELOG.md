@@ -5,6 +5,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 ## [Chưa phát hành] — CP-B: Combat
 
 ### Thêm
+- B1: `HealthComponent`, `HitboxComponent`, `HurtboxComponent` + test.
 - Test headless: `tests/run_all.gd`, `tests/test_case.gd` và 6 test chuyển từ CP-A.
 
 ## [Chưa phát hành] — CP-A: Tương tác và chuyển cảnh

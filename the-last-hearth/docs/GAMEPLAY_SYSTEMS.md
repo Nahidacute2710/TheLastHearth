@@ -69,7 +69,7 @@
 ### 3.1 Chiến đấu (Combat)
 - **Mục đích:** Hành động cận chiến ngắn, đọc được, có phản hồi mạnh.
 - **Chi tiết:**
-  - `HitboxComponent` (Area2D gây sát thương) và `HurtboxComponent` (Area2D nhận sát thương) → `HealthComponent` (máu, signal `died`, `health_changed`).
+  - `HitboxComponent` (Area2D gây sát thương) và `HurtboxComponent` (Area2D nhận sát thương) → `HealthComponent` (máu, signal `died`, `health_changed`). **Đã làm ở B1** (`scripts/components/`): hitbox chỉ dò khi `activate(duration)`, trúng mỗi hurtbox tối đa 1 lần mỗi lần kích hoạt; `HurtboxComponent.start_invulnerability()` tắt `monitorable` nên hitbox không thấy hurtbox (dùng chung cho i-frames khi bị đánh và khi né).
   - Đòn đánh theo **hướng chuột** (✅ ĐÃ CHỐT 2026-11-27).
   - Có cooldown, knockback, i-frames ngắn sau khi bị đánh.
   - Phản hồi: nháy trắng, hitstop, rung camera.
