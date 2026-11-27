@@ -12,3 +12,6 @@ signal level_changed(level_id: StringName)
 
 ## GameState equipped a weapon (null when unequipped).
 signal weapon_equipped(weapon: WeaponData)
+
+## An enemy died (loot and quests listen to this).
+signal enemy_died(enemy_data: EnemyData, position: Vector2)

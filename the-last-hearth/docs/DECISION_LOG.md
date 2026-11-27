@@ -35,4 +35,9 @@
 | 2026-11-27 | B2 | Hitbox của cuốc: hình tròn bán kính 11 px, cách tâm thân 14 px theo hướng chuột 🧪 | Tầm với ngắn, hợp vũ khí cận chiến | Claude |
 | 2026-11-27 | B2 | Hit-stop làm bằng cách tắt `process_mode` của `%Entities` trong level, timer bỏ qua time scale | Không dùng `Engine.time_scale`, nên fade và UI không bị ảnh hưởng | Claude |
 | 2026-11-27 | B2 | Giá treo vũ khí đặt cạnh nắp hầm; lấy được đúng 1 lần (trang bị nằm ở `GameState`); xuống mỏ không cần có cuốc | Theo kịch bản MVP; không chặn người chơi | Claude |
+| 2026-11-27 | B3 | Thợ Mỏ Rỗng: 3 máu, tốc độ 38 px/s, phát hiện 120 px, bỏ đuổi khi xa hơn 200 px, tầm đánh 22 px, lấy đà 0,6 s, hitbox 0,12 s, nghỉ sau đòn 0,6 s, sát thương 1, knockback 140 px/s, choáng khi bị đánh 0,25 s 🧪 | Giá trị khởi đầu trong `data/enemies/hollow_miner.tres` | Claude |
+| 2026-11-27 | B3 | Hướng đòn của quái khóa lúc bắt đầu lấy đà 🧪 | Người chơi đọc được hướng và có thể né sang bên | Claude |
+| 2026-11-27 | B3 | Đánh trúng quái đang lấy đà thì ngắt đòn của nó 🧪 | Thưởng cho người chơi đánh trước; đổi được nếu thấy quá dễ | Claude |
+| 2026-11-27 | B3 | Lấy đà: quái nháy đỏ cam mỗi 0,1 s; trúng đòn: nháy trắng 0,08 s; chết: mờ trong 0,3 s 🧪 | Báo hiệu rõ, chỉ dùng `modulate`, chưa cần shader | Claude |
+| 2026-11-27 | B3 | Quái phát hiện player theo khoảng cách, chưa xét tầm nhìn xuyên tường | Đủ cho MVP; tránh pathfinding phức tạp | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

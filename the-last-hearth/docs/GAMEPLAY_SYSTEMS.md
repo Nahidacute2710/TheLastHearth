@@ -80,6 +80,7 @@
 
 ### 3.2 Quái vật (Enemy AI)
 - **Chi tiết:** State machine đơn giản: `Idle → Chase → Attack → Hurt → Dead`. Chỉ số lấy từ `EnemyData`.
+- **Đã làm ở B3 (Thợ Mỏ Rỗng):** `Idle → Chase → WindUp → Attack → Recover`, cộng `Hurt` và `Dead`. Chạm thân **không** gây sát thương (✅ chốt); chỉ đòn sau khi lấy đà mới gây sát thương. Lúc lấy đà, quái đứng yên và nháy đỏ cam; hướng đòn khóa từ lúc bắt đầu lấy đà nên người chơi né sang bên được. Bị đánh trúng thì ngắt lấy đà, bị đẩy lùi, nháy trắng. Chết thì emit `EventBus.enemy_died`, mờ dần rồi bị xóa. Mỏ có 10 con: R1 2, R2 3, R4 3, R3 2 🧪.
 - **MVP:** ✅ 1 loại quái cận chiến, đuổi theo khi thấy player, tấn công khi lại gần. ❌ Pathfinding phức tạp (MVP dùng di chuyển thẳng hoặc `NavigationAgent2D` cơ bản).
 
 ### 3.3 Rơi đồ (Loot)

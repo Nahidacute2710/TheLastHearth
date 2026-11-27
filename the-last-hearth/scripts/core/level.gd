@@ -17,6 +17,9 @@ var _hit_stop_active: bool = false
 func _ready() -> void:
 	_player.set_camera_limits(_get_room_rect_px())
 	_player.attack_landed.connect(_on_player_attack_landed)
+	for child: Node in _entities.get_children():
+		if child.has_method(&"set_target"):
+			child.call(&"set_target", _player)
 
 
 ## Called by SceneRouter right after the level enters the tree.
@@ -58,6 +61,14 @@ func is_hit_stop_active() -> bool:
 
 func get_player() -> Player:
 	return _player
+
+
+## Adds an enemy (or any entity with set_target) to the room, targeting the player.
+func add_enemy(enemy: Node2D, at: Vector2) -> void:
+	_entities.add_child(enemy)
+	enemy.global_position = at
+	if enemy.has_method(&"set_target"):
+		enemy.call(&"set_target", _player)
 
 
 func _on_player_attack_landed(_hurtbox: HurtboxComponent) -> void:

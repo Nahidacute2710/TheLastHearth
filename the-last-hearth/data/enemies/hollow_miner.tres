@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"hollow_miner"
+name_key = &"ENEMY_HOLLOW_MINER_NAME"
+max_health = 3
+move_speed = 38.0
+detection_radius = 120.0
+lose_interest_radius = 200.0
+attack_range = 22.0
+windup_time = 0.6
+attack_active_time = 0.12
+attack_recover_time = 0.6
+attack_damage = 1
+attack_knockback = 140.0
+hurt_stun_time = 0.25
+knockback_friction = 900.0

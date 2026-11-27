@@ -5,6 +5,7 @@
 [ext_resource type="TileSet" path="res://resources/tilesets/mine_placeholder_tileset.tres" id="3_tileset"]
 [ext_resource type="PackedScene" path="res://scenes/interactions/level_door.tscn" id="4_door"]
 [ext_resource type="Texture2D" path="res://assets/environments/mine/env_mine_ladder_placeholder.png" id="5_ladder"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/hollow_miner.tscn" id="6_miner"]
 
 [node name="AbandonedMine" type="Node2D"]
 script = ExtResource("1_script")
@@ -30,6 +31,36 @@ prompt_key = &"PROMPT_RETURN_TAVERN"
 [node name="Entities" type="Node2D" parent="."]
 unique_name_in_owner = true
 y_sort_enabled = true
+
+[node name="MinerR1_1" parent="Entities" instance=ExtResource("6_miner")]
+position = Vector2(300, 120)
+
+[node name="MinerR1_2" parent="Entities" instance=ExtResource("6_miner")]
+position = Vector2(250, 280)
+
+[node name="MinerR2_3" parent="Entities" instance=ExtResource("6_miner")]
+position = Vector2(520, 100)
+
+[node name="MinerR2_4" parent="Entities" instance=ExtResource("6_miner")]
+position = Vector2(650, 250)
+
+[node name="MinerR2_5" parent="Entities" instance=ExtResource("6_miner")]
+position = Vector2(740, 120)
+
+[node name="MinerR4_6" parent="Entities" instance=ExtResource("6_miner")]
+position = Vector2(500, 450)
+
+[node name="MinerR4_7" parent="Entities" instance=ExtResource("6_miner")]
+position = Vector2(650, 600)
+
+[node name="MinerR4_8" parent="Entities" instance=ExtResource("6_miner")]
+position = Vector2(740, 420)
+
+[node name="MinerR3_9" parent="Entities" instance=ExtResource("6_miner")]
+position = Vector2(300, 450)
+
+[node name="MinerR3_10" parent="Entities" instance=ExtResource("6_miner")]
+position = Vector2(150, 600)
 
 [node name="Player" parent="Entities" instance=ExtResource("2_player")]
 unique_name_in_owner = true

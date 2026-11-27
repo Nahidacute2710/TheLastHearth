@@ -1,0 +1,73 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/hollow_miner.gd" id="1_script"]
+[ext_resource type="Resource" path="res://data/enemies/hollow_miner.tres" id="2_data"]
+[ext_resource type="Texture2D" path="res://assets/enemies/hollow_miner/enm_hollow_miner_placeholder.png" id="3_sprite"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="4_health"]
+[ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="5_hurtbox"]
+[ext_resource type="Script" path="res://scripts/components/hitbox_component.gd" id="6_hitbox"]
+[ext_resource type="Texture2D" path="res://assets/effects/vfx_swing_placeholder.png" id="7_swing"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_feet"]
+radius = 5.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(12, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_attack"]
+radius = 10.0
+
+[node name="HollowMiner" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_script")
+data = ExtResource("2_data")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("3_sprite")
+offset = Vector2(0, -16)
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_feet")
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_health")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("5_hurtbox")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="AttackPivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -8)
+
+[node name="AttackSprite" type="Sprite2D" parent="AttackPivot"]
+unique_name_in_owner = true
+modulate = Color(1, 0.45, 0.35, 1)
+position = Vector2(10, 0)
+texture = ExtResource("7_swing")
+
+[node name="AttackHitbox" type="Area2D" parent="AttackPivot"]
+unique_name_in_owner = true
+position = Vector2(14, 0)
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+monitorable = false
+script = ExtResource("6_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackPivot/AttackHitbox"]
+shape = SubResource("CircleShape2D_attack")
