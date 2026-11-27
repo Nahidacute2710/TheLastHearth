@@ -101,7 +101,7 @@
 ### 4.1 Nấu ăn (Cooking)
 - **Mục đích:** Biến tài nguyên dungeon thành giá trị (tiền + buff).
 - **Chi tiết:** Tương tác với bếp → chọn công thức có đủ nguyên liệu → trừ nguyên liệu → sau `cook_time` nhận món. Dữ liệu từ `RecipeData`.
-- **MVP:** ✅ 1 công thức, 1 bếp, nấu xong ngay hoặc chờ vài giây.
+- **MVP:** ✅ 1 công thức, 1 bếp, nấu xong ngay hoặc chờ vài giây. **Đã làm ở C4:** `RecipeData` (`ingredients: Array[RecipeIngredient]`, `result`, `cook_time`), `data/recipes/mushroom_stew.tres` (2 Nấm Hang → 1 Súp Nấm, 1,5 s 🧪). Nguyên liệu lấy từ kho quán, món nằm trong kho đến khi giao.
 
 ### 4.2 Khách hàng (Customers)
 - **Chi tiết:** Khách đến, ngồi vào chỗ, yêu cầu món. Player mang món đến (tương tác) → nhận tiền. Khách có độ kiên nhẫn; hết kiên nhẫn thì bỏ đi.

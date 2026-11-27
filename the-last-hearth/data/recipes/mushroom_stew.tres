@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RecipeData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/recipe_data.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/data/recipe_ingredient.gd" id="2_ingredient"]
+[ext_resource type="Resource" path="res://data/items/cave_mushroom.tres" id="3_mushroom"]
+[ext_resource type="Resource" path="res://data/items/mushroom_stew.tres" id="4_stew"]
+
+[sub_resource type="Resource" id="Resource_mushrooms"]
+script = ExtResource("2_ingredient")
+item = ExtResource("3_mushroom")
+count = 2
+
+[resource]
+script = ExtResource("1_script")
+id = &"mushroom_stew"
+ingredients = Array[ExtResource("2_ingredient")]([SubResource("Resource_mushrooms")])
+result = ExtResource("4_stew")
+result_count = 1
+cook_time = 1.5

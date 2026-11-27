@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/interactions/level_door.tscn" id="5_door"]
 [ext_resource type="Texture2D" path="res://assets/environments/tavern/env_cellar_hatch_placeholder.png" id="6_hatch"]
 [ext_resource type="PackedScene" path="res://scenes/interactions/weapon_rack.tscn" id="7_rack"]
+[ext_resource type="PackedScene" path="res://scenes/interactions/cooking_station.tscn" id="8_stove"]
 
 [node name="TavernMainHall" type="Node2D"]
 script = ExtResource("1_script")
@@ -35,6 +36,9 @@ y_sort_enabled = true
 
 [node name="WeaponRack" parent="Entities" instance=ExtResource("7_rack")]
 position = Vector2(736, 376)
+
+[node name="CookingStation" parent="Entities" instance=ExtResource("8_stove")]
+position = Vector2(520, 100)
 
 [node name="Counter" parent="Entities" instance=ExtResource("2_obstacle")]
 position = Vector2(160, 120)

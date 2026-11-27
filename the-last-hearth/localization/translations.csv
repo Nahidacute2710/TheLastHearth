@@ -9,3 +9,7 @@ TOAST_ITEMS_STORED,Stored %d %s,Đã cất %d %s
 ITEM_CAVE_MUSHROOM_NAME,Cave Mushroom,Nấm Hang
 UI_INVENTORY_BAG,Bag (lost on death),Túi (mất khi chết)
 UI_INVENTORY_STASH,Tavern stash,Kho quán
+ITEM_MUSHROOM_STEW_NAME,Mushroom Stew,Súp Nấm
+PROMPT_COOK_STEW,Cook Mushroom Stew,Nấu Súp Nấm
+TOAST_MISSING_INGREDIENTS,Need %d %s in the stash,Cần %d %s trong kho
+TOAST_DISH_COOKED,Cooked %s,Đã nấu xong %s

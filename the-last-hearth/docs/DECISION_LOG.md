@@ -62,4 +62,9 @@
 | 2026-11-27 | C3 | Panel túi đồ: túi 6×2 ô, kho 10×3 ô, ô 20×20 px, giữa màn hình; chỉ xem, chưa kéo thả 🧪 | UI tạm đúng phạm vi MVP | Claude |
 | 2026-11-27 | C3 | Mở panel thì thế giới tạm dừng (`get_tree().paused`), panel chạy ở `PROCESS_MODE_ALWAYS`; Esc cũng đóng panel; không mở được khi đang chuyển cảnh 🧪 | Mở túi giữa trận không bị đánh lén; đổi được nếu muốn xem túi trong lúc chạy | Claude |
 | 2026-11-27 | C3 | TECH-006: panel đọc `inventory` trong `_input` (trước GUI) và đánh dấu đã xử lý, mọi ô đặt `FOCUS_NONE`; không sửa `ui_focus_next` trong `project.godot` | Tab không bao giờ tới phần chuyển focus; không đụng cấu hình | Claude |
+| 2026-11-27 | C4 | Súp Nấm: 2 Nấm Hang → 1 Súp, nấu 1,5 s; chồng tối đa 10 🧪 | Theo khoảng 1–2 s đã chốt | Claude |
+| 2026-11-27 | C4 | Bếp đặt cạnh lò sưởi (520, 100); bấm E nấu ngay công thức duy nhất, chưa có menu chọn món; thiếu nguyên liệu thì hiện thông báo "Cần 2 Nấm Hang trong kho" | MVP chỉ có 1 công thức | Claude |
+| 2026-11-27 | C4 | Đang nấu thì bếp tắt tương tác; player đi lại tự do; rời quán giữa chừng thì món được nấu xong ngay (không mất nguyên liệu) | Tránh mất đồ vì chuyển cảnh | Claude |
+| 2026-11-27 | C4 | Thanh tiến trình vẽ bằng `_draw` trên đầu bếp (24×3 px, màu cam) | Placeholder | Claude |
+| 2026-11-27 | C4 | Thêm `EventBus.toast_requested(message)` cho thông báo chung; người gửi tự dịch bằng `tr()` | Một kênh thông báo cho mọi hệ thống | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

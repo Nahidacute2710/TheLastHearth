@@ -26,3 +26,6 @@ signal items_stored(item: ItemData, count: int)
 ## Gold or day changed (HUD).
 signal gold_changed(gold: int)
 signal day_changed(day: int)
+
+## Show a short, already translated message (Toast).
+signal toast_requested(message: String)

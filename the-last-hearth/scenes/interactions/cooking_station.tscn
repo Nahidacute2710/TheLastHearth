@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/interactions/cooking_station.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/environments/tavern/env_stove_placeholder.png" id="2_stove"]
+[ext_resource type="Script" path="res://scripts/components/interactable.gd" id="3_interactable"]
+[ext_resource type="Resource" path="res://data/recipes/mushroom_stew.tres" id="4_recipe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_range"]
+radius = 18.0
+
+[node name="CookingStation" type="Node2D"]
+script = ExtResource("1_script")
+recipe = ExtResource("4_recipe")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_stove")
+offset = Vector2(0, -16)
+
+[node name="Interactable" type="Area2D" parent="."]
+position = Vector2(0, -6)
+collision_layer = 32
+collision_mask = 2
+monitorable = false
+script = ExtResource("3_interactable")
+prompt_key = &"PROMPT_COOK_STEW"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_range")

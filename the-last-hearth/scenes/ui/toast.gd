@@ -10,6 +10,7 @@ const MAX_LINES: int = 4
 
 func _ready() -> void:
 	EventBus.items_stored.connect(_on_items_stored)
+	EventBus.toast_requested.connect(show_message)
 
 
 func show_message(message: String) -> void:
