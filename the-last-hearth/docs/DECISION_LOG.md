@@ -47,4 +47,11 @@
 | 2026-11-27 | B4 | Hồi sinh = level quán mới có Player mới, nên máu đầy mỗi lần vào level; vũ khí đã trang bị giữ nguyên (nằm ở `GameState`) | Đúng luật chết đã chốt; luật mất đồ áp dụng ở CP-C | Claude |
 | 2026-11-27 | B4 | HUD máu: các ô vuông đỏ góc trên trái, không có chữ (không cần khóa dịch), nghe `EventBus.player_health_changed` | UI tạm | Claude |
 | 2026-11-27 | B4 | Phím debug thêm (chỉ bản debug): F4 hồi đầy máu, F9 tự sát, F10 sinh 1 Thợ Mỏ Rỗng cạnh player, F11 bật/tắt bất tử. Không dùng F5–F8 vì trùng phím editor | Theo yêu cầu chủ dự án | Claude |
+| 2026-11-27 | CP-C | Chủ dự án chốt: túi chỉ chứa đồ trong chuyến; về quán an toàn thì tài nguyên trong túi tự vào kho quán (`GameState.stash`) kèm thông báo; chết mất cả túi trừ vật phẩm quest, giữ trang bị đang mặc; nấu lấy nguyên liệu từ kho, món đã nấu nằm trong kho đến khi giao; panel Tab/I hiện túi và kho; Súp Nấm = 2 Nấm Hang, nấu 1–2 s; Lữ Khách mỗi ngày 1 lần, đứng chờ nếu chưa có món; HUD hiện ngày và vàng; giá treo cuốc đọc trạng thái từ `GameState` | Quyết định của chủ dự án | Chủ dự án |
+| 2026-11-27 | C1 | Túi 12 ô, kho 30 ô 🧪; mỗi ô một chồng tối đa `ItemData.max_stack`; túi đầy thì phần dư trả lại (nhặt không được) | Giá trị khởi đầu | Claude |
+| 2026-11-27 | C1 | `GameState` nghe `EventBus.level_changed`: đi từ mỏ vào quán thì cất túi vào kho rồi tăng ngày; nghe `EventBus.player_died` để xóa túi ngay lúc chết, nên khi về quán sau khi chết không còn gì để cất | Một chỗ duy nhất áp dụng luật; không phụ thuộc cửa nào được dùng | Claude |
+| 2026-11-27 | C1 | Kho đầy thì đồ không vừa ở lại trong túi (không mất) | Tránh mất đồ âm thầm | Claude |
+| 2026-11-27 | C1 | Giá treo vũ khí trống khi `GameState.owns_item_id(id)` đúng (đang trang bị, trong túi hoặc trong kho) | Sửa theo yêu cầu: không hiện lại cuốc sau khi chết hay đi lại | Claude |
+| 2026-11-27 | C1 | Thông báo: dòng chữ cỡ 8 ở giữa phía dưới màn hình, mỗi loại đồ một dòng, hiện 2 s rồi mờ 0,4 s, tối đa 4 dòng 🧪 | UI tạm | Claude |
+| 2026-11-27 | C1 | Vàng chưa nhặt được trong mỏ nên luật "mất vàng nhặt trong chuyến" chưa có gì để áp dụng; `gold` của quán không bao giờ mất khi chết | Đúng bảng mất/giữ | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

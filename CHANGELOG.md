@@ -2,6 +2,11 @@
 
 Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định dạng dựa trên [Keep a Changelog](https://keepachangelog.com/).
 
+## [Chưa phát hành] — CP-C: Túi đồ, nấu ăn, khách
+
+### Thêm
+- C1: `ItemStack`, `Inventory`; túi và kho trong `GameState`, cất túi khi về quán, luật chết (giữ vật phẩm quest), bộ đếm ngày, thông báo `Toast`; giá treo cuốc đọc `GameState` + test.
+
 ## [Chưa phát hành] — CP-B: Combat
 
 ### Thêm

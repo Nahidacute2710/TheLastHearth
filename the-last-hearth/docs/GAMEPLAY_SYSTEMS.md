@@ -52,7 +52,7 @@
 - **Chi tiết:** Class `Inventory` (`RefCounted`) giữ danh sách `ItemStack {item: ItemData, quantity: int}`. API: `add_item`, `remove_item`, `has_item`, `get_quantity`, signal `changed`. Logic tách khỏi UI. Inventory thuộc `GameState`, nên tồn tại xuyên suốt khi chuyển cảnh.
 - **MVP:** ✅ Danh sách đơn giản, số ô giới hạn, UI hiển thị dạng lưới. ❌ Kéo thả, kho chứa, phân loại.
 - **Hệ quả của luật chết (✅ ĐÃ CHỐT, bảng ở GDD mục 6):** khi chết, mất mọi thứ player đang mang trong chuyến (loot, tài nguyên, tiền nhặt được, đồ tiêu hao, trang bị chưa mặc); giữ trang bị đang mặc và vật phẩm cốt truyện/quest. Vì vậy inventory phải phân biệt được: *đồ cất ở quán*, *đồ đang mang theo*, *slot trang bị đang mặc*, và cờ *vật phẩm quest* trên `ItemData`.
-- **Cách làm (ĐỀ XUẤT, chốt ở mốc 1.6; chưa code):** khi chết, xóa toàn bộ inventory mang theo trừ vật phẩm có cờ quest; slot trang bị đang mặc không bị ảnh hưởng; tiền nhặt trong chuyến tính riêng (`run_gold`) và chỉ cộng vào `gold` khi về quán.
+- **Cách làm (✅ ĐÃ CHỐT 2026-11-27, làm ở C1):** `GameState.bag` (túi, 12 ô 🧪) chỉ chứa đồ trong chuyến; `GameState.stash` (kho quán, 30 ô 🧪). Về quán an toàn: túi tự cất vào kho, hiện thông báo `TOAST_ITEMS_STORED`. Chết: túi bị xóa trừ vật phẩm có `ItemData.is_quest_item`; `equipped_weapon` và kho không đổi. Class `Inventory` có `add` (trả về số không vừa), `remove` (đủ hoặc không lấy gì), `count_of`, `get_stacks`, `get_totals`.
 
 ### 2.4 Lưu/Tải
 - **Chi tiết:** Xem TECHNICAL_ARCHITECTURE.md mục 6.
@@ -60,7 +60,7 @@
 
 ### 2.5 Chuyển cảnh & Thời gian
 - **Chi tiết:** `SceneRouter` đổi scene giữa Quán và Dungeon, có fade đen. Bộ đếm ngày nằm trong `GameState`.
-- **MVP:** ✅ Chuyển cảnh + fade. ✅ ĐÃ CHỐT: mỗi lần từ dungeon về quán (về an toàn hay bị đánh gục) là sang ngày mới. Kiến trúc: `Main` tồn tại suốt game, `SceneRouter` chỉ thay level trong `Main/LevelRoot`. ❌ Đồng hồ trong ngày.
+- **MVP:** ✅ Chuyển cảnh + fade. ✅ ĐÃ CHỐT: mỗi lần từ dungeon về quán (về an toàn hay bị đánh gục) là sang ngày mới. Kiến trúc: `Main` tồn tại suốt game, `SceneRouter` chỉ thay level trong `Main/LevelRoot`. ❌ Đồng hồ trong ngày. **Đã làm ở C1:** `GameState.day` bắt đầu từ 1, tăng khi `level_changed` đi từ mỏ vào quán.
 
 ---
 

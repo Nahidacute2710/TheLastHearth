@@ -7,3 +7,5 @@ extends Resource
 @export var icon: Texture2D
 @export var max_stack: int = 99
 @export var sell_price: int = 0
+## Quest items survive death (kept in the bag).
+@export var is_quest_item: bool = false

@@ -20,3 +20,9 @@ signal enemy_died(enemy_data: EnemyData, position: Vector2)
 signal player_health_changed(current: int, maximum: int)
 ## Player health reached 0.
 signal player_died
+
+## Items moved from the bag into the tavern stash (toast).
+signal items_stored(item: ItemData, count: int)
+## Gold or day changed (HUD).
+signal gold_changed(gold: int)
+signal day_changed(day: int)

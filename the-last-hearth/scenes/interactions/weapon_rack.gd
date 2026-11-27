@@ -1,5 +1,6 @@
 extends Node2D
-## Rack holding a weapon. Interacting equips it once; the rack is empty afterwards.
+## Rack holding a weapon. Interacting equips it. The rack reads GameState, so it stays empty
+## once the player owns the weapon (after death, respawn or travel too).
 
 @export var weapon: WeaponData
 
@@ -9,6 +10,7 @@ extends Node2D
 
 func _ready() -> void:
 	_interactable.interacted.connect(_on_interacted)
+	EventBus.weapon_equipped.connect(_on_weapon_equipped)
 	_weapon_sprite.texture = weapon.icon if weapon != null else null
 	_refresh()
 
@@ -22,6 +24,10 @@ func _on_interacted(_actor: Node2D) -> void:
 
 
 func _refresh() -> void:
-	var taken: bool = weapon != null and GameState.equipped_weapon == weapon
+	var taken: bool = weapon != null and GameState.owns_item_id(weapon.id)
 	_weapon_sprite.visible = not taken
 	_interactable.enabled = not taken and weapon != null
+
+
+func _on_weapon_equipped(_weapon: WeaponData) -> void:
+	_refresh()

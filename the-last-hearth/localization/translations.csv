@@ -5,3 +5,4 @@ PROMPT_RETURN_TAVERN,Return to the tavern,Về quán
 PROMPT_TAKE_PICKAXE,Take the pickaxe,Lấy Cuốc Chim
 ITEM_RUSTY_PICKAXE_NAME,Pickaxe,Cuốc Chim
 ENEMY_HOLLOW_MINER_NAME,Hollow Miner,Thợ Mỏ Rỗng
+TOAST_ITEMS_STORED,Stored %d %s,Đã cất %d %s
