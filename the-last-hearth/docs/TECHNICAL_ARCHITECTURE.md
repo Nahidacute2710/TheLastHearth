@@ -95,6 +95,7 @@ Thứ tự load: `EventBus` → `GameState` → `SaveManager` → `SceneRouter`.
 
 | Tình huống | Cách làm |
 |---|---|
+| Đối tượng tương tác báo có player ở gần | `Interactable` emit `EventBus.interactable_available(self)`; `Interactor` của player chọn cái gần nhất và emit `EventBus.interaction_focus_changed` cho UI prompt |
 | Player nhận sát thương từ quái trong cùng scene | `Hitbox` chạm `Hurtbox` → `HealthComponent.take_damage()` |
 | Quái chết, HUD và nhiệm vụ cần biết | Quái emit `EventBus.enemy_died(enemy_data)` |
 | Player nhặt vật phẩm | Gọi `GameState.inventory.add_item(item, qty)`; inventory emit signal `changed` |

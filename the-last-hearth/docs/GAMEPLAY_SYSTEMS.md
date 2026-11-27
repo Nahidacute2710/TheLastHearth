@@ -43,7 +43,7 @@
 
 ### 2.2 Tương tác (Interaction)
 - **Mục đích:** Một cách thống nhất để player tương tác với mọi đối tượng.
-- **Chi tiết:** Đối tượng có component `Interactable` (Area2D, layer 6 `interactable`, mask 2) dò thân player và có `prompt_text`, signal `interacted(actor)`. Khi nhiều đối tượng cùng báo player trong vùng, player chọn đối tượng gần nhất. (Bố trí layer ✅ ĐÃ CHỐT, xem TECHNICAL_ARCHITECTURE.md mục 7.) Hiện prompt "[E] Nấu ăn".
+- **Chi tiết:** Đối tượng có component `Interactable` (Area2D, layer 6 `interactable`, mask 2) dò thân player và có `prompt_text`, signal `interacted(actor)`. Khi nhiều đối tượng cùng báo player trong vùng, player chọn đối tượng gần nhất. **Đã làm ở A2:** `Interactable` (`scripts/components/interactable.gd`) báo `EventBus.interactable_available/unavailable`; component `Interactor` trong Player chọn đối tượng gần nhất, phát `EventBus.interaction_focus_changed`; `InteractionPrompt` trong `Main/UILayer` hiện `[E] <hành động>` từ khóa dịch. (Bố trí layer ✅ ĐÃ CHỐT, xem TECHNICAL_ARCHITECTURE.md mục 7.) Hiện prompt "[E] Nấu ăn".
 - **Liên kết:** Nấu ăn, Khách hàng, Cửa chuyển cảnh, Rương, NPC hội thoại.
 - **MVP:** ✅
 

@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/interaction_prompt.gd" id="1_script"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_prompt"]
+font_size = 8
+outline_size = 3
+outline_color = Color(0.0862745, 0.0784314, 0.109804, 1)
+
+[node name="InteractionPrompt" type="Label"]
+auto_translate_mode = 2
+mouse_filter = 2
+label_settings = SubResource("LabelSettings_prompt")
+horizontal_alignment = 1
+script = ExtResource("1_script")

@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/tavern/tavern_main_hall.tscn" id="1_tavern"]
+[ext_resource type="PackedScene" path="res://scenes/ui/interaction_prompt.tscn" id="2_prompt"]
 
 [node name="Main" type="Node"]
 
@@ -12,3 +13,5 @@ unique_name_in_owner = true
 [node name="UILayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 layer = 10
+
+[node name="InteractionPrompt" parent="UILayer" instance=ExtResource("2_prompt")]

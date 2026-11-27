@@ -6,6 +6,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 
 ### Thêm
 - `docs/DECISION_LOG.md`; kế hoạch checkpoint trong `DEVELOPMENT_ROADMAP.md`.
+- A2: component `Interactable` + `Interactor`, `InteractionPrompt` trên `UILayer`, scene `level_door.tscn`, nắp hầm placeholder trong quán.
 - A1: `localization/translations.csv` (keys, en, vi), đăng ký bản dịch trong `project.godot` (`[internationalization]`).
 
 ## [Chưa phát hành] — Mốc 1.2: Player di chuyển trong phòng quán (2026-11-27)
