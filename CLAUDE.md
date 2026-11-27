@@ -154,6 +154,8 @@ Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình b�
 
 **Mốc 1.2 (player di chuyển trong phòng quán graybox): ✅ HOÀN THÀNH** (2026-11-27, không rung hình nên chưa cần `snap_2d_transforms_to_pixel`).
 
-**Đang làm:** checkpoint CP-A (mốc 1.3 + 1.4: localization, tương tác, chuyển cảnh, Mỏ Bỏ Hoang graybox). Kế hoạch checkpoint ở `DEVELOPMENT_ROADMAP.md`.
+**CP-A (mốc 1.3 + 1.4):** code xong 2026-11-27 (A1–A4), chờ chủ dự án chơi thử. **Tiếp theo:** CP-B (combat). Kế hoạch checkpoint ở `DEVELOPMENT_ROADMAP.md`.
+
+**Kiểm tra headless phía Claude:** dùng bản Godot 4.7.2 Linux chính thức trên bản sao repo ở cloud (chủ dự án cho phép 2026-11-27).
 
 Lịch sử thay đổi theo mốc ghi ở `CHANGELOG.md` (gốc repo).

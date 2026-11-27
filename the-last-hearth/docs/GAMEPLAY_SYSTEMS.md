@@ -88,7 +88,7 @@
 
 ### 3.4 Sinh dungeon
 - **Chi tiết dài hạn:** Ghép các phòng thiết kế sẵn (room templates) theo graph, có phòng chiến đấu, phòng thưởng, phòng boss.
-- **MVP:** ❌ Chỉ 1 khu vực thiết kế tay.
+- **MVP:** ❌ Chỉ 1 khu vực thiết kế tay. **Đã làm ở A4:** Mỏ Bỏ Hoang graybox gồm 4 phòng 24×21 tile xếp 2×2, nối nhau bằng lối đi rộng 3 tile theo đường R1 → R2 → R4 → R3; có cột đá; thang ở phòng đầu là lối vào và lối ra về quán 🧪.
 
 ### 3.5 Boss
 - **MVP:** ❌ (Vertical Slice).
