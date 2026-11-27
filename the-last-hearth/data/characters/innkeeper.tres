@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlayerData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/player_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+max_speed = 80.0
+acceleration = 800.0
+friction = 1000.0
+max_health = 5
+hurt_invulnerability = 0.8
+hurt_knockback_time = 0.15
+death_delay = 0.6
+dodge_speed = 220.0
+dodge_duration = 0.18
+dodge_invulnerability = 0.22
+dodge_cooldown = 0.6

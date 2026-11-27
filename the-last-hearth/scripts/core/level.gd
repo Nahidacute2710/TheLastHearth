@@ -17,6 +17,7 @@ var _hit_stop_active: bool = false
 func _ready() -> void:
 	_player.set_camera_limits(_get_room_rect_px())
 	_player.attack_landed.connect(_on_player_attack_landed)
+	_player.died.connect(_on_player_died)
 	for child: Node in _entities.get_children():
 		if child.has_method(&"set_target"):
 			child.call(&"set_target", _player)
@@ -75,3 +76,9 @@ func _on_player_attack_landed(_hurtbox: HurtboxComponent) -> void:
 	var weapon: WeaponData = GameState.equipped_weapon
 	if weapon != null:
 		hit_stop(weapon.hit_stop_time)
+
+
+## Death: short pause, then wake up in the tavern with full health (new player instance).
+func _on_player_died() -> void:
+	await get_tree().create_timer(_player.data.death_delay, false).timeout
+	SceneRouter.go_to(SceneRouter.TAVERN, DEFAULT_SPAWN)

@@ -5,6 +5,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 ## [Chưa phát hành] — CP-B: Combat
 
 ### Thêm
+- B4: `PlayerData` + `innkeeper.tres`, máu player, i-frames khi bị đánh, né (Space), chết → tỉnh dậy ở quán, HUD ô máu, phím debug F4/F9/F10/F11 + test.
 - B3: `EnemyData`, Thợ Mỏ Rỗng (lấy đà, đòn, bị đánh, chết), 10 con trong mỏ, `EventBus.enemy_died` + test.
 - B2: `ItemData`, `WeaponData`, `rusty_pickaxe.tres`, giá treo vũ khí, đòn vung theo hướng chuột, hit-stop + test.
 - B1: `HealthComponent`, `HitboxComponent`, `HurtboxComponent` + test.

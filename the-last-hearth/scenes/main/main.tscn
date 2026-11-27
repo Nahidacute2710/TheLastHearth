@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://scenes/ui/interaction_prompt.tscn" id="2_prompt"]
 [ext_resource type="Script" path="res://scenes/main/debug_tools.gd" id="3_debug"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_script")
@@ -13,6 +14,8 @@ unique_name_in_owner = true
 [node name="UILayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 layer = 10
+
+[node name="HUD" parent="UILayer" instance=ExtResource("4_hud")]
 
 [node name="InteractionPrompt" parent="UILayer" instance=ExtResource("2_prompt")]
 

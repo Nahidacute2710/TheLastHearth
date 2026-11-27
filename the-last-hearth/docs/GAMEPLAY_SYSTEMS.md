@@ -37,9 +37,9 @@
 ### 2.1 Di chuyển (Movement)
 - **Mục đích:** Điều khiển nhân vật mượt, chính xác.
 - **Chi tiết:** `CharacterBody2D`, 8 hướng, có gia tốc và giảm tốc ngắn để có cảm giác "nặng" vừa phải. Tốc độ lấy từ biến export, không hard-code.
-- **Thông số khởi đầu (🧪 CẦN THỬ NGHIỆM, `@export` trong `player.gd`):** `max_speed` 80 px/s (khoảng 5 tile/giây), `acceleration` 800 px/s² (đạt tốc độ tối đa sau khoảng 0,1 giây), `friction` 1000 px/s² (dừng sau khoảng 0,08 giây). Hướng đọc bằng `Input.get_vector()` nên đi chéo không nhanh hơn đi thẳng. Camera trong Player, `position_smoothing` tắt ở 1.2.
+- **Thông số khởi đầu (🧪 CẦN THỬ NGHIỆM, từ B4 nằm trong `data/characters/innkeeper.tres`, Resource `PlayerData`):** `max_speed` 80 px/s (khoảng 5 tile/giây), `acceleration` 800 px/s² (đạt tốc độ tối đa sau khoảng 0,1 giây), `friction` 1000 px/s² (dừng sau khoảng 0,08 giây). Hướng đọc bằng `Input.get_vector()` nên đi chéo không nhanh hơn đi thẳng. Camera trong Player, `position_smoothing` tắt ở 1.2.
 - **Liên kết:** Chiến đấu (đứng khựng khi tấn công), Tương tác.
-- **MVP:** ✅ Đi bộ 8 hướng (mốc 1.2). ✅ Né (`dodge`, Space) ở mốc B4 (✅ ĐÃ CHỐT 2026-11-27): lướt ngắn theo hướng đang di chuyển, đứng yên thì lướt theo hướng chuột; có i-frames và cooldown, dùng chung cơ chế tắt hurtbox với i-frames khi bị đánh. Thông số 🧪.
+- **MVP:** ✅ Đi bộ 8 hướng (mốc 1.2). ✅ Né (`dodge`, Space) ở mốc B4 (✅ ĐÃ CHỐT 2026-11-27): lướt ngắn theo hướng đang di chuyển, đứng yên thì lướt theo hướng chuột; có i-frames và cooldown, dùng chung cơ chế tắt hurtbox với i-frames khi bị đánh. **Đã làm ở B4:** 220 px/s trong 0,18 s, bất tử 0,22 s, cooldown 0,6 s 🧪; không vung cuốc khi đang né.
 
 ### 2.2 Tương tác (Interaction)
 - **Mục đích:** Một cách thống nhất để player tương tác với mọi đối tượng.
@@ -71,11 +71,11 @@
 - **Chi tiết:**
   - `HitboxComponent` (Area2D gây sát thương) và `HurtboxComponent` (Area2D nhận sát thương) → `HealthComponent` (máu, signal `died`, `health_changed`). **Đã làm ở B1** (`scripts/components/`): hitbox chỉ dò khi `activate(duration)`, trúng mỗi hurtbox tối đa 1 lần mỗi lần kích hoạt; `HurtboxComponent.start_invulnerability()` tắt `monitorable` nên hitbox không thấy hurtbox (dùng chung cho i-frames khi bị đánh và khi né).
   - Đòn đánh theo **hướng chuột** (✅ ĐÃ CHỐT 2026-11-27). **Đã làm ở B2:** `WeaponPivot` (script `PlayerAttack`) xoay theo hướng chuột, hiện vệt vung placeholder và bật hitbox trong `hit_active_time`. Lấy Cuốc Chim ở giá treo cạnh nắp hầm (`GameState.equipped_weapon`). Trúng đòn thì hit-stop: `Level.hit_stop()` tắt xử lý `%Entities` trong thời gian ngắn, không dùng `Engine.time_scale` nên fade và UI không bị ảnh hưởng. Không rung màn hình ở MVP (✅ chốt).
-  - Có cooldown, knockback, i-frames ngắn sau khi bị đánh.
+  - Có cooldown, knockback, i-frames ngắn sau khi bị đánh. **Đã làm ở B4:** player 5 máu, bị đánh thì bất tử 0,8 s (nhấp nháy) và bị đẩy lùi 0,15 s 🧪; HUD ô máu góc trên trái. Quái không gây sát thương khi chạm thân.
   - Phản hồi: nháy trắng, hitstop, rung camera.
 - **Đầu vào:** `WeaponData`. **Đầu ra:** Signal chết → rơi đồ, nhiệm vụ.
 - **MVP:** ✅ 1 vũ khí cận chiến, đánh 1 hướng. ❌ Combo, kỹ năng, vũ khí tầm xa.
-- **Khi player chết (✅ ĐÃ CHỐT):** màn hình fade, tỉnh dậy trong quán với máu đầy, áp dụng bảng mất/giữ ở GDD mục 6. Không thêm hình phạt khác khi chưa được duyệt.
+- **Khi player chết (✅ ĐÃ CHỐT):** màn hình fade, tỉnh dậy trong quán với máu đầy, áp dụng bảng mất/giữ ở GDD mục 6. Không thêm hình phạt khác khi chưa được duyệt. **Đã làm ở B4:** chờ 0,6 s, fade, tỉnh dậy ở điểm `default` trong quán, giữ vũ khí đã trang bị; bảng mất đồ làm ở CP-C.
 - **Chỉ số** (máu, sát thương, cooldown, knockback, i-frames): 🧪 CẦN THỬ NGHIỆM, đặt trong Resource `.tres`.
 
 ### 3.2 Quái vật (Enemy AI)

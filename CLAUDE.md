@@ -163,7 +163,9 @@ Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình b�
 
 **Mốc 1.2 (player di chuyển trong phòng quán graybox): ✅ HOÀN THÀNH** (2026-11-27, không rung hình nên chưa cần `snap_2d_transforms_to_pixel`).
 
-**CP-A (mốc 1.3 + 1.4):** code xong 2026-11-27 (A1–A4), chờ chủ dự án chơi thử. **Tiếp theo:** CP-B (combat). Kế hoạch checkpoint ở `DEVELOPMENT_ROADMAP.md`.
+**CP-A (mốc 1.3 + 1.4): ✅ HOÀN THÀNH** (2026-11-27).
+
+**CP-B (mốc 1.5):** code xong 2026-11-27 (B1–B4: component combat, Cuốc Chim, Thợ Mỏ Rỗng, máu player, né, chết → về quán), chờ chủ dự án chơi thử. **Tiếp theo:** CP-C. Kế hoạch checkpoint ở `DEVELOPMENT_ROADMAP.md`.
 
 **Kiểm tra headless phía Claude:** dùng bản Godot 4.7.2 Linux chính thức trên bản sao repo ở cloud (chủ dự án cho phép 2026-11-27).
 

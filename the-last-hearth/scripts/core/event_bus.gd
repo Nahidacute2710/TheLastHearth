@@ -15,3 +15,8 @@ signal weapon_equipped(weapon: WeaponData)
 
 ## An enemy died (loot and quests listen to this).
 signal enemy_died(enemy_data: EnemyData, position: Vector2)
+
+## Player health changed (HUD).
+signal player_health_changed(current: int, maximum: int)
+## Player health reached 0.
+signal player_died

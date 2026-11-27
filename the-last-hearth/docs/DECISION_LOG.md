@@ -40,4 +40,11 @@
 | 2026-11-27 | B3 | Đánh trúng quái đang lấy đà thì ngắt đòn của nó 🧪 | Thưởng cho người chơi đánh trước; đổi được nếu thấy quá dễ | Claude |
 | 2026-11-27 | B3 | Lấy đà: quái nháy đỏ cam mỗi 0,1 s; trúng đòn: nháy trắng 0,08 s; chết: mờ trong 0,3 s 🧪 | Báo hiệu rõ, chỉ dùng `modulate`, chưa cần shader | Claude |
 | 2026-11-27 | B3 | Quái phát hiện player theo khoảng cách, chưa xét tầm nhìn xuyên tường | Đủ cho MVP; tránh pathfinding phức tạp | Claude |
+| 2026-11-27 | B4 | Chỉ số player chuyển từ `@export` trong `player.gd` sang Resource `PlayerData` (`data/characters/innkeeper.tres`) | Theo yêu cầu đặt thông số trong Resource; một chỗ để chỉnh | Claude |
+| 2026-11-27 | B4 | Player: 5 máu, bất tử sau khi bị đánh 0,8 s (nhấp nháy), mất điều khiển khi bị đẩy lùi 0,15 s, chết → chờ 0,6 s rồi fade về quán 🧪 | Giá trị khởi đầu | Claude |
+| 2026-11-27 | B4 | Né: tốc độ 220 px/s trong 0,18 s (khoảng 40 px), bất tử 0,22 s, cooldown 0,6 s; đang né thì mờ 50% 🧪 | Giá trị khởi đầu; i-frames dài hơn cú lướt một chút cho dễ né đúng lúc | Claude |
+| 2026-11-27 | B4 | Đang né, đang bị đẩy lùi hoặc đã chết thì không vung cuốc được; đang vung vẫn né được | Né là lối thoát an toàn; không ngắt được thì cảm giác bị kẹt | Claude |
+| 2026-11-27 | B4 | Hồi sinh = level quán mới có Player mới, nên máu đầy mỗi lần vào level; vũ khí đã trang bị giữ nguyên (nằm ở `GameState`) | Đúng luật chết đã chốt; luật mất đồ áp dụng ở CP-C | Claude |
+| 2026-11-27 | B4 | HUD máu: các ô vuông đỏ góc trên trái, không có chữ (không cần khóa dịch), nghe `EventBus.player_health_changed` | UI tạm | Claude |
+| 2026-11-27 | B4 | Phím debug thêm (chỉ bản debug): F4 hồi đầy máu, F9 tự sát, F10 sinh 1 Thợ Mỏ Rỗng cạnh player, F11 bật/tắt bất tử. Không dùng F5–F8 vì trùng phím editor | Theo yêu cầu chủ dự án | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |
