@@ -145,6 +145,8 @@ Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình b�
 
 **Giai đoạn 1 — MVP, mốc 1.1 (cấu hình project): ✅ HOÀN THÀNH** (2026-11-27, headless và editor đã kiểm tra). Đã có: 9 input action, 6 collision layer, 4 autoload rỗng, `scenes/main/main.tscn` làm main scene, integer scaling, cảnh báo `untyped_declaration` = Warn. Chưa có gameplay.
 
-**Tiếp theo:** mốc 1.2 (player di chuyển trong phòng quán graybox), chỉ bắt đầu khi được duyệt.
+**Mốc 1.2 (player di chuyển trong phòng quán graybox): ✅ HOÀN THÀNH** (2026-11-27, không rung hình nên chưa cần `snap_2d_transforms_to_pixel`).
+
+**Tiếp theo:** mốc 1.3 (hệ thống tương tác), chỉ bắt đầu khi được duyệt.
 
 Lịch sử thay đổi theo mốc ghi ở `CHANGELOG.md` (gốc repo).

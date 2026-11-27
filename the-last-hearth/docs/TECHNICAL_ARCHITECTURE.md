@@ -1,6 +1,6 @@
 # THE LAST HEARTH — Kiến trúc kỹ thuật
 
-> Phiên bản: 0.4 · Cập nhật: 2026-11-27
+> Phiên bản: 0.5 · Cập nhật: 2026-11-27
 > Quy ước nhãn: **✅ ĐÃ CHỐT** = chủ dự án đã xác nhận · **ĐỀ XUẤT** = gợi ý, chưa duyệt · **🧪 CẦN THỬ NGHIỆM** = chốt qua playtest/mockup · **❓** = câu hỏi mở.
 > Engine: Godot 4.7.2 stable · Ngôn ngữ: GDScript (static typing)
 
@@ -224,6 +224,15 @@ window/stretch/scale_mode="integer"  ; MỚI: chỉ phóng to theo bội số ng
 - Cân nhắc `stretch/mode = "viewport"` nếu muốn mọi thứ, kể cả UI và chuyển động, khớp lưới pixel tuyệt đối. Đánh đổi là chữ UI và chuyển động camera kém mượt hơn. Nên thử cả hai ở MVP rồi mới chốt.
 - ✅ Đã bật cảnh báo `debug/gdscript/warnings/untyped_declaration = 1` (Warn).
 
+## 9.1 Quy ước scene 2D (từ mốc 1.2)
+
+- **Gốc tọa độ ở chân** cho mọi thực thể đứng trên sàn (player, quái, NPC, đồ vật). Sprite dùng `offset` để đáy hình nằm ở gốc. Nhờ vậy y-sort đúng.
+- Thực thể nằm trong node `Entities` (`Node2D`, `y_sort_enabled = true`) của phòng. Tile sàn và tường nằm ở các `TileMapLayer` riêng, ngoài `Entities`.
+- Va chạm của thực thể chỉ ở phần chân/đế (top-down 3/4): player dùng `CircleShape2D` bán kính 5 px, chướng ngại dùng hình chữ nhật ở đáy.
+- Chướng ngại vật trong phòng là scene `StaticBody2D` riêng (layer 1, mask trống), không vẽ bằng tile, để y-sort cùng player.
+- **Camera:** `Camera2D` nằm trong Player. Phòng (cha) gọi `player.set_camera_limits(rect)` với khung phòng **tính bằng pixel**. `TileMapLayer.get_used_rect()` trả về tọa độ tile, phải nhân `tile_set.tile_size` trước khi truyền.
+- TileSet placeholder: `resources/tilesets/tavern_placeholder_tileset.tres`, tile 16×16, physics layer 0 = layer 1 `World`.
+
 ## 10. Kiểm thử
 
 - **Kiểm tra headless** (không cần mở editor):
@@ -245,6 +254,7 @@ window/stretch/scale_mode="integer"  ; MỚI: chỉ phóng to theo bội số ng
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
 | 2026-11-27 | 0.1 | Bản khởi tạo |
+| 2026-11-27 | 0.5 | Thêm mục 9.1 Quy ước scene 2D (mốc 1.2) |
 | 2026-11-27 | 0.4 | Mốc 1.1: autoload đã đăng ký, integer scaling, cảnh báo untyped, main scene |
 | 2026-11-27 | 0.3 | Chốt collision layers (6 layer, hitbox dò hurtbox) và Input Map (9 action, thêm `pause`); ghi rủi ro Tab |
 | 2026-11-27 | 0.2 | Chốt nguyên tắc kiến trúc, 4 autoload, Resource + ID, save JSON, static typing; thêm mục 5.1 Localization; đề xuất collision 6 layer, input `movement_*`, cấu hình TECH-003 |

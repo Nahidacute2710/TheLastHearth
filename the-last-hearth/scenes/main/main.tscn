@@ -1,9 +1,13 @@
 [gd_scene format=3]
 
+[ext_resource type="PackedScene" path="res://scenes/tavern/tavern_main_hall.tscn" id="1_tavern"]
+
 [node name="Main" type="Node"]
 
 [node name="LevelRoot" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="TavernMainHall" parent="LevelRoot" instance=ExtResource("1_tavern")]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

@@ -43,7 +43,7 @@ Chia thành các mốc nhỏ (mỗi mốc được duyệt riêng):
 | Mốc | Nội dung | Kiểm chứng |
 |---|---|---|
 | 1.1 | Cấu hình project: input map (8 action), collision layers (6 layer), 4 autoload rỗng, `main.tscn` làm scene chính, integer scaling (TECH-003). ✅ **Hoàn thành 2026-11-27** (headless và editor đã kiểm tra) | Chạy F5 ra màn hình trống không lỗi |
-| 1.2 | Player di chuyển trong phòng quán (graybox) | Đi lại, va chạm tường |
+| 1.2 | Player di chuyển trong phòng quán (graybox). ✅ **Hoàn thành 2026-11-27** (headless và editor đã kiểm tra, không rung hình) | Đi lại, va chạm tường |
 | 1.3 | Hệ thống tương tác (`Interactable` + prompt); tạo `translations.csv` và khóa dịch đầu tiên | Đứng gần bếp/cửa hiện chữ "E" |
 | 1.4 | Chuyển cảnh Quán ↔ Dungeon | Đi qua cửa sang dungeon và quay về |
 | 1.5 | Chiến đấu: vũ khí + 1 loại quái + máu + chết | Đánh chết quái, quái đánh được player |

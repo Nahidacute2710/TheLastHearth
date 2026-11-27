@@ -34,6 +34,7 @@
 | TECH-002 | Có hai file `.gitignore` (gốc repo và `the-last-hearth/`) với nội dung chồng lấn | Low | Fixed | 2026-11-27 | Đã gộp về `.gitignore` gốc và xóa file con (mốc 1.1, chưa commit). Đã chạy `git check-ignore`: `.godot/` và `android/` vẫn bị ignore. |
 | TECH-003 | Chưa đặt `stretch/scale_mode = integer` | Low | Verified | 2026-11-27 | Đã đặt `window/stretch/scale_mode="integer"` (mốc 1.1). Chủ dự án đã kiểm tra trong editor 2026-11-27. |
 | TECH-006 | Phím Tab của `inventory` trùng `ui_focus_next` | Low | Open | 2026-11-27 | Khi một `Control` có focus, Tab chuyển focus thay vì mở inventory. Xử lý khi làm UI inventory (mốc 1.6), chưa làm bây giờ. |
+| TECH-008 | Chưa bật physics interpolation; chuyển động có thể kém mượt trên màn hình 120/144 Hz | Low | Open | 2026-11-27 | Physics chạy 60 tick/giây, màn hình tần số cao vẽ nhiều frame hơn nên vị trí có thể bị giật. Cách xử lý dự kiến: bật `physics/common/physics_interpolation` (sửa `project.godot`, cần duyệt). Chưa xử lý. |
 | TECH-007 | Quy tắc đuôi dòng chưa thống nhất (CRLF/LF lẫn lộn) | Low | Fixed | 2026-11-27 | Đã thêm `.gitattributes` ở gốc repo (`* text=auto eol=lf`) và chạy `git add --renormalize .`: không file nào trong index phải đổi (index vốn đã là LF). Commit `chore: normalize line endings`. |
 | TECH-005 | Git LFS chưa được thiết lập | Low | Open (hoãn có chủ đích) | 2026-11-27 | **Quyết định 2026-11-27:** chưa thiết lập. Điều kiện xem xét lại ở ASSET_GUIDELINES.md mục 7 (file > 50 MB, tổng nhị phân > ~500 MB, hoặc bắt đầu commit file nguồn lớn). |
 
@@ -110,6 +111,7 @@ Copy mẫu này khi lỗi cần mô tả dài:
 | Ngày | Nội dung |
 |---|---|
 | 2026-11-27 | Bản khởi tạo: TECH-001 đến TECH-004 |
+| 2026-11-27 | Thêm TECH-008 (physics interpolation) |
 | 2026-11-27 | Sửa TECH-007 (`.gitattributes` gốc) |
 | 2026-11-27 | Thêm TECH-007 (đuôi dòng CRLF/LF) |
 | 2026-11-27 | Mốc 1.1: sửa TECH-001, TECH-002, TECH-003; thêm TECH-006 (Tab) |
