@@ -84,6 +84,10 @@ pause={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://localization/translations.en.translation", "res://localization/translations.vi.translation")
+
 [layer_names]
 
 2d_physics/layer_1="World"

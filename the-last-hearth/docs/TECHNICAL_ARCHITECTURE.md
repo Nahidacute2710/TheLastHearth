@@ -124,7 +124,9 @@ Tra cứu từ `id` sang Resource qua một `DataRegistry` (dự kiến nằm �
 - Mọi chuỗi hiển thị cho người chơi dùng **khóa dịch** dạng `CONSTANT_CASE`, ví dụ `UI_PROMPT_COOK`, `ITEM_CAVE_MUSHROOM_NAME`. Code gọi `tr(key)`. Với `Label`/`Button`, gán khóa vào `text` và Godot tự dịch (auto translate).
 - Resource dữ liệu lưu **khóa** (`name_key`, `description_key`), không lưu chuỗi đã dịch.
 - File dịch: `localization/translations.csv`, UTF-8, cột `keys,en,vi`. Godot import CSV thành file `.translation`. Ngôn ngữ dự phòng: `en`.
-- Đăng ký file dịch trong Project Settings → Localization (thay đổi `project.godot`) làm ở mốc có chuỗi UI đầu tiên (dự kiến 1.3), **không** làm ở 1.1.
+- ✅ Đã đăng ký ở mốc A1: `[internationalization] locale/translations` trỏ tới `translations.en.translation` và `translations.vi.translation`. Hai file này do Godot sinh khi import CSV và **được commit** cùng `translations.csv.import`.
+- Ngôn ngữ khi chạy theo ngôn ngữ hệ điều hành; không có bản dịch thì dùng `en`. Bản debug có phím chuyển EN/VI (xem DECISION_LOG.md).
+- Chuỗi có tham số dùng khóa định dạng, ví dụ `UI_PROMPT_FORMAT` = `[%s] %s` (phím, hành động).
 - Font phải hiển thị đủ ký tự tiếng Việt (ASSET_GUIDELINES.md mục 4.3). Chuỗi tiếng Việt thường dài hơn tiếng Anh, nên UI không đặt chiều rộng cứng sát chữ.
 - Chuỗi debug/log (`print`, `push_error`) không cần dịch.
 - Chưa làm ở giai đoạn này: dịch toàn bộ nội dung, menu chọn ngôn ngữ (Vertical Slice).
