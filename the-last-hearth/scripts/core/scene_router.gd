@@ -36,6 +36,8 @@ func _ready() -> void:
 ## Called once by Main. Loads the first level and fades in from black.
 func start(level_root: Node, level_id: StringName, spawn_id: StringName = &"") -> void:
 	_level_root = level_root
+	_current_level = null
+	_is_transitioning = false
 	_fade_rect.modulate.a = 1.0
 	_swap_level(level_id, spawn_id)
 	await _fade_to(0.0)
@@ -61,6 +63,10 @@ func go_to(level_id: StringName, spawn_id: StringName = &"") -> void:
 
 func is_transitioning() -> bool:
 	return _is_transitioning
+
+
+func get_current_level() -> Level:
+	return _current_level if is_instance_valid(_current_level) else null
 
 
 func _swap_level(level_id: StringName, spawn_id: StringName) -> void:

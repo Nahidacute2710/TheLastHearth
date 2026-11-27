@@ -2,6 +2,11 @@
 
 Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định dạng dựa trên [Keep a Changelog](https://keepachangelog.com/).
 
+## [Chưa phát hành] — CP-B: Combat
+
+### Thêm
+- Test headless: `tests/run_all.gd`, `tests/test_case.gd` và 6 test chuyển từ CP-A.
+
 ## [Chưa phát hành] — CP-A: Tương tác và chuyển cảnh
 
 ### Thêm

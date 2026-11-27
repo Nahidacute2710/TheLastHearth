@@ -27,4 +27,5 @@
 | 2026-11-27 | A4 | Mỏ: 4 phòng 24×21 tile xếp 2×2 (51×45 tile), lối đi 3 tile, đi theo vòng R1 → R2 → R4 → R3 (R3 không nối thẳng R1) 🧪 | Đủ chỗ đặt 2–3 quái/phòng ở CP-B; buộc đi một vòng | Claude |
 | 2026-11-27 | A4 | Lối ra về quán là chính cái thang ở lối vào (phòng 1) 🧪 | Đi xa thì phải quay về, tạo rủi ro trên đường về; đổi được nếu chơi thấy dài | Claude |
 | 2026-11-27 | A4 | Cột đá trong mỏ vẽ bằng tile tường (khác quán: chướng ngại quán là scene riêng) | Đá là địa hình, không cần y-sort với player | Claude |
+| 2026-11-27 | Test | Bộ test tự viết trong `tests/`, mỗi test khởi động `Main` mới; `SceneRouter.start()` reset trạng thái để chạy lại được | Không dùng addon theo yêu cầu | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

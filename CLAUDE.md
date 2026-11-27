@@ -101,8 +101,17 @@ Chạy từ thư mục `the-last-hearth/`:
 "D:/Godot_v4.7.2/Godot_v4.7.2-stable_win64_console.exe" --headless --path . --quit-after 120
 ```
 
-- Sau mỗi thay đổi code: chạy lệnh import và đọc output tìm `ERROR` / `SCRIPT ERROR` / `Parse Error`.
-- Unit test: dự kiến dùng GUT (chưa cài; cài phải được duyệt). Test đặt ở `tests/`, tên `test_<đối tượng>.gd`.
+```bash
+# Chạy toàn bộ test headless (không dùng addon). Mã thoát khác 0 khi có test fail
+"D:/Godot_v4.7.2/Godot_v4.7.2-stable_win64_console.exe" --headless --path . -s res://tests/run_all.gd
+```
+
+PowerShell (từ `the-last-hearth/`): `& "D:\Godot_v4.7.2\Godot_v4.7.2-stable_win64_console.exe" --headless --path . -s res://tests/run_all.gd`
+
+- **Sau MỖI mốc:** chạy `--import`, `--quit-after 120` và `run_all.gd`; đọc output tìm `ERROR` / `SCRIPT ERROR` / `Parse Error` / `WARNING` / `FAIL`.
+- Mỗi mốc mới phải thêm test cho phần logic kiểm tra được.
+- Test viết ở `tests/test_<đối tượng>.gd`, kế thừa `res://tests/test_case.gd`, mỗi hàm test tên `test_*`. Trong test, truy cập autoload qua `tree.root.get_node("SceneRouter")` (hàm `router()`), không dùng tên autoload trực tiếp.
+- Unit test: bộ chạy tự viết `tests/run_all.gd` (không addon). GUT chưa cài; cài phải được duyệt.
 - Những gì không kiểm chứng được qua headless (cảm giác điều khiển, hiển thị, animation) phải ghi rõ trong báo cáo là **"cần kiểm tra thủ công trong editor"**.
 - **Không bao giờ tuyên bố đã test thành công nếu chưa thực sự chạy.** Báo cáo trung thực cả output lỗi.
 

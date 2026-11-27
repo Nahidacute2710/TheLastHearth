@@ -247,7 +247,7 @@ window/stretch/scale_mode="integer"  ; MỚI: chỉ phóng to theo bội số ng
   "D:/Godot_v4.7.2/Godot_v4.7.2-stable_win64_console.exe" --headless --path . --import
   ```
   Lệnh này import toàn bộ project và báo lỗi parse script. Chạy từ thư mục `the-last-hearth/`.
-- **Unit test:** dự kiến dùng addon GUT (Godot Unit Test) cho logic thuần như inventory, công thức, serialize save. Addon **chưa được cài**; sẽ đề xuất ở Giai đoạn 1.
+- **Test headless (từ CP-B):** `godot --headless --path . -s res://tests/run_all.gd`. Bộ chạy tự viết, không addon: tìm mọi `tests/test_*.gd`, chạy các hàm `test_*`, in PASS/FAIL, mã thoát 1 khi có lỗi. Base `tests/test_case.gd` có `check`, `check_eq`, `wait`, `start_main`, `tap`, `hold`. Test có thể khởi động `Main` thật và giả lập input. Addon GUT chưa cài.
 - **Scene test:** mỗi scene thực thể phải chạy được độc lập bằng F6.
 
 ## 11. Hiệu năng (mục tiêu)
