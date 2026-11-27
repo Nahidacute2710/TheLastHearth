@@ -1,6 +1,6 @@
 # THE LAST HEARTH — Hệ thống Gameplay
 
-> Phiên bản: 0.4 · Cập nhật: 2026-11-27
+> Phiên bản: 0.5 · Cập nhật: 2026-11-27
 > Quy ước nhãn: **✅ ĐÃ CHỐT** = chủ dự án đã xác nhận · **ĐỀ XUẤT** = gợi ý, chưa duyệt · **🧪 CẦN THỬ NGHIỆM** = chốt qua playtest/mockup · **❓** = câu hỏi mở.
 > Mỗi hệ thống ghi rõ: mục đích · đầu vào · đầu ra · liên kết · phạm vi MVP.
 
@@ -39,7 +39,7 @@
 - **Chi tiết:** `CharacterBody2D`, 8 hướng, có gia tốc và giảm tốc ngắn để có cảm giác "nặng" vừa phải. Tốc độ lấy từ biến export, không hard-code.
 - **Thông số khởi đầu (🧪 CẦN THỬ NGHIỆM, `@export` trong `player.gd`):** `max_speed` 80 px/s (khoảng 5 tile/giây), `acceleration` 800 px/s² (đạt tốc độ tối đa sau khoảng 0,1 giây), `friction` 1000 px/s² (dừng sau khoảng 0,08 giây). Hướng đọc bằng `Input.get_vector()` nên đi chéo không nhanh hơn đi thẳng. Camera trong Player, `position_smoothing` tắt ở 1.2.
 - **Liên kết:** Chiến đấu (đứng khựng khi tấn công), Tương tác.
-- **MVP:** ✅ Đi bộ 8 hướng (mốc 1.2). ❌ Cơ chế né/lăn (Vertical Slice). Action `dodge` được khai báo sẵn trong Input Map từ mốc 1.1 nhưng chưa gắn cơ chế.
+- **MVP:** ✅ Đi bộ 8 hướng (mốc 1.2). ✅ Né (`dodge`, Space) ở mốc B4 (✅ ĐÃ CHỐT 2026-11-27): lướt ngắn theo hướng đang di chuyển, đứng yên thì lướt theo hướng chuột; có i-frames và cooldown, dùng chung cơ chế tắt hurtbox với i-frames khi bị đánh. Thông số 🧪.
 
 ### 2.2 Tương tác (Interaction)
 - **Mục đích:** Một cách thống nhất để player tương tác với mọi đối tượng.
@@ -60,7 +60,7 @@
 
 ### 2.5 Chuyển cảnh & Thời gian
 - **Chi tiết:** `SceneRouter` đổi scene giữa Quán và Dungeon, có fade đen. Bộ đếm ngày nằm trong `GameState`.
-- **MVP:** ✅ Chuyển cảnh + fade. Ngày tăng khi đi ngủ hoặc khi về từ dungeon (❓ chốt ở MVP). ❌ Đồng hồ trong ngày.
+- **MVP:** ✅ Chuyển cảnh + fade. ✅ ĐÃ CHỐT: mỗi lần từ dungeon về quán (về an toàn hay bị đánh gục) là sang ngày mới. Kiến trúc: `Main` tồn tại suốt game, `SceneRouter` chỉ thay level trong `Main/LevelRoot`. ❌ Đồng hồ trong ngày.
 
 ---
 
@@ -70,12 +70,12 @@
 - **Mục đích:** Hành động cận chiến ngắn, đọc được, có phản hồi mạnh.
 - **Chi tiết:**
   - `HitboxComponent` (Area2D gây sát thương) và `HurtboxComponent` (Area2D nhận sát thương) → `HealthComponent` (máu, signal `died`, `health_changed`).
-  - Đòn đánh theo hướng chuột hoặc hướng di chuyển ❓.
+  - Đòn đánh theo **hướng chuột** (✅ ĐÃ CHỐT 2026-11-27).
   - Có cooldown, knockback, i-frames ngắn sau khi bị đánh.
   - Phản hồi: nháy trắng, hitstop, rung camera.
 - **Đầu vào:** `WeaponData`. **Đầu ra:** Signal chết → rơi đồ, nhiệm vụ.
 - **MVP:** ✅ 1 vũ khí cận chiến, đánh 1 hướng. ❌ Combo, kỹ năng, vũ khí tầm xa.
-- **Khi player chết (✅ ĐÃ CHỐT):** về quán, áp dụng bảng mất/giữ ở GDD mục 6. Không thêm hình phạt khác khi chưa được duyệt.
+- **Khi player chết (✅ ĐÃ CHỐT):** màn hình fade, tỉnh dậy trong quán với máu đầy, áp dụng bảng mất/giữ ở GDD mục 6. Không thêm hình phạt khác khi chưa được duyệt.
 - **Chỉ số** (máu, sát thương, cooldown, knockback, i-frames): 🧪 CẦN THỬ NGHIỆM, đặt trong Resource `.tres`.
 
 ### 3.2 Quái vật (Enemy AI)
@@ -154,6 +154,7 @@
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
 | 2026-11-27 | 0.1 | Bản khởi tạo |
+| 2026-11-27 | 0.5 | Chốt: né trong MVP, đòn theo hướng chuột, chết thì tỉnh dậy ở quán máu đầy, sang ngày khi về từ dungeon |
 | 2026-11-27 | 0.4 | Thông số di chuyển khởi đầu của mốc 1.2 |
 | 2026-11-27 | 0.3 | Luật chết chi tiết; tương tác theo layer 6 `interactable` dò player |
 | 2026-11-27 | 0.2 | Luật chết đã chốt và hệ quả cho inventory; vai trò Ngọn Lửa Gốc; action `dodge`; thêm mục 5.5 Localization |

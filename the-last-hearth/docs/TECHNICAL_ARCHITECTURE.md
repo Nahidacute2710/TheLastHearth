@@ -98,7 +98,7 @@ Thứ tự load: `EventBus` → `GameState` → `SaveManager` → `SceneRouter`.
 | Player nhận sát thương từ quái trong cùng scene | `Hitbox` chạm `Hurtbox` → `HealthComponent.take_damage()` |
 | Quái chết, HUD và nhiệm vụ cần biết | Quái emit `EventBus.enemy_died(enemy_data)` |
 | Player nhặt vật phẩm | Gọi `GameState.inventory.add_item(item, qty)`; inventory emit signal `changed` |
-| Chuyển từ quán xuống dungeon | `SceneRouter.go_to(SceneRouter.DUNGEON)` |
+| Chuyển từ quán xuống dungeon | `SceneRouter.go_to(SceneRouter.DUNGEON, &"entrance")`. ✅ `Main` tồn tại suốt game; `SceneRouter` chỉ thay level trong `Main/LevelRoot` |
 | Tìm node khác scene | **Không** dùng đường dẫn tuyệt đối `/root/...`. Dùng signal, group hoặc truyền tham chiếu |
 
 ## 5. Mô hình dữ liệu (Resource)
@@ -185,9 +185,9 @@ Tra cứu từ `id` sang Resource qua một `DataRegistry` (dự kiến nằm �
 | `movement_up` / `movement_down` / `movement_left` / `movement_right` | W / S / A / D | Physical key: giữ đúng vị trí trên bàn phím AZERTY/QWERTZ |
 | `interact` | E | |
 | `attack` | Chuột trái | |
-| `dodge` | Space | Khai báo ở 1.1; cơ chế né ở Vertical Slice |
+| `dodge` | Space | Cơ chế né ở mốc B4 (MVP) |
 | `inventory` | Tab, I | |
-| `pause` | Escape | Khai báo ở 1.1; chưa có menu tạm dừng |
+| `pause` | Escape | Menu tạm dừng tối thiểu ở mốc D2 |
 
 Đọc hướng di chuyển bằng `Input.get_vector(&"movement_left", &"movement_right", &"movement_up", &"movement_down")`. Code chỉ dùng tên action, không đọc phím trực tiếp. Tay cầm: thêm sau MVP.
 

@@ -1,6 +1,6 @@
 # THE LAST HEARTH — Đặc tả MVP
 
-> Phiên bản: 0.3 · Cập nhật: 2026-11-27
+> Phiên bản: 0.4 · Cập nhật: 2026-11-27
 > Quy ước nhãn: **✅ ĐÃ CHỐT** = chủ dự án đã xác nhận · **ĐỀ XUẤT** = gợi ý, chưa duyệt · **🧪 CẦN THỬ NGHIỆM** = chốt qua playtest/mockup · **❓** = câu hỏi mở.
 > MVP = Giai đoạn 1 trong DEVELOPMENT_ROADMAP.md.
 
@@ -29,7 +29,7 @@ Quản lý quán → Chuẩn bị → Đi dungeon → Chiến đấu → Thu th�
 | Phòng quán trọ | 1 | **Sảnh chính**: lò sưởi (Ngọn Lửa Gốc, trang trí), 1 bếp, 1 bàn khách, 1 cửa hầm dẫn xuống dungeon |
 | Khu vực dungeon | 1 | **Mỏ Bỏ Hoang** (`abandoned_mine`): 3 đến 4 phòng nối liền, thiết kế tay, có lối ra về quán |
 | Quái vật | 1 | ✅ **Thợ Mỏ Rỗng** (`hollow_miner`): đi chậm, đuổi khi thấy player, đánh cận chiến có lấy đà |
-| Vũ khí | 1 | ✅ **Cuốc Chim** (`rusty_pickaxe`): cận chiến, vung theo hướng chuột ❓ |
+| Vũ khí | 1 | ✅ **Cuốc Chim** (`rusty_pickaxe`): cận chiến, vung theo hướng chuột ✅ |
 | Tài nguyên | 1 | ✅ **Nấm Hang** (`cave_mushroom`): rơi từ quái và mọc ở góc dungeon |
 | Khách hàng NPC | 1 | **Lữ Khách** (`weary_traveler`): đến mỗi ngày, gọi 1 món |
 | Công thức | 1 | ✅ **Súp Nấm** (`mushroom_stew`) = 3 Nấm Hang (số lượng 🧪) |
@@ -47,7 +47,7 @@ Quản lý quán → Chuẩn bị → Đi dungeon → Chiến đấu → Thu th�
 8. **Quản lý quán:** Nấu Súp Nấm → mang cho Lữ Khách → nhận vàng. Ngày tăng thêm 1.
 9. Thoát game, mở lại → "Tiếp tục" → mọi thứ còn nguyên.
 
-**Liên kết Quán → Dungeon trong MVP (ĐỀ XUẤT ❓):** Player cũng có thể **tự ăn** Súp Nấm trước khi xuống hầm để được +2 máu tối đa (🧪) trong chuyến đó. Điều này tạo lựa chọn thật sự đầu tiên: *bán lấy tiền hay ăn để đi sâu hơn?*
+**Liên kết Quán → Dungeon trong MVP (✅ làm ở mốc D3 nếu vòng chơi đã ổn, nếu không thì để Vertical Slice):** Player cũng có thể **tự ăn** Súp Nấm trước khi xuống hầm để được +2 máu tối đa (🧪) trong chuyến đó. Điều này tạo lựa chọn thật sự đầu tiên: *bán lấy tiền hay ăn để đi sâu hơn?*
 
 ## 4. Hệ thống trong MVP & tiêu chí chấp nhận
 
@@ -62,10 +62,12 @@ Quản lý quán → Chuẩn bị → Đi dungeon → Chiến đấu → Thu th�
 | **Lưu & tải** | Lưu: ngày, vàng, inventory, đã nhặt vũ khí chưa. Tải lại đúng 100%. File save hỏng hoặc thiếu không làm crash game. File có `save_version`; ghi file tạm rồi mới thay thế file chính |
 | **Localization** | Mọi chuỗi hiển thị dùng khóa dịch trong `localization/translations.csv`, không có chuỗi UI viết cứng trong script. Bắt buộc có cột `en`; cột `vi` chưa bắt buộc ở MVP |
 | **Chuyển cảnh** | Quán ↔ Dungeon có fade, không rò rỉ node cũ |
+| **Né** | Space lướt ngắn theo hướng di chuyển (đứng yên thì theo hướng chuột), có i-frames và cooldown |
+| **Tạm dừng** | Esc dừng game (`get_tree().paused`); menu Tiếp tục / Về menu chính |
 
 ## 5. Ngoài phạm vi MVP (KHÔNG làm)
 
-Cơ chế né/lăn (chỉ khai báo action `dodge`) · nhiều vũ khí · boss · sinh dungeon ngẫu nhiên · nhân viên · nâng cấp quán · cửa hàng · chế tạo trang bị · hệ thống nhiệm vụ · hội thoại nhiều nhánh · Ngọn Lửa Gốc có cơ chế · âm thanh/nhạc final · menu cài đặt · dịch đầy đủ và menu chọn ngôn ngữ (kiến trúc localization **có** trong MVP) · tạo nhân vật · tay cầm · Steam.
+nhiều vũ khí · boss · sinh dungeon ngẫu nhiên · nhân viên · nâng cấp quán · cửa hàng · chế tạo trang bị · hệ thống nhiệm vụ · hội thoại nhiều nhánh · Ngọn Lửa Gốc có cơ chế · âm thanh/nhạc final · menu cài đặt (chỉ có menu tạm dừng tối thiểu: Tiếp tục / Về menu chính) · dịch đầy đủ và menu chọn ngôn ngữ (kiến trúc localization **có** trong MVP) · tạo nhân vật · tay cầm · Steam.
 
 Nếu trong lúc làm MVP phát sinh ý tưởng, ghi vào mục "Ý tưởng chờ" bên dưới, **không** làm ngay.
 
@@ -103,5 +105,6 @@ tests/               test_inventory.gd · test_save_roundtrip.gd (nếu cài GUT
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
 | 2026-11-27 | 0.1 | Bản khởi tạo |
+| 2026-11-27 | 0.4 | Né và menu tạm dừng vào MVP; đòn theo hướng chuột; buff Súp Nấm ở D3 nếu kịp |
 | 2026-11-27 | 0.3 | Cập nhật luật chết theo bảng mất/giữ |
 | 2026-11-27 | 0.2 | Đánh dấu nội dung MVP đã chốt; luật chết mới thay cho mất 50%; thêm tiêu chí Localization; cập nhật ngoài phạm vi |

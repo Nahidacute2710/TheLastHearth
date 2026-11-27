@@ -126,13 +126,20 @@ Chạy từ thư mục `the-last-hearth/`:
 - Đổi định dạng save hoặc tăng `save_version` mà không có migration
 - Sửa `.gitignore`, `.gitattributes`
 
-Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình bày kế hoạch và chờ xác nhận.** Sau mỗi mốc: **báo cáo và chờ xác nhận** trước khi sang mốc tiếp.
+Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình bày kế hoạch và chờ xác nhận.**
+
+**Quy trình checkpoint (từ 2026-11-27):** làm lần lượt các mốc trong checkpoint, mỗi mốc 1 commit, không chờ duyệt giữa các mốc. Sau mỗi mốc: kiểm tra tĩnh + headless, cập nhật tài liệu, ghi quyết định nhỏ vào `docs/DECISION_LOG.md`, push (chỉ fast-forward). Được tự quyết tên node, cấu trúc scene, thông số khởi đầu (🧪), placeholder, UI tạm; được sửa `project.godot` khi thuộc checkpoint nhưng phải ghi trong báo cáo. Được thêm phím debug chỉ hoạt động khi `OS.is_debug_build()`.
+
+**Chỉ dừng giữa checkpoint khi:** (1) cần đổi kiến trúc đã chốt hoặc làm khác GDD/MVP_SPECIFICATION; (2) cần addon/dependency; (3) cần xóa file không phải placeholder hoặc viết lại hệ thống đã có; (4) headless lỗi mà sửa 2 lần không được; (5) quyết định thiết kế ảnh hưởng cảm giác chơi mà tài liệu chưa nói tới.
+
+**Cuối checkpoint báo cáo:** commit (hash + message), trích DECISION_LOG, lệnh headless PowerShell (có `&` ở đầu), một danh sách chơi thử ≤ 10 bước, rủi ro và thông số 🧪. Rồi dừng chờ kết quả.
 
 ## 11. Cập nhật tài liệu
 
 - Code thay đổi kiến trúc → cập nhật `TECHNICAL_ARCHITECTURE.md`.
 - Thêm/sửa hệ thống gameplay → cập nhật `GAMEPLAY_SYSTEMS.md` (và GDD nếu ảnh hưởng tầm nhìn).
 - Hoàn thành mốc → tick checklist trong `DEVELOPMENT_ROADMAP.md` và thêm mục vào `CHANGELOG.md`.
+- Quyết định nhỏ tự chốt → `the-last-hearth/docs/DECISION_LOG.md` (ngày, mốc, quyết định, lý do).
 - Phát hiện lỗi chưa sửa ngay → ghi vào `BUG_TRACKER.md`.
 - Mỗi tài liệu có bảng "Lịch sử thay đổi" ở cuối: thêm dòng khi sửa nội dung đáng kể.
 - Nhãn trạng thái: **✅ ĐÃ CHỐT** · **ĐỀ XUẤT** · **🧪 CẦN THỬ NGHIỆM** · **❓** câu hỏi mở.
@@ -147,6 +154,6 @@ Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình b�
 
 **Mốc 1.2 (player di chuyển trong phòng quán graybox): ✅ HOÀN THÀNH** (2026-11-27, không rung hình nên chưa cần `snap_2d_transforms_to_pixel`).
 
-**Tiếp theo:** mốc 1.3 (hệ thống tương tác), chỉ bắt đầu khi được duyệt.
+**Đang làm:** checkpoint CP-A (mốc 1.3 + 1.4: localization, tương tác, chuyển cảnh, Mỏ Bỏ Hoang graybox). Kế hoạch checkpoint ở `DEVELOPMENT_ROADMAP.md`.
 
 Lịch sử thay đổi theo mốc ghi ở `CHANGELOG.md` (gốc repo).

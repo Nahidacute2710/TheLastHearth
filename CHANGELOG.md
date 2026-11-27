@@ -2,6 +2,11 @@
 
 Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định dạng dựa trên [Keep a Changelog](https://keepachangelog.com/).
 
+## [Chưa phát hành] — CP-A: Tương tác và chuyển cảnh
+
+### Thêm
+- `docs/DECISION_LOG.md`; kế hoạch checkpoint trong `DEVELOPMENT_ROADMAP.md`.
+
 ## [Chưa phát hành] — Mốc 1.2: Player di chuyển trong phòng quán (2026-11-27)
 
 ### Thêm

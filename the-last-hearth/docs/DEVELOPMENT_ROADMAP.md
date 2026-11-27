@@ -52,6 +52,17 @@ Chia thành các mốc nhỏ (mỗi mốc được duyệt riêng):
 | 1.8 | Lưu/tải | Thoát game, mở lại, dữ liệu còn nguyên |
 | 1.9 | Hoàn thiện vòng chơi + playtest nội bộ | Một người mới chơi hết vòng không cần hướng dẫn miệng |
 
+### Checkpoint (✅ duyệt 2026-11-27)
+
+Từ mốc 1.3, công việc chia thành checkpoint. Mỗi checkpoint kết thúc ở một trạng thái chơi thử được; mỗi mốc nhỏ là 1 commit, không chờ duyệt giữa các mốc. Chủ dự án chơi thử và duyệt ở cuối mỗi checkpoint. Quyết định nhỏ tự chốt ghi ở `docs/DECISION_LOG.md`.
+
+| Checkpoint | Mốc roadmap | Mốc nhỏ | Chơi thử được |
+|---|---|---|---|
+| CP-A | 1.3, 1.4 | A1 localization · A2 `Interactable` + prompt · A3 `SceneRouter` + fade · A4 Mỏ Bỏ Hoang graybox + cửa hầm | Quán → xuống mỏ → về quán |
+| CP-B | 1.5 | B1 component máu/hitbox/hurtbox · B2 Cuốc Chim + đòn vung theo chuột · B3 Thợ Mỏ Rỗng · B4 máu player, i-frames, **né**, chết → tỉnh dậy ở quán | Đánh quái, né, bị đánh gục |
+| CP-C | 1.6, 1.7 | C1 inventory + luật chết · C2 Nấm Hang · C3 túi đồ (TECH-006) · C4 bếp + Súp Nấm · C5 Lữ Khách, vàng, ngày | Nhặt nấm, nấu, bán |
+| CP-D | 1.8, 1.9 | D1 save JSON · D2 menu chính, tự lưu, **menu tạm dừng** · D3 toàn vòng, cân thông số, buff Súp Nấm nếu kịp | Thoát và mở lại vẫn còn dữ liệu |
+
 **Tiêu chí hoàn thành:** Vòng Quán → Chuẩn bị → Dungeon → Chiến đấu → Thu thập → Về quán chạy được trọn vẹn, có lưu/tải, không crash.
 
 ---
@@ -62,7 +73,7 @@ Chia thành các mốc nhỏ (mỗi mốc được duyệt riêng):
 
 - Art final cho quán (1 tầng) và 1 khu dungeon
 - 3 đến 4 loại quái, 1 boss
-- 2 đến 3 vũ khí, hệ thống né (dodge)
+- 2 đến 3 vũ khí, nâng cấp hệ thống né (né cơ bản đã có từ MVP)
 - 5 đến 8 công thức, 3 đến 4 loại khách
 - Cơ chế Ngọn Lửa Gốc phiên bản đầu
 - Hội thoại cơ bản, 1 mạch nhiệm vụ ngắn
@@ -120,4 +131,5 @@ Chia thành các mốc nhỏ (mỗi mốc được duyệt riêng):
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
 | 2026-11-27 | 0.1 | Bản khởi tạo |
+| 2026-11-27 | 0.3 | Chia Giai đoạn 1 thành 4 checkpoint |
 | 2026-11-27 | 0.2 | Giai đoạn 0 hoàn thành; chi tiết mốc 1.1; localization theo mốc |
