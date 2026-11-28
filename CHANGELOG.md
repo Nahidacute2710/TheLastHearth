@@ -5,6 +5,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 ## [Chưa phát hành] — Giai đoạn 2 (Vertical Slice), VS-A
 
 ### Thêm
+- VSA6: rà soát toàn bộ màn hình EN/VI (menu, quán, mỏ, túi đồ, tạm dừng, cài đặt); tổng 111 test headless.
 - VSA5: bật physics interpolation (TECH-008), camera player chạy ở chế độ physics, reset interpolation khi dịch chuyển tức thời; test.
 - VSA4: bus Master/Music/SFX; `AudioDirector` trong Main phát âm theo id qua `EventBus.sfx_requested`; 8 SFX tạm tự sinh (`tools/gen_placeholder_sfx.py`): swing, hit, enemy_windup, dodge, pickup, cook_done, coin, ui_click; bảng âm `data/audio/sfx_library.tres`; test.
 - VSA3: menu cài đặt (từ menu chính và menu tạm dừng): ngôn ngữ, âm lượng Master/Music/SFX, toàn màn hình, đổi 8 phím (báo trùng phím, Esc hủy, khôi phục mặc định); 26 khóa dịch mới; test.
@@ -16,7 +17,8 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 - VSA4: rời quán khi nồi đang nấu không còn hiện thông báo "Đã nấu xong" ở màn hình khác.
 
 ### Tài liệu
-- Ghi các quyết định Vertical Slice đã duyệt (DECISION_LOG, VERTICAL_SLICE_PLAN, GDD 4.3 và 5.3, ASSET_GUIDELINES, BUG_TRACKER TECH-008); thêm `docs/STORY_BIBLE.md` (Maren); kế hoạch VS-A chờ duyệt.
+- Ghi các quyết định Vertical Slice đã duyệt (DECISION_LOG, VERTICAL_SLICE_PLAN, GDD 4.3 và 5.3, ASSET_GUIDELINES, BUG_TRACKER TECH-008); thêm `docs/STORY_BIBLE.md` (Maren); kế hoạch VS-A.
+- VSA6: cập nhật VERTICAL_SLICE_PLAN (VS-A xong), TECHNICAL_ARCHITECTURE (cài đặt, âm thanh, theme), ASSET_GUIDELINES (SFX theo id), DEVELOPMENT_ROADMAP, CLAUDE.md.
 
 ## Giai đoạn 1 (MVP) hoàn thành, 2026-11-28 — tag `v0.1-mvp`
 

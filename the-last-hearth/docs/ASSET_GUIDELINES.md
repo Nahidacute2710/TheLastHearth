@@ -67,10 +67,13 @@ Khi một nhân vật/quái có từ 3 file trở lên thì tạo thư mục con
 - SFX: **WAV** 16-bit 44,1 kHz (ngắn, cần độ trễ thấp).
 - Nhạc: **OGG Vorbis** (dài, cần nén). Bật **Loop** trong import cho nhạc nền.
 - Chuẩn hóa âm lượng: SFX đỉnh khoảng −3 dBFS, nhạc khoảng −14 LUFS.
+- SFX gọi bằng id qua bảng `data/audio/sfx_library.tres` (swing, hit, enemy_windup, dodge, pickup, cook_done, coin, ui_click). Thay âm thật: đặt file vào `assets/audio/sfx/`, đổi đường dẫn của id trong bảng, ghi giấy phép vào `CREDITS.md`; không sửa code.
+- SFX tạm `sfx_<id>_placeholder.wav` sinh bằng `tools/gen_placeholder_sfx.py` (ở gốc repo, chỉ dùng thư viện chuẩn Python, kết quả cố định). Không phát hành.
 
 ### 4.3 Font
 - TTF/OTF hoặc bitmap font. **Bắt buộc** kiểm tra hiển thị đủ ký tự tiếng Việt (ă â đ ê ô ơ ư và 5 dấu thanh) trước khi đưa vào.
-- Với pixel font: tắt antialiasing, tắt hinting, `subpixel_positioning` tắt.
+- Với pixel font: tắt antialiasing, tắt hinting, `subpixel_positioning` tắt, `allow_system_fallback` tắt. Sửa import xong phải xóa cache `.godot/imported/fnt_*` để Godot import lại.
+- Font đang dùng (VS-A): Galmuri11 12 px (chữ chính), Galmuri9 10 px (HUD), cắt bớt chỉ còn Latin + tiếng Việt + dấu câu.
 
 ## 5. Bản quyền & nguồn gốc (BẮT BUỘC cho game thương mại)
 
@@ -110,6 +113,7 @@ Theo dõi trong bảng ở `assets/ASSET_STATUS.md` (tạo khi có asset thật)
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.4 | VS-A: bảng SFX theo id, script SFX tạm, ghi chú import pixel font |
 | 2026-11-28 | 0.3 | Thêm OFL cho font, quy định giấy phép âm thanh, quy trình art PixelLab |
 | 2026-11-27 | 0.1 | Bản khởi tạo |
 | 2026-11-27 | 0.2 | Chốt file nguồn art ngoài `res://`; ghi nhận quyết định chưa dùng Git LFS và điều kiện xem xét lại |

@@ -1,7 +1,7 @@
 # THE LAST HEARTH — Kế hoạch Vertical Slice (Giai đoạn 2)
 
 > Phiên bản: 0.2 · Cập nhật: 2026-11-28
-> Trạng thái: **✅ ĐÃ DUYỆT (2026-11-28)** cho phạm vi, thứ tự checkpoint và các quyết định ở mục 9. Kế hoạch chi tiết từng checkpoint được lập và duyệt riêng trước khi làm. **Kế hoạch VS-A (mục 10) đang chờ duyệt.**
+> Trạng thái: **✅ ĐÃ DUYỆT (2026-11-28)** cho phạm vi, thứ tự checkpoint và các quyết định ở mục 9. Kế hoạch chi tiết từng checkpoint được lập và duyệt riêng trước khi làm. **VS-A (mục 10) ✅ hoàn thành 2026-11-28, chờ chơi thử.** Tiếp theo: lập kế hoạch VS-E1.
 > Nguồn phạm vi: `DEVELOPMENT_ROADMAP.md` Giai đoạn 2 và `GAME_DESIGN_DOCUMENT.md`.
 
 ---
@@ -87,7 +87,7 @@ Yêu cầu: đủ chữ có dấu, kể cả dấu chồng (ầ, ẫ, ặ, ổ, 
 
 ---
 
-## 10. Kế hoạch VS-A — Nền trình bày (ĐỀ XUẤT, CHỜ DUYỆT)
+## 10. Kế hoạch VS-A — Nền trình bày (✅ ĐÃ DUYỆT, ĐÃ LÀM XONG 2026-11-28)
 
 **Mục tiêu:** toàn bộ vòng MVP đọc rõ chữ bằng pixel font tiếng Việt, có theme UI chung, có tiếng, có menu cài đặt, chuyển động mượt trên màn hình tần số cao. Không thêm gameplay.
 
@@ -96,12 +96,12 @@ Yêu cầu: đủ chữ có dấu, kể cả dấu chồng (ầ, ẫ, ặ, ổ, 
 | Mốc | Nội dung | Commit dự kiến | Test |
 |---|---|---|---|
 | VSA0 ✅ | Màn hình thử font (`scenes/debug/font_preview.tscn`), font ứng viên trong `assets/fonts/candidates/`, `assets/CREDITS.md` | `feat(ui): font preview screen with candidate fonts` | Mọi ứng viên có đủ ký tự trong `translations.csv`; màn hình đổi font và ngôn ngữ đúng |
-| VSA1 | Font được chọn thành `assets/fonts/fnt_<tên>.ttf` (tắt antialiasing, hinting, subpixel); xóa ứng viên không chọn; theme chung `resources/ui/main_theme.tres` (font, cỡ, khoảng dòng đủ cho dấu chồng, màu nền/viền panel, nút); gán theme cho mọi UI | `feat(ui): pixel font and shared ui theme` | Mọi Label/Button dùng font của theme; đủ ký tự; không chữ nào tràn khỏi khung ở cả EN và VI |
-| VSA2 | Cài đặt lưu riêng ở `user://settings.cfg` (ConfigFile): ngôn ngữ, âm lượng 3 bus, phím đã đổi. Ngôn ngữ chuyển từ save ván chơi sang đây (save cũ vẫn đọc được, lấy ngôn ngữ cũ một lần) | `feat(settings): settings file separate from game save` | Lưu/đọc, file hỏng thì dùng mặc định, migrate ngôn ngữ từ save cũ, Chơi mới không reset cài đặt |
-| VSA3 | Menu cài đặt mở từ menu chính và menu tạm dừng: ngôn ngữ, 3 thanh âm lượng, đổi phím cho các action gameplay (di chuyển 4 hướng, tương tác, đánh, né, túi đồ), nút "Khôi phục mặc định". Esc đóng menu cài đặt trước | `feat(ui): settings menu with volume, language, key rebinding` | Đổi phím có tác dụng ngay và sau khi mở lại; không gán trùng phím (báo lỗi); Esc đúng thứ tự; HUD và chữ cập nhật khi đổi ngôn ngữ |
-| VSA4 | Bus âm thanh Master / Music / SFX (`default_bus_layout.tres`); node `Audio` trong `Main` nghe signal từ EventBus và phát SFX; SFX tạm cho vung cuốc, trúng đòn, quái lấy đà, né, nhặt đồ, nấu xong, nhận vàng, bấm nút UI | `feat(audio): audio buses and placeholder sfx` | Mỗi signal phát đúng âm; âm lượng 0 thì tắt; không lỗi khi thiếu file |
-| VSA5 | TECH-008: bật `physics/common/physics_interpolation`; gọi `reset_physics_interpolation()` khi đặt vị trí tức thời (spawn, vào level, hồi sinh) | `feat(core): enable physics interpolation` | Setting bật; player/quái đặt vị trí tức thời không bị "trượt" từ vị trí cũ |
-| VSA6 | Rà toàn bộ: docs, CHANGELOG, test, danh sách chơi thử | `docs: complete vs-a` | Toàn bộ test |
+| VSA1 ✅ `361f7d2` | Font được chọn thành `assets/fonts/fnt_<tên>.ttf` (tắt antialiasing, hinting, subpixel); xóa ứng viên không chọn; theme chung `resources/ui/main_theme.tres` (font, cỡ, khoảng dòng đủ cho dấu chồng, màu nền/viền panel, nút); gán theme cho mọi UI | `feat(ui): pixel font and shared ui theme` | Mọi Label/Button dùng font của theme; đủ ký tự; không chữ nào tràn khỏi khung ở cả EN và VI |
+| VSA2 ✅ `5175bd8` | Cài đặt lưu riêng ở `user://settings.cfg` (ConfigFile): ngôn ngữ, âm lượng 3 bus, phím đã đổi. Ngôn ngữ chuyển từ save ván chơi sang đây (save cũ vẫn đọc được, lấy ngôn ngữ cũ một lần) | `feat(settings): settings file separate from game save` | Lưu/đọc, file hỏng thì dùng mặc định, migrate ngôn ngữ từ save cũ, Chơi mới không reset cài đặt |
+| VSA3 ✅ `fb23092` | Menu cài đặt mở từ menu chính và menu tạm dừng: ngôn ngữ, 3 thanh âm lượng, đổi phím cho các action gameplay (di chuyển 4 hướng, tương tác, đánh, né, túi đồ), nút "Khôi phục mặc định". Esc đóng menu cài đặt trước | `feat(ui): settings menu with volume, language, key rebinding` | Đổi phím có tác dụng ngay và sau khi mở lại; không gán trùng phím (báo lỗi); Esc đúng thứ tự; HUD và chữ cập nhật khi đổi ngôn ngữ |
+| VSA4 ✅ `38b0226` | Bus âm thanh Master / Music / SFX (`default_bus_layout.tres`); node `Audio` trong `Main` nghe signal từ EventBus và phát SFX; SFX tạm cho vung cuốc, trúng đòn, quái lấy đà, né, nhặt đồ, nấu xong, nhận vàng, bấm nút UI | `feat(audio): audio buses and placeholder sfx` | Mỗi signal phát đúng âm; âm lượng 0 thì tắt; không lỗi khi thiếu file |
+| VSA5 ✅ `b63dac9` | TECH-008: bật `physics/common/physics_interpolation`; gọi `reset_physics_interpolation()` khi đặt vị trí tức thời (spawn, vào level, hồi sinh) | `feat(core): enable physics interpolation` | Setting bật; player/quái đặt vị trí tức thời không bị "trượt" từ vị trí cũ |
+| VSA6 ✅ | Rà toàn bộ: docs, CHANGELOG, test, danh sách chơi thử | `docs: complete vs-a` | Toàn bộ test |
 
 ### 10.2 Pixel font ứng viên (đã kiểm tra 2026-11-28)
 
@@ -129,7 +129,7 @@ Galmuri11 và Galmuri9 được cắt bớt (subset) chỉ còn chữ Latin, ti�
   `& "D:\Godot_v4.7.2\Godot_v4.7.2-stable_win64.exe" --path "D:\Godot_v4.7.2\TheLastHearth\the-last-hearth" res://scenes/debug/font_preview.tscn`
 - Phím: **← / →** đổi font, **Enter** đổi EN/VI, **↑ / ↓** cuộn, **Esc** thoát. Chữ được vẽ ở đúng độ phân giải game 640×360, phóng nguyên lần như khi chơi.
 
-### 10.4 Danh sách chơi thử cuối VS-A (dự kiến)
+### 10.4 Danh sách chơi thử cuối VS-A (bản dự kiến; bản cuối ở báo cáo VS-A)
 
 1. Menu chính, HUD, túi đồ, menu tạm dừng: mọi chữ dùng pixel font mới, dấu tiếng Việt không bị cắt hay đè dòng trên.
 2. Menu cài đặt: đổi ngôn ngữ, toàn bộ chữ đổi ngay (kể cả HUD đang mở).
@@ -138,7 +138,7 @@ Galmuri11 và Galmuri9 được cắt bớt (subset) chỉ còn chữ Latin, ti�
 5. Chơi trên màn hình 120/144 Hz (nếu có): đi lại và quay camera không rung; xuống mỏ, chết, tỉnh dậy: không thấy nhân vật "trượt" qua màn hình.
 6. Chơi mới: cài đặt (ngôn ngữ, âm lượng, phím) vẫn giữ nguyên.
 
-### 10.5 Câu hỏi cần chốt cho VS-A
+### 10.5 Câu hỏi cần chốt cho VS-A (✅ đã chốt 2026-11-28, xem DECISION_LOG mục VS-A)
 
 1. Chọn font (hoặc 2 font: chữ chính và HUD) từ màn hình thử.
 2. Cài đặt lưu riêng `user://settings.cfg` và chuyển ngôn ngữ ra khỏi save ván chơi: đồng ý không?
@@ -151,5 +151,6 @@ Galmuri11 và Galmuri9 được cắt bớt (subset) chỉ còn chữ Latin, ti�
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.3 | VS-A hoàn thành (VSA1–VSA6), ghi commit từng mốc |
 | 2026-11-28 | 0.2 | Chủ dự án duyệt: ghi quyết định mục 9, thứ tự mới (tách VS-E1/E2), kế hoạch VS-A và font ứng viên |
 | 2026-11-28 | 0.1 | Bản đề xuất |

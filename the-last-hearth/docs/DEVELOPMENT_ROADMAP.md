@@ -36,7 +36,7 @@
 
 ## Giai đoạn 1 — MVP Prototype ✅ HOÀN THÀNH (2026-11-28)
 
-> Nhìn lại: [PHASE1_RETROSPECTIVE.md](PHASE1_RETROSPECTIVE.md). Kế hoạch Giai đoạn 2 (đề xuất, chưa duyệt): [VERTICAL_SLICE_PLAN.md](VERTICAL_SLICE_PLAN.md).
+> Nhìn lại: [PHASE1_RETROSPECTIVE.md](PHASE1_RETROSPECTIVE.md). Kế hoạch Giai đoạn 2 (đã duyệt): [VERTICAL_SLICE_PLAN.md](VERTICAL_SLICE_PLAN.md).
 
 **Mục tiêu:** Một vòng gameplay hoàn chỉnh, chơi được, dùng asset tạm. Chi tiết ở [MVP_SPECIFICATION.md](MVP_SPECIFICATION.md).
 
@@ -74,6 +74,8 @@ Từ mốc 1.3, công việc chia thành checkpoint. Mỗi checkpoint kết thú
 **Mục tiêu:** Một lát cắt nhỏ nhưng đạt chất lượng gần như bản phát hành, dùng để quảng bá và gọi vốn/tìm publisher.
 
 > ✅ Phạm vi và thứ tự checkpoint đã duyệt 2026-11-28: VS-A → VS-E1 → VS-B → VS-C → VS-D → VS-E2 + VS-F. Chi tiết và quyết định ở [VERTICAL_SLICE_PLAN.md](VERTICAL_SLICE_PLAN.md). Tay cầm để sau Vertical Slice.
+>
+> ✅ VS-A (nền trình bày) hoàn thành 2026-11-28, chờ chơi thử. Tiếp theo: VS-E1.
 
 - Art final cho quán (1 tầng) và 1 khu dungeon
 - 3 đến 4 loại quái, 1 boss

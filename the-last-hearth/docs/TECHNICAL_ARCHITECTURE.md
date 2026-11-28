@@ -85,7 +85,7 @@ Thứ tự load: `EventBus` → `GameState` → `SaveManager` → `SceneRouter`.
                     └────────────┘
    Player ─┐                               ┌─ HUD
    Enemy  ─┼─ (signal toàn cục: enemy_died, ├─ QuestTracker
-   Stove  ─┘   item_collected, day_ended…)  └─ AudioManager (sau MVP)
+   Stove  ─┘   item_collected, day_ended…)  └─ Audio (AudioDirector trong Main, VS-A)
 
    Scene nội bộ:  Parent ──gọi hàm──▶ Child
                   Parent ◀──signal──── Child
@@ -150,15 +150,36 @@ Tra cứu từ `id` sang Resource qua một `DataRegistry` (dự kiến nằm �
       "day": 2, "gold": 15, "equipped_weapon": "rusty_pickaxe",
       "stash": [ { "id": "cave_mushroom", "count": 3 } ],
       "customer_served_day": { "weary_traveler": 2 }
-    },
-    "settings": { "locale": "vi" }
+    }
   }
   ```
+- Save cũ (trước VS-A) có trường `"settings": { "locale": ... }`: chỉ được đọc một lần để chuyển ngôn ngữ sang `settings.cfg`, file save không bị sửa.
 - Chỉ tự lưu khi đang ở quán (`EventBus.autosave_requested`: về từ mỏ, sau khi giao món). Không lưu túi và vị trí player.
 - File không đọc được (JSON sai, rỗng, thiếu trường, `save_version` khác) được đổi tên thành `slot_1.json.bak`; menu hiện một dòng lỗi (`SaveManager.last_error_key`).
 - Mỗi hệ thống cần lưu có cặp hàm `to_dict() -> Dictionary` và `from_dict(data: Dictionary) -> void`.
 - `save_version` tăng mỗi khi cấu trúc thay đổi; `SaveManager` có hàm migrate từ phiên bản cũ.
 - Ghi an toàn: ghi vào file tạm `.tmp` trước, xong mới đổi tên đè lên file cũ, để tránh hỏng save khi game crash giữa chừng. Hành vi đổi tên đè file trên Windows: `DirAccess.rename_absolute` đè file đích; test headless chạy trên Linux, cần chủ dự án xác nhận trên Windows khi chơi thử.
+
+## 6.1 Cài đặt người chơi (✅ VS-A, 2026-11-28)
+
+- File riêng `user://settings.cfg` (ConfigFile), không nằm trong save ván chơi. Chơi mới không đổi cài đặt.
+- Nội dung: ngôn ngữ, âm lượng 3 bus (Master/Music/SFX, tuyến tính 0..1, 0 = tắt), toàn màn hình, phím đã đổi của 8 action gameplay (`pause` cố định).
+- Lớp dữ liệu `GameSettings` (`scripts/save/game_settings.gd`, RefCounted); `SaveManager` đọc/ghi và áp dụng (`load_settings`, `set_locale`, `set_volume`, `set_fullscreen`, `rebind_action`, `reset_key_bindings`). Không thêm autoload.
+- File hỏng hoặc giá trị sai: dùng mặc định cho phần sai, không crash.
+- Toàn màn hình dùng `Window.MODE_FULLSCREEN`; integer scaling giữ nguyên (1080p → 3×, 1366×768 → 2× có viền).
+
+## 6.2 Âm thanh (✅ VS-A)
+
+- Bus: Master → Music, SFX (`default_bus_layout.tres`).
+- Node `Audio` (`AudioDirector`, `scenes/main/audio_director.gd`) trong `Main`, `PROCESS_MODE_ALWAYS`, 8 `AudioStreamPlayer` trên bus SFX.
+- Hệ thống phát âm bằng `EventBus.sfx_requested.emit(&"<id>")`; mọi `BaseButton` tự phát `ui_click`.
+- Bảng id → file: `SfxLibrary` (`data/audio/sfx_library.tres`). Thay âm thật chỉ cần đổi file trong bảng, không sửa code. Id lạ chỉ cảnh báo một lần.
+
+## 6.3 Theme UI (✅ VS-A)
+
+- `resources/ui/main_theme.tres` gán toàn project qua `gui/theme/custom`. Font chính `fnt_main.tres` (Galmuri11, 12 px), HUD `fnt_hud.tres` (Galmuri9, 10 px), `spacing_top` chừa chỗ dấu chữ hoa.
+- UI dùng `theme_type_variation` (HudLabel, HudGoldLabel, TitleLabel, ErrorLabel, SlotCountLabel, CompactButton), không dùng LabelSettings hay `font_size` riêng.
+- Chỉ dùng cỡ gốc của font (hoặc bội nguyên), không phóng lẻ.
 
 ## 7. Physics: Collision Layers — ✅ ĐÃ CHỐT (2026-11-27)
 
@@ -254,6 +275,8 @@ window/stretch/scale_mode="integer"  ; MỚI: chỉ phóng to theo bội số ng
   ```
   Lệnh này import toàn bộ project và báo lỗi parse script. Chạy từ thư mục `the-last-hearth/`.
 - **Test headless (từ CP-B):** `godot --headless --path . -s res://tests/run_all.gd`. Bộ chạy tự viết, không addon: tìm mọi `tests/test_*.gd`, chạy các hàm `test_*`, in PASS/FAIL, mã thoát 1 khi có lỗi. Base `tests/test_case.gd` có `check`, `check_eq`, `wait`, `start_main`, `tap`, `hold`. Test có thể khởi động `Main` thật và giả lập input. Addon GUT chưa cài.
+- Bộ chạy đánh trượt test có `ERROR` của engine; test cố ý gây lỗi (ví dụ file cài đặt hỏng) khai báo chuỗi lỗi được phép trong `allowed_errors`.
+- `physics/common/physics_interpolation` bật từ VSA5: dịch chuyển tức thời (spawn, vào level, hồi sinh) phải gọi `reset_physics_interpolation()`; camera player chạy ở chế độ physics.
 - **Scene test:** mỗi scene thực thể phải chạy được độc lập bằng F6.
 
 ## 11. Hiệu năng (mục tiêu)
@@ -266,6 +289,7 @@ window/stretch/scale_mode="integer"  ; MỚI: chỉ phóng to theo bội số ng
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.6 | VS-A: mục 6.1 cài đặt, 6.2 âm thanh, 6.3 theme; bỏ `settings` khỏi save; `allowed_errors`, physics interpolation |
 | 2026-11-27 | 0.1 | Bản khởi tạo |
 | 2026-11-27 | 0.5 | Thêm mục 9.1 Quy ước scene 2D (mốc 1.2) |
 | 2026-11-27 | 0.4 | Mốc 1.1: autoload đã đăng ký, integer scaling, cảnh báo untyped, main scene |

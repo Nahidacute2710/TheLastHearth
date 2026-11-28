@@ -176,7 +176,9 @@ Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình b�
 
 **Giai đoạn 1 — MVP: ✅ HOÀN THÀNH** (2026-11-28). Nhìn lại ở `the-last-hearth/docs/PHASE1_RETROSPECTIVE.md`.
 
-**Giai đoạn 2 — Vertical Slice: đang lập kế hoạch.** Phạm vi, thứ tự checkpoint và quyết định đã duyệt 2026-11-28 (`the-last-hearth/docs/VERTICAL_SLICE_PLAN.md` mục 9). **Kế hoạch VS-A (mục 10) chờ duyệt**; mới có VSA0 (màn hình thử font `scenes/debug/font_preview.tscn`). Không làm VSA1 trở đi trước khi chủ dự án duyệt và chọn font. Nhân vật chính: `the-last-hearth/docs/STORY_BIBLE.md`. API key (PixelLab...) chỉ ở biến môi trường, không bao giờ commit.
+**Giai đoạn 2 — Vertical Slice: đang làm.** Phạm vi, thứ tự checkpoint và quyết định đã duyệt 2026-11-28 (`the-last-hearth/docs/VERTICAL_SLICE_PLAN.md` mục 9). **VS-A ✅ HOÀN THÀNH** (2026-11-28, VSA1–VSA6, chờ chơi thử): Galmuri11/Galmuri9 + theme chung, `user://settings.cfg`, menu cài đặt, bus âm thanh + SFX tạm, physics interpolation. **Tiếp theo: lập kế hoạch VS-E1, chờ chủ dự án.** Nhân vật chính: `the-last-hearth/docs/STORY_BIBLE.md`. API key (PixelLab...) chỉ ở biến môi trường, không bao giờ commit.
+
+**Ghi chú kiến trúc VS-A:** cài đặt (ngôn ngữ, âm lượng, phím, toàn màn hình) nằm trong `GameSettings` (`scripts/save/game_settings.gd`), do `SaveManager` đọc/ghi ở `user://settings.cfg`, tách khỏi save ván chơi. Âm thanh: node `Audio` (`AudioDirector`) trong `Main`, phát theo id qua `EventBus.sfx_requested`; id → file ở `data/audio/sfx_library.tres`. Mọi UI lấy font/màu từ `resources/ui/main_theme.tres` (gán qua `gui/theme/custom`), dùng `theme_type_variation` thay vì LabelSettings. Test cố ý gây ERROR của engine phải khai báo `allowed_errors`. Dịch chuyển tức thời phải gọi `reset_physics_interpolation()`.
 
 **Kiểm tra headless phía Claude:** dùng bản Godot 4.7.2 Linux chính thức trên bản sao repo ở cloud (chủ dự án cho phép 2026-11-27).
 
