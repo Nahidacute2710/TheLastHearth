@@ -176,7 +176,7 @@ Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình b�
 
 **Giai đoạn 1 — MVP: ✅ HOÀN THÀNH** (2026-11-28). Nhìn lại ở `the-last-hearth/docs/PHASE1_RETROSPECTIVE.md`.
 
-**Tiếp theo: Giai đoạn 2 — Vertical Slice.** Kế hoạch ở `the-last-hearth/docs/VERTICAL_SLICE_PLAN.md` là **ĐỀ XUẤT, CHƯA DUYỆT**. Không bắt đầu việc nào của Giai đoạn 2 trước khi chủ dự án chốt các quyết định ở mục 9 của file đó.
+**Giai đoạn 2 — Vertical Slice: đang lập kế hoạch.** Phạm vi, thứ tự checkpoint và quyết định đã duyệt 2026-11-28 (`the-last-hearth/docs/VERTICAL_SLICE_PLAN.md` mục 9). **Kế hoạch VS-A (mục 10) chờ duyệt**; mới có VSA0 (màn hình thử font `scenes/debug/font_preview.tscn`). Không làm VSA1 trở đi trước khi chủ dự án duyệt và chọn font. Nhân vật chính: `the-last-hearth/docs/STORY_BIBLE.md`. API key (PixelLab...) chỉ ở biến môi trường, không bao giờ commit.
 
 **Kiểm tra headless phía Claude:** dùng bản Godot 4.7.2 Linux chính thức trên bản sao repo ở cloud (chủ dự án cho phép 2026-11-27).
 

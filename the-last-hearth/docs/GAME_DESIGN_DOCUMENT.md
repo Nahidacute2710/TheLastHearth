@@ -1,6 +1,6 @@
 # THE LAST HEARTH — Game Design Document
 
-> Phiên bản: 0.3 · Cập nhật: 2026-11-27
+> Phiên bản: 0.4 · Cập nhật: 2026-11-28
 > Trạng thái: **Định hướng đã duyệt (Phase 0)**. Mục nào không ghi ✅ thì vẫn là đề xuất.
 > Quy ước nhãn: **✅ ĐÃ CHỐT** = chủ dự án đã xác nhận · **ĐỀ XUẤT** = gợi ý, chưa duyệt · **🧪 CẦN THỬ NGHIỆM** = chốt qua playtest/mockup · **❓** = câu hỏi mở.
 
@@ -48,7 +48,7 @@ Vùng **Vael** từng là một thung lũng trù phú, sống nhờ các mạch 
 
 ### 4.3 Nhân vật chính
 
-✅ **ĐÃ CHỐT:** nhân vật chính là **nhân vật cố định**, có danh tính và cốt truyện riêng: người chủ quán mới. MVP **không** có hệ thống tạo nhân vật. Tùy chỉnh ngoại hình có thể xem xét ở giai đoạn sau. Tên, giới tính và tiểu sử chi tiết: ❓ chưa chốt.
+✅ **ĐÃ CHỐT:** nhân vật chính là **nhân vật cố định**, có danh tính và cốt truyện riêng: người chủ quán mới. MVP **không** có hệ thống tạo nhân vật. Tùy chỉnh ngoại hình có thể xem xét ở giai đoạn sau. ✅ **Bản đầu (2026-11-28):** **Maren**, nữ, khoảng 30 tuổi, từng là người đưa thư trên các tuyến đường Vael; nhận chìa khóa quán qua lá thư của người chủ cũ đã biến mất. Chi tiết ở `STORY_BIBLE.md`, còn sửa được đến VS-F.
 
 Đây không phải anh hùng được chọn mà là một người bình thường buộc phải cầm vũ khí, vì không ai khác sẽ xuống dưới đó.
 
@@ -58,7 +58,7 @@ Vùng **Vael** từng là một thung lũng trù phú, sống nhờ các mạch 
 - Vì sao Ngọn Lửa Gốc kháng cự được nó?
 - Người chủ cũ đã đi đâu?
 
-Câu trả lời được hé lộ dần qua boss, vật phẩm cổ và câu chuyện của khách trọ. Chi tiết cốt truyện đầy đủ sẽ có ở tài liệu `NARRATIVE_BIBLE.md` (chưa tạo; sẽ viết ở giai đoạn Vertical Slice).
+Câu trả lời được hé lộ dần qua boss, vật phẩm cổ và câu chuyện của khách trọ. Chi tiết cốt truyện đầy đủ sẽ có ở tài liệu `STORY_BIBLE.md` (tạo 2026-11-28, bổ sung dần trong Vertical Slice).
 
 ### 4.5 Tông giọng
 
@@ -92,14 +92,16 @@ U tối nhưng không tuyệt vọng. Bên ngoài lạnh, xám và im lặng; b�
 
 **Cơ chế Ngọn Lửa Gốc:** ✅ vai trò đã chốt: đây là cơ chế quan trọng gắn với sự tồn tại và phát triển của quán. Cách vận hành dưới đây vẫn là ĐỀ XUẤT ❓: Lửa có "cấp độ". Muốn tăng cấp phải tiêu tài nguyên đặc biệt lấy từ dungeon. Cấp càng cao thì quán càng có nhiều chỗ, càng hút khách, và người chơi càng chịu được Tro Lặng lâu hơn khi ở dưới mỏ. Đây là sợi dây chính nối hai nửa game.
 
-### 5.3 Nhịp một ngày trong game (ĐỀ XUẤT ❓)
+### 5.3 Nhịp một ngày trong game
+
+✅ **ĐÃ CHỐT (2026-11-28):** giữ nhịp như MVP cho Vertical Slice: ở quán (nấu, phục vụ) → xuống mỏ → về quán (an toàn hay bị đánh gục) là sang ngày mới. **Không giới hạn số ngày.** Phần dưới là ý tưởng cũ, giữ để tham khảo.
 
 1. **Sáng** — Chuẩn bị quán: nấu trước, sắp xếp, nhận nhiệm vụ.
 2. **Chiều tối** — Mở cửa, phục vụ khách (giai đoạn quản lý chủ động).
 3. **Đêm** — Đóng cửa, đi thám hiểm dungeon (một chuyến/đêm).
 4. **Kết thúc** — Trở về hoặc bị đánh gục, game lưu, sang ngày mới.
 
-Thứ tự "phục vụ trước, thám hiểm sau" hay ngược lại là ❓ cần chốt qua playtest MVP.
+Thứ tự: xem quyết định ở đầu mục.
 
 ### 5.4 Vòng meta (dài hạn)
 
@@ -151,15 +153,18 @@ Xem [MVP_SPECIFICATION.md](MVP_SPECIFICATION.md).
 - Phạt khi chết → bảng ở mục 6 ✅
 - Ngôn ngữ phát hành → tiếng Anh + tiếng Việt ✅
 
-**Còn mở:**
-1. Tên, giới tính, tiểu sử nhân vật chính.
-2. Nhịp ngày: phục vụ trước rồi thám hiểm, hay ngược lại? (🧪 chốt qua playtest MVP)
-3. Có giới hạn số ngày (áp lực thời gian) hay chơi tự do?
+**Đã trả lời (2026-11-28):**
+- Nhân vật chính → Maren (bản đầu, xem `STORY_BIBLE.md`) ✅
+- Nhịp ngày → giữ như MVP (quán → mỏ → về là sang ngày mới) ✅
+- Giới hạn số ngày → không giới hạn ✅
+
+**Còn mở:** chưa có.
 
 ## 10. Lịch sử thay đổi
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.4 | Chốt nhân vật chính (Maren, bản đầu), nhịp ngày, không giới hạn ngày; tài liệu cốt truyện đổi tên thành STORY_BIBLE.md |
 | 2026-11-27 | 0.1 | Bản nháp khởi tạo |
 | 2026-11-27 | 0.3 | Chốt bảng mất/giữ khi chết (thêm tiền, đồ tiêu hao, trang bị chưa mặc, vật phẩm quest) |
 | 2026-11-27 | 0.2 | Chốt quyết định Phase 0: luật chết, nhân vật cố định, EN/VI, Vael/Tro Lặng/Ngọn Lửa Gốc; thêm quy ước nhãn |

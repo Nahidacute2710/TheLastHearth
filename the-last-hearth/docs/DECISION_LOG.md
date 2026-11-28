@@ -92,4 +92,16 @@
 | 2026-11-28 | D3 | Trường `max_health_buff` trong save là tùy chọn (thiếu thì 0), nên không tăng `save_version` | Save cũ vẫn đọc được | Claude |
 | 2026-11-28 | D3 | Nút X: `Main` tắt tự thoát (`set_auto_accept_quit(false)`), gỡ level (nồi đang nấu được tính) rồi lưu nếu ở quán, sau đó mới thoát. Ở mỏ và ở menu thì không ghi gì | Dùng chung hàm với "Về menu chính" | Claude |
 | 2026-11-28 | D3 | Bộ chạy test đánh trượt mọi test có ERROR / SCRIPT ERROR (dùng `Logger` của Godot qua `OS.add_logger`) | Phát hiện khi viết test trọn vòng: SCRIPT ERROR dừng hàm test giữa chừng mà vẫn báo PASS | Claude |
+| 2026-11-28 | VS | Giai đoạn 1 chính thức hoàn thành (chơi thử 6 bước D3 đạt); tag `v0.1-mvp` tại `3822f93` | Chơi thử đạt | Chủ dự án |
+| 2026-11-28 | VS | Art: PixelLab qua MCP là nguồn chính, chỉnh tay theo ART_BIBLE; mockup 1 màn hình trước khi làm hàng loạt; ghi prompt/nguồn từng asset; API key chỉ ở biến môi trường, không commit; chưa dùng Retro Diffusion | Quyết định của chủ dự án | Chủ dự án |
+| 2026-11-28 | VS | Âm thanh: SFX/nhạc từ thư viện CC0 hoặc có giấy phép thương mại rõ ràng, ghi giấy phép từng file | Quyết định của chủ dự án | Chủ dự án |
+| 2026-11-28 | VS | Thứ tự: VS-A → VS-E1 (Ngọn Lửa Gốc v1 + nâng cấp) → VS-B (art) → VS-C → VS-D → VS-E2 (5–8 công thức, 3–4 loại khách) + VS-F | Chỗ tiêu vàng có sớm; art làm sau khi hệ thống ổn định | Chủ dự án |
+| 2026-11-28 | VS | Dungeon: ghép ngẫu nhiên từ phòng mẫu thiết kế tay; phòng đầu và phòng boss cố định; có test mọi bố cục đi được | Quyết định của chủ dự án | Chủ dự án |
+| 2026-11-28 | VS | Boss "Quản Đốc Rỗng" (Hollow Foreman): 2 pha, 3 đòn có báo trước (đập đất, lao tới, gọi Thợ Mỏ Rỗng); sang pha 2 khi dưới 50% máu | Quyết định của chủ dự án | Chủ dự án |
+| 2026-11-28 | VS | Chỗ tiêu vàng: nâng cấp quán gộp vào Ngọn Lửa Gốc; vàng + tài nguyên để "nhóm lửa" lên cấp, mỗi cấp mở một thứ; danh sách 4–5 cấp đề xuất khi lập kế hoạch VS-E1 | Quyết định của chủ dự án | Chủ dự án |
+| 2026-11-28 | VS | Nhịp ngày giữ như MVP (quán → mỏ → về là sang ngày mới); không giới hạn số ngày | Trả lời câu hỏi mở 2 và 3 của GDD | Chủ dự án |
+| 2026-11-28 | VS | Nhân vật chính bản đầu: Maren (xem STORY_BIBLE.md), còn sửa được đến VS-F | Quyết định của chủ dự án | Chủ dự án |
+| 2026-11-28 | VS | TECH-008: bật physics interpolation ở VS-A, có bước kiểm tra camera có rung không | Quyết định của chủ dự án | Chủ dự án |
+| 2026-11-28 | VS | Tay cầm: để sau Vertical Slice; mọi input vẫn đi qua action | Quyết định của chủ dự án | Chủ dự án |
+| 2026-11-28 | VS | Font: giấy phép SIL OFL 1.1 được chấp nhận cho font (nhúng vào game thương mại, ghi giấy phép kèm theo) | Chủ dự án nêu OFL làm ví dụ hợp lệ | Chủ dự án |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

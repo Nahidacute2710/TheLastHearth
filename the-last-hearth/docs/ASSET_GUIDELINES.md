@@ -75,9 +75,18 @@ Khi một nhân vật/quái có từ 3 file trở lên thì tạo thư mục con
 ## 5. Bản quyền & nguồn gốc (BẮT BUỘC cho game thương mại)
 
 - Mọi asset không do đội tự làm phải được ghi vào `assets/CREDITS.md` (tạo khi có asset đầu tiên) với: tên file, tác giả, nguồn (URL), giấy phép, ngày tải.
-- Chỉ dùng giấy phép cho phép **thương mại**: CC0, CC-BY (phải ghi công), hoặc giấy phép đã mua.
+- Chỉ dùng giấy phép cho phép **thương mại**: CC0, CC-BY (phải ghi công), SIL OFL 1.1 (chỉ cho font, kèm file giấy phép), hoặc giấy phép đã mua.
+- Âm thanh và nhạc (✅ 2026-11-28): chỉ từ thư viện CC0 hoặc có giấy phép thương mại rõ ràng; ghi giấy phép **từng file** trong `CREDITS.md`.
 - **Không** dùng asset có giấy phép NC (non-commercial), asset không rõ nguồn, hoặc asset lấy từ game khác.
 - Asset tạo bằng AI: ghi rõ công cụ và cách tạo trong `CREDITS.md`. Steam yêu cầu khai báo nội dung AI khi phát hành.
+
+### 5.1 Quy trình art bằng PixelLab (✅ ĐÃ CHỐT 2026-11-28)
+
+- PixelLab qua MCP là nguồn art chính; chưa dùng Retro Diffusion.
+- Mọi asset sinh ra đều được **chỉnh tay** cho đúng palette, kích thước và góc nhìn trong `ART_BIBLE.md` trước khi vào game.
+- Làm **mockup 1 màn hình** (quán + nhân vật + HUD) và được duyệt trước khi làm hàng loạt.
+- Ghi cho **từng asset** trong `CREDITS.md`: công cụ, prompt (nguyên văn), tham số chính, ngày tạo, các bước chỉnh tay.
+- **API key** chỉ đặt trong biến môi trường. Không commit, không ghi vào bất kỳ file cấu hình nào có trong git (kể cả `.mcp.json`, `project.godot`, `.env` không có trong `.gitignore`).
 
 ## 6. Trạng thái asset
 
@@ -101,5 +110,6 @@ Theo dõi trong bảng ở `assets/ASSET_STATUS.md` (tạo khi có asset thật)
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.3 | Thêm OFL cho font, quy định giấy phép âm thanh, quy trình art PixelLab |
 | 2026-11-27 | 0.1 | Bản khởi tạo |
 | 2026-11-27 | 0.2 | Chốt file nguồn art ngoài `res://`; ghi nhận quyết định chưa dùng Git LFS và điều kiện xem xét lại |

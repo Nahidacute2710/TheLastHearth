@@ -73,6 +73,8 @@ Từ mốc 1.3, công việc chia thành checkpoint. Mỗi checkpoint kết thú
 
 **Mục tiêu:** Một lát cắt nhỏ nhưng đạt chất lượng gần như bản phát hành, dùng để quảng bá và gọi vốn/tìm publisher.
 
+> ✅ Phạm vi và thứ tự checkpoint đã duyệt 2026-11-28: VS-A → VS-E1 → VS-B → VS-C → VS-D → VS-E2 + VS-F. Chi tiết và quyết định ở [VERTICAL_SLICE_PLAN.md](VERTICAL_SLICE_PLAN.md). Tay cầm để sau Vertical Slice.
+
 - Art final cho quán (1 tầng) và 1 khu dungeon
 - 3 đến 4 loại quái, 1 boss
 - 2 đến 3 vũ khí, nâng cấp hệ thống né (né cơ bản đã có từ MVP)
@@ -132,6 +134,7 @@ Từ mốc 1.3, công việc chia thành checkpoint. Mỗi checkpoint kết thú
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.5 | Duyệt phạm vi và thứ tự checkpoint Vertical Slice; tag `v0.1-mvp` |
 | 2026-11-28 | 0.4 | Giai đoạn 1 hoàn thành; thêm liên kết nhìn lại và kế hoạch Vertical Slice |
 | 2026-11-27 | 0.1 | Bản khởi tạo |
 | 2026-11-27 | 0.3 | Chia Giai đoạn 1 thành 4 checkpoint |
