@@ -77,4 +77,10 @@
 | 2026-11-28 | D1 | Kiểm tra toàn bộ file trước khi áp dụng: file sai thì không đổi gì trong `GameState`. Vũ khí có id lạ hoặc mục kho sai kiểu = file hỏng; mục kho có id lạ thì bỏ qua và ghi cảnh báo | Không bao giờ áp dụng nửa chừng | Claude |
 | 2026-11-28 | D1 | Bếp: nếu kho không đủ chỗ cho món thì không nấu, hiện "Kho đã đầy". Nếu kho bị lấp đầy trong lúc đang nấu (chỉ xảy ra bằng phím debug), món vẫn được thêm vượt giới hạn ô để không bao giờ mất | Theo yêu cầu không mất món | Claude |
 | 2026-11-28 | D1 | Test dùng thư mục `user://test_saves/`, không đụng tới save thật trong `user://saves/` | Chạy test trên máy chủ dự án không làm mất save | Claude |
+| 2026-11-28 | D2 | Game mở vào menu chính (nền tối, không tải level phía sau). Chơi mới ghi save ngay (ngày 1), nên "Tiếp tục" xuất hiện từ lần mở sau | Nếu không, chọn Chơi mới rồi thoát sẽ vẫn còn save cũ | Claude |
+| 2026-11-28 | D2 | Về menu chính từ quán thì lưu (giữ món vừa nấu sau lần tự lưu cuối); từ mỏ thì không lưu | Theo quyết định không lưu ở mỏ; ở quán thì không có lý do bỏ dữ liệu | Claude |
+| 2026-11-28 | D2 | Menu tạm dừng đọc Esc trong `_unhandled_input`, túi đồ đọc trong `_input`, nên Esc đóng túi trước; túi không mở được khi đang tạm dừng hoặc đang ở menu | Đúng thứ tự đã chốt | Claude |
+| 2026-11-28 | D2 | Tên món hiện ở một dòng dưới hai lưới khi rê chuột vào ô; bấm chuột trái chọn ô thì tên giữ lại khi rời chuột | Dễ thấy hơn tooltip mặc định | Claude |
+| 2026-11-28 | D2 | Phím debug: Shift+F9 xóa file save | Theo yêu cầu; tránh F5–F8 | Claude |
+| 2026-11-28 | D2 | Tên game giữ "The Last Hearth" ở cả hai ngôn ngữ (khóa `GAME_TITLE`) | Tên riêng; chủ dự án có thể đổi cột vi | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

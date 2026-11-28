@@ -2,6 +2,7 @@ extends Control
 ## Bag + tavern stash panel. The `inventory` action (Tab, I) opens and closes it; `pause` (Esc) closes it.
 ## The world is paused while it is open. Input is read in _input and marked handled, so Tab never
 ## reaches GUI focus navigation (TECH-006). No control in the panel can take focus.
+## Hovering or clicking a slot shows the item name below the grids.
 
 const SLOT_SIZE: Vector2 = Vector2(20.0, 20.0)
 const SLOT_COLOR: Color = Color(0.16, 0.13, 0.15)
@@ -11,6 +12,10 @@ const SLOT_BORDER: Color = Color(0.0862745, 0.0784314, 0.109804)
 
 @onready var _bag_grid: GridContainer = %BagGrid
 @onready var _stash_grid: GridContainer = %StashGrid
+@onready var _item_name: Label = %ItemName
+
+var _selected_name_key: StringName = &""
+var _slot_name_keys: Dictionary[Control, StringName] = {}
 
 
 func _ready() -> void:
@@ -25,7 +30,7 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		if visible:
 			close()
-		elif not SceneRouter.is_transitioning():
+		elif SceneRouter.get_current_level() != null and not SceneRouter.is_transitioning() and not get_tree().paused:
 			open()
 	elif visible and event.is_action_pressed(&"pause"):
 		get_viewport().set_input_as_handled()
@@ -34,6 +39,8 @@ func _input(event: InputEvent) -> void:
 
 func open() -> void:
 	_refresh()
+	_selected_name_key = &""
+	_show_name(&"")
 	show()
 	get_tree().paused = true
 
@@ -74,17 +81,20 @@ func _fill(grid: GridContainer, inventory: Inventory) -> void:
 		if i < stacks.size():
 			icon.texture = stacks[i].item.icon
 			count.text = str(stacks[i].count) if stacks[i].count > 1 or stacks[i].item.max_stack > 1 else ""
-			slot.tooltip_text = stacks[i].item.name_key
+			_slot_name_keys[slot] = stacks[i].item.name_key
 		else:
 			icon.texture = null
 			count.text = ""
-			slot.tooltip_text = ""
+			_slot_name_keys[slot] = &""
 
 
 func _make_slot() -> Control:
 	var slot: Panel = Panel.new()
 	slot.custom_minimum_size = SLOT_SIZE
 	slot.focus_mode = Control.FOCUS_NONE
+	slot.mouse_entered.connect(_on_slot_hovered.bind(slot))
+	slot.mouse_exited.connect(_on_slot_unhovered)
+	slot.gui_input.connect(_on_slot_gui_input.bind(slot))
 	var style: StyleBoxFlat = StyleBoxFlat.new()
 	style.bg_color = SLOT_COLOR
 	style.border_color = SLOT_BORDER
@@ -106,3 +116,41 @@ func _make_slot() -> Control:
 	count.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	slot.add_child(count)
 	return slot
+
+
+func get_item_name_text() -> String:
+	return _item_name.text
+
+
+## Shows the item name of a slot (index in the grid). which = &"bag" or &"stash". Used by tests.
+func hover_slot(which: StringName, index: int) -> void:
+	var grid: GridContainer = _bag_grid if which == &"bag" else _stash_grid
+	_on_slot_hovered(grid.get_child(index) as Control)
+
+
+func select_slot(which: StringName, index: int) -> void:
+	var grid: GridContainer = _bag_grid if which == &"bag" else _stash_grid
+	_select(grid.get_child(index) as Control)
+
+
+func _on_slot_hovered(slot: Control) -> void:
+	_show_name(_slot_name_keys.get(slot, &""))
+
+
+func _on_slot_unhovered() -> void:
+	_show_name(_selected_name_key)
+
+
+func _on_slot_gui_input(event: InputEvent, slot: Control) -> void:
+	var click: InputEventMouseButton = event as InputEventMouseButton
+	if click != null and click.pressed and click.button_index == MOUSE_BUTTON_LEFT:
+		_select(slot)
+
+
+func _select(slot: Control) -> void:
+	_selected_name_key = _slot_name_keys.get(slot, &"")
+	_show_name(_selected_name_key)
+
+
+func _show_name(name_key: StringName) -> void:
+	_item_name.text = tr(name_key) if name_key != &"" else ""

@@ -22,3 +22,13 @@ HUD_GOLD,%d gold,%d vàng
 TOAST_STASH_FULL,The stash is full,Kho đã đầy
 MENU_ERROR_SAVE_CORRUPT,The save file could not be read. A copy was kept as .bak.,Không đọc được file lưu. Đã giữ bản sao .bak.
 MENU_ERROR_SAVE_VERSION,The save file is from an unknown version. A copy was kept as .bak.,File lưu thuộc phiên bản không rõ. Đã giữ bản sao .bak.
+GAME_TITLE,The Last Hearth,The Last Hearth
+MENU_CONTINUE,Continue,Tiếp tục
+MENU_NEW_GAME,New Game,Chơi mới
+MENU_QUIT,Quit,Thoát
+MENU_CONFIRM_OVERWRITE,Start a new game? The current save will be overwritten.,Chơi mới? File lưu hiện tại sẽ bị ghi đè.
+MENU_YES,Yes,Có
+MENU_NO,No,Không
+PAUSE_TITLE,Paused,Tạm dừng
+PAUSE_RESUME,Resume,Tiếp tục
+PAUSE_MAIN_MENU,Main menu,Về menu chính

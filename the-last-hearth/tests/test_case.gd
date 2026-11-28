@@ -26,6 +26,7 @@ func before_each() -> void:
 func after_each() -> void:
 	for action: StringName in _ACTIONS:
 		Input.action_release(action)
+	tree.paused = false
 	if main != null:
 		main.queue_free()
 		main = null
@@ -56,11 +57,20 @@ func wait_physics(frames: int) -> void:
 		await tree.physics_frame
 
 
-## Boots Main (which loads the tavern) and waits for the fade-in to finish.
+## Boots Main, starts a new game (tavern) and waits for the fade-in to finish.
 func start_main() -> Node:
 	main = (load(MAIN_SCENE) as PackedScene).instantiate()
 	tree.root.add_child(main)
+	main.call("start_new_game")
 	await wait(0.4)
+	return main
+
+
+## Boots Main and stays on the main menu.
+func boot_to_menu() -> Node:
+	main = (load(MAIN_SCENE) as PackedScene).instantiate()
+	tree.root.add_child(main)
+	await tree.process_frame
 	return main
 
 

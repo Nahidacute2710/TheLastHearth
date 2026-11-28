@@ -80,6 +80,7 @@ func test_autosave_on_return_from_mine_and_after_serving_not_in_mine() -> void:
 	var state: Node = _state()
 	router().call("go_to", &"dungeon", &"entrance")
 	await wait(0.8)
+	_saves().call("delete_save")
 	state.get("bag").call("add", load(MUSHROOM_PATH), 3)
 	tree.root.get_node("EventBus").emit_signal("autosave_requested")
 	check(not _saves().call("has_save_file"), "no autosave while in the mine")

@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/toast.tscn" id="5_toast"]
 [ext_resource type="PackedScene" path="res://scenes/ui/inventory_panel.tscn" id="6_inventory"]
 [ext_resource type="PackedScene" path="res://scenes/ui/day_gold_display.tscn" id="7_daygold"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="8_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/main_menu.tscn" id="9_menu"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_script")
@@ -27,6 +29,12 @@ layer = 10
 [node name="Toast" parent="UILayer" instance=ExtResource("5_toast")]
 
 [node name="InventoryPanel" parent="UILayer" instance=ExtResource("6_inventory")]
+
+[node name="PauseMenu" parent="UILayer" instance=ExtResource("8_pause")]
+unique_name_in_owner = true
+
+[node name="MainMenu" parent="UILayer" instance=ExtResource("9_menu")]
+unique_name_in_owner = true
 
 [node name="DebugTools" type="Node" parent="."]
 script = ExtResource("3_debug")

@@ -5,6 +5,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 ## [Chưa phát hành] — CP-D: Lưu/tải và menu
 
 ### Thêm
+- D2: menu chính (Tiếp tục / Chơi mới có xác nhận / Thoát, dòng báo lỗi save), menu tạm dừng (Esc), `SceneRouter.unload()`, tên món trong túi đồ khi rê chuột hoặc chọn, phím debug Shift+F9 xóa save + test.
 - D1: `SaveManager` (JSON, file tạm, `.bak` cho file hỏng), `ItemDB`, `to_dict()/from_dict()` của `GameState`, `Inventory.to_array()/load_array()`, tự lưu ở quán + test.
 
 ### Sửa

@@ -3,6 +3,7 @@ extends Node
 ## F1: toggle EN/VI · F2: go to the mine · F3: go to the tavern
 ## F4: heal to full · F9: kill the player · F10: spawn a Hollow Miner next to the player · F11: toggle god mode
 ## Shift+F1: +5 Cave Mushroom in the bag · Shift+F2: +5 in the stash · Shift+F3: next day · Shift+F4: +50 gold
+## Shift+F9: delete the save file
 
 const MINER_SCENE: PackedScene = preload("res://scenes/enemies/hollow_miner.tscn")
 const SPAWN_OFFSET: Vector2 = Vector2(40.0, 0.0)
@@ -64,6 +65,9 @@ func _handle_shift_key(keycode: Key) -> void:
 			GameState.advance_day()
 		KEY_F4:
 			GameState.add_gold(DEBUG_GOLD_AMOUNT)
+		KEY_F9:
+			SaveManager.delete_save()
+			print("Debug: save deleted (%s)" % SaveManager.get_save_path())
 
 
 func _get_player() -> Player:

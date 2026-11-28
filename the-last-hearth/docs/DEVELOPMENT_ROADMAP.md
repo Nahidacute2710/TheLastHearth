@@ -61,7 +61,7 @@ Từ mốc 1.3, công việc chia thành checkpoint. Mỗi checkpoint kết thú
 | CP-A ✅ hoàn thành 2026-11-27 | 1.3, 1.4 | A1 localization · A2 `Interactable` + prompt · A3 `SceneRouter` + fade · A4 Mỏ Bỏ Hoang graybox + cửa hầm | Quán → xuống mỏ → về quán |
 | CP-B ✅ code xong 2026-11-27, chờ chơi thử (gộp với CP-C) | 1.5 | B1 component máu/hitbox/hurtbox · B2 Cuốc Chim + đòn vung theo chuột · B3 Thợ Mỏ Rỗng · B4 máu player, i-frames, **né**, chết → tỉnh dậy ở quán | Đánh quái, né, bị đánh gục |
 | CP-C ✅ code xong 2026-11-27, chờ chơi thử (gộp với CP-B) | 1.6, 1.7 | C1 inventory + luật chết · C2 Nấm Hang · C3 túi đồ (TECH-006) · C4 bếp + Súp Nấm · C5 Lữ Khách, vàng, ngày | Nhặt nấm, nấu, bán |
-| CP-D | 1.8, 1.9 | D1 save JSON · D2 menu chính, tự lưu, **menu tạm dừng** · D3 toàn vòng, cân thông số, buff Súp Nấm nếu kịp | Thoát và mở lại vẫn còn dữ liệu |
+| CP-D 🔶 D1–D2 code xong 2026-11-28, chờ chơi thử; D3 chờ kết quả chơi thử | 1.8, 1.9 | D1 save JSON · D2 menu chính, tự lưu, **menu tạm dừng** · D3 toàn vòng, cân thông số, buff Súp Nấm nếu kịp | Thoát và mở lại vẫn còn dữ liệu |
 
 **Tiêu chí hoàn thành:** Vòng Quán → Chuẩn bị → Dungeon → Chiến đấu → Thu thập → Về quán chạy được trọn vẹn, có lưu/tải, không crash.
 

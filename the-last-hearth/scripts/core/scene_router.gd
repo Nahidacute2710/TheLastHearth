@@ -61,6 +61,17 @@ func go_to(level_id: StringName, spawn_id: StringName = &"") -> void:
 	_is_transitioning = false
 
 
+## Removes the current level (back to the main menu).
+func unload() -> void:
+	if is_instance_valid(_current_level):
+		_current_level.get_parent().remove_child(_current_level)
+		_current_level.queue_free()
+	_current_level = null
+	current_level_id = &""
+	_is_transitioning = false
+	_fade_rect.modulate.a = 0.0
+
+
 func is_transitioning() -> bool:
 	return _is_transitioning
 
