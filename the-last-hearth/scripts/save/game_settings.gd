@@ -103,7 +103,7 @@ func find_action_using(event: InputEvent) -> StringName:
 ## Binds one key or mouse button to an action. Returns the action that already uses it (and changes
 ## nothing), or &"" on success.
 func rebind(action: StringName, event: InputEvent) -> StringName:
-	if not REBINDABLE_ACTIONS.has(action) or event_to_dict(event).is_empty():
+	if not REBINDABLE_ACTIONS.has(action) or not is_bindable(event):
 		return &"invalid"
 	var owner: StringName = find_action_using(event)
 	if owner != &"" and owner != action:
@@ -159,6 +159,32 @@ func from_config(config: ConfigFile) -> void:
 					events.append(event)
 			if not events.is_empty():
 				bindings[action] = events
+
+
+## Keys and mouse buttons can be bound; the mouse wheel cannot.
+static func is_bindable(event: InputEvent) -> bool:
+	if event is InputEventMouseButton:
+		var index: MouseButton = (event as InputEventMouseButton).button_index
+		return index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_XBUTTON1, MOUSE_BUTTON_XBUTTON2]
+	return event is InputEventKey and not event_to_dict(event).is_empty()
+
+
+## Short name of a key or mouse button for the settings menu (translated for the mouse).
+static func describe_event(event: InputEvent) -> String:
+	if event is InputEventKey:
+		var key: InputEventKey = event as InputEventKey
+		return key.as_text_physical_keycode() if key.physical_keycode != KEY_NONE else key.as_text_keycode()
+	if event is InputEventMouseButton:
+		match (event as InputEventMouseButton).button_index:
+			MOUSE_BUTTON_LEFT:
+				return TranslationServer.translate(&"KEY_MOUSE_LEFT")
+			MOUSE_BUTTON_RIGHT:
+				return TranslationServer.translate(&"KEY_MOUSE_RIGHT")
+			MOUSE_BUTTON_MIDDLE:
+				return TranslationServer.translate(&"KEY_MOUSE_MIDDLE")
+			var other:
+				return TranslationServer.translate(&"KEY_MOUSE_OTHER") % int(other)
+	return "?"
 
 
 static func normalize_locale(value: String) -> String:

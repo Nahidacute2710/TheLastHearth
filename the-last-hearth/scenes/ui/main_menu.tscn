@@ -64,6 +64,12 @@ custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "MENU_NEW_GAME"
 
+[node name="SettingsButton" type="Button" parent="Center/Rows/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "MENU_SETTINGS"
+
 [node name="QuitButton" type="Button" parent="Center/Rows/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)

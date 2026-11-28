@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/day_gold_display.tscn" id="7_daygold"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="8_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/main_menu.tscn" id="9_menu"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings_menu.tscn" id="10_settings"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_script")
@@ -34,6 +35,9 @@ layer = 10
 unique_name_in_owner = true
 
 [node name="MainMenu" parent="UILayer" instance=ExtResource("9_menu")]
+unique_name_in_owner = true
+
+[node name="SettingsMenu" parent="UILayer" instance=ExtResource("10_settings")]
 unique_name_in_owner = true
 
 [node name="DebugTools" type="Node" parent="."]

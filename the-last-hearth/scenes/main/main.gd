@@ -6,6 +6,7 @@ extends Node
 @onready var _level_root: Node2D = %LevelRoot
 @onready var _main_menu: MainMenu = %MainMenu
 @onready var _pause_menu: PauseMenu = %PauseMenu
+@onready var _settings_menu: SettingsMenu = %SettingsMenu
 
 ## Tests turn this off so a simulated close request does not end the test run.
 var quit_on_close: bool = true
@@ -16,6 +17,8 @@ func _ready() -> void:
 	_main_menu.new_game_requested.connect(start_new_game)
 	_main_menu.quit_requested.connect(_on_quit_requested)
 	_pause_menu.main_menu_requested.connect(return_to_menu)
+	_main_menu.settings_requested.connect(func() -> void: _settings_menu.open(_main_menu))
+	_pause_menu.settings_requested.connect(func() -> void: _settings_menu.open(_pause_menu))
 	get_tree().set_auto_accept_quit(false)
 	SaveManager.load_settings()
 	_main_menu.open()

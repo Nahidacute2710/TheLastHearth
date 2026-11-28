@@ -36,3 +36,29 @@ UI_EAT_FOOD,Eat (+%d max health next run),Ăn (+%d máu tối đa chuyến tới
 UI_EAT_ALREADY,Already ate this run,Đã ăn cho chuyến này
 UI_EAT_TAVERN_ONLY,Eat in the tavern,Chỉ ăn được ở quán
 TOAST_ATE_FOOD,Ate %s: +%d max health next run,Đã ăn %s: +%d máu tối đa chuyến tới
+MENU_SETTINGS,Settings,Cài đặt
+SETTINGS_TITLE,Settings,Cài đặt
+SETTINGS_LANGUAGE,Language,Ngôn ngữ
+LANGUAGE_NAME,English,Tiếng Việt
+SETTINGS_VOLUME_MASTER,Master volume,Âm lượng chung
+SETTINGS_VOLUME_MUSIC,Music,Nhạc
+SETTINGS_VOLUME_SFX,Sound effects,Hiệu ứng âm thanh
+SETTINGS_FULLSCREEN,Fullscreen,Toàn màn hình
+SETTINGS_CONTROLS,Controls,Phím điều khiển
+SETTINGS_PRESS_KEY,Press a key...,Nhấn phím...
+SETTINGS_KEY_IN_USE,Already used by: %s,Phím này đang dùng cho: %s
+SETTINGS_RESET_KEYS,Reset controls,Khôi phục phím mặc định
+SETTINGS_BACK,Back,Quay lại
+ACTION_MOVEMENT_UP,Move up,Đi lên
+ACTION_MOVEMENT_DOWN,Move down,Đi xuống
+ACTION_MOVEMENT_LEFT,Move left,Sang trái
+ACTION_MOVEMENT_RIGHT,Move right,Sang phải
+ACTION_INTERACT,Interact,Tương tác
+ACTION_ATTACK,Attack,Đánh
+ACTION_DODGE,Dodge,Né
+ACTION_INVENTORY,Inventory,Túi đồ
+ACTION_PAUSE,Pause,Tạm dừng
+KEY_MOUSE_LEFT,Left mouse,Chuột trái
+KEY_MOUSE_RIGHT,Right mouse,Chuột phải
+KEY_MOUSE_MIDDLE,Middle mouse,Chuột giữa
+KEY_MOUSE_OTHER,Mouse %d,Chuột %d

@@ -1,0 +1,109 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/settings_menu.gd" id="1_script"]
+
+[node name="SettingsMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0862745, 0.0784314, 0.109804, 0.85)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Frame" type="PanelContainer" parent="Center"]
+layout_mode = 2
+
+[node name="Columns" type="HBoxContainer" parent="Center/Frame"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Left" type="VBoxContainer" parent="Center/Frame/Columns"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Center/Frame/Columns/Left"]
+layout_mode = 2
+text = "SETTINGS_TITLE"
+
+[node name="LanguageRow" type="HBoxContainer" parent="Center/Frame/Columns/Left"]
+layout_mode = 2
+
+[node name="LanguageLabel" type="Label" parent="Center/Frame/Columns/Left/LanguageRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SETTINGS_LANGUAGE"
+
+[node name="LanguageButton" type="Button" parent="Center/Frame/Columns/Left/LanguageRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+auto_translate_mode = 2
+theme_type_variation = &"CompactButton"
+
+[node name="VolumeGrid" type="GridContainer" parent="Center/Frame/Columns/Left"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 2
+columns = 3
+
+[node name="FullscreenCheck" type="CheckButton" parent="Center/Frame/Columns/Left"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SETTINGS_FULLSCREEN"
+
+[node name="Spacer" type="Control" parent="Center/Frame/Columns/Left"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BackButton" type="Button" parent="Center/Frame/Columns/Left"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SETTINGS_BACK"
+
+[node name="Right" type="VBoxContainer" parent="Center/Frame/Columns"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ControlsTitle" type="Label" parent="Center/Frame/Columns/Right"]
+layout_mode = 2
+text = "SETTINGS_CONTROLS"
+
+[node name="KeyGrid" type="GridContainer" parent="Center/Frame/Columns/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 2
+columns = 2
+
+[node name="KeyError" type="Label" parent="Center/Frame/Columns/Right"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+auto_translate_mode = 2
+theme_type_variation = &"ErrorLabel"
+autowrap_mode = 3
+
+[node name="ResetKeysButton" type="Button" parent="Center/Frame/Columns/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SETTINGS_RESET_KEYS"
