@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/interactions/weapon_rack.tscn" id="7_rack"]
 [ext_resource type="PackedScene" path="res://scenes/interactions/cooking_station.tscn" id="8_stove"]
 [ext_resource type="PackedScene" path="res://scenes/tavern/customer.tscn" id="9_customer"]
+[ext_resource type="PackedScene" path="res://scenes/tavern/hearth_flame.tscn" id="10_hearth"]
 
 [node name="TavernMainHall" type="Node2D"]
 script = ExtResource("1_script")
@@ -57,7 +58,7 @@ position = Vector2(160, 120)
 [node name="Table" parent="Entities" instance=ExtResource("2_obstacle")]
 position = Vector2(384, 320)
 
-[node name="Hearth" parent="Entities" instance=ExtResource("2_obstacle")]
+[node name="HearthFlame" parent="Entities" instance=ExtResource("10_hearth")]
 position = Vector2(608, 96)
 
 [node name="Player" parent="Entities" instance=ExtResource("3_player")]

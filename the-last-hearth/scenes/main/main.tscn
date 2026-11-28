@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/settings_menu.tscn" id="10_settings"]
 [ext_resource type="Script" path="res://scenes/main/audio_director.gd" id="11_audio"]
 [ext_resource type="Resource" path="res://data/audio/sfx_library.tres" id="12_sfx"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hearth_panel.tscn" id="13_hearth"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_script")
@@ -32,6 +33,8 @@ layer = 10
 [node name="Toast" parent="UILayer" instance=ExtResource("5_toast")]
 
 [node name="InventoryPanel" parent="UILayer" instance=ExtResource("6_inventory")]
+
+[node name="HearthPanel" parent="UILayer" instance=ExtResource("13_hearth")]
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("8_pause")]
 unique_name_in_owner = true

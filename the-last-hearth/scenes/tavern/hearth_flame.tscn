@@ -1,0 +1,51 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/tavern/hearth_flame.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/environments/tavern/env_fireplace_placeholder.png" id="2_fireplace"]
+[ext_resource type="Texture2D" path="res://assets/effects/vfx_hearth_flame_placeholder.png" id="3_flame"]
+[ext_resource type="Texture2D" path="res://assets/effects/vfx_light_radial_placeholder.png" id="4_light"]
+[ext_resource type="Script" path="res://scripts/components/interactable.gd" id="5_interactable"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_base"]
+size = Vector2(46, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_range"]
+radius = 22.0
+
+[node name="HearthFlame" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1_script")
+
+[node name="Fireplace" type="Sprite2D" parent="."]
+texture = ExtResource("2_fireplace")
+offset = Vector2(0, -20)
+
+[node name="Flame" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -6)
+texture = ExtResource("3_flame")
+offset = Vector2(0, -12)
+
+[node name="Light" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -12)
+color = Color(1, 0.72, 0.4, 1)
+energy = 0.3
+texture = ExtResource("4_light")
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_base")
+
+[node name="Interactable" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 4)
+collision_layer = 32
+collision_mask = 2
+monitorable = false
+script = ExtResource("5_interactable")
+prompt_key = &"PROMPT_TEND_HEARTH"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_range")

@@ -1,0 +1,130 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/hearth_panel.gd" id="1_script"]
+
+[node name="HearthPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0862745, 0.0784314, 0.109804, 0.6)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Frame" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Rows" type="VBoxContainer" parent="Center/Frame"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Header" type="HBoxContainer" parent="Center/Frame/Rows"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Center/Frame/Rows/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "HEARTH_TITLE"
+
+[node name="LevelLabel" type="Label" parent="Center/Frame/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+auto_translate_mode = 2
+
+[node name="NextBox" type="VBoxContainer" parent="Center/Frame/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="NextTitle" type="Label" parent="Center/Frame/Rows/NextBox"]
+unique_name_in_owner = true
+layout_mode = 2
+auto_translate_mode = 2
+
+[node name="UnlockLabel" type="Label" parent="Center/Frame/Rows/NextBox"]
+unique_name_in_owner = true
+layout_mode = 2
+auto_translate_mode = 2
+autowrap_mode = 3
+
+[node name="GoldLabel" type="Label" parent="Center/Frame/Rows/NextBox"]
+unique_name_in_owner = true
+layout_mode = 2
+auto_translate_mode = 2
+
+[node name="EmberLabel" type="Label" parent="Center/Frame/Rows/NextBox"]
+unique_name_in_owner = true
+layout_mode = 2
+auto_translate_mode = 2
+
+[node name="KindleRow" type="HBoxContainer" parent="Center/Frame/Rows/NextBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="KindleButton" type="Button" parent="Center/Frame/Rows/NextBox/KindleRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+theme_type_variation = &"CompactButton"
+text = "HEARTH_KINDLE"
+
+[node name="BlockLabel" type="Label" parent="Center/Frame/Rows/NextBox/KindleRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"ErrorLabel"
+auto_translate_mode = 2
+autowrap_mode = 3
+
+[node name="MaxLabel" type="Label" parent="Center/Frame/Rows"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "HEARTH_MAX_LEVEL"
+autowrap_mode = 3
+
+[node name="Separator" type="HSeparator" parent="Center/Frame/Rows"]
+layout_mode = 2
+
+[node name="LetterTitle" type="Label" parent="Center/Frame/Rows"]
+layout_mode = 2
+text = "HEARTH_LETTER_TITLE"
+
+[node name="LetterScroll" type="ScrollContainer" parent="Center/Frame/Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="LetterList" type="VBoxContainer" parent="Center/Frame/Rows/LetterScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="CloseButton" type="Button" parent="Center/Frame/Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"CompactButton"
+text = "HEARTH_CLOSE"

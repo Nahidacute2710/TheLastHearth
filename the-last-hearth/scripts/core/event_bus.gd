@@ -40,6 +40,8 @@ signal max_health_buff_changed(amount: int)
 signal hearth_level_changed(level: int)
 ## The player kindled the Hearth Flame to `level` (feedback: sound, toast, letter).
 signal hearth_kindled(level: int)
+## The player used the hearth in the tavern (HearthPanel opens).
+signal hearth_panel_requested
 
 ## Play a sound effect by id (AudioDirector; ids listed in SfxLibrary.IDS).
 signal sfx_requested(id: StringName)
