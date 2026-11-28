@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="HearthTable" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/hearth_table.gd" id="1_table"]
+[ext_resource type="Script" path="res://scripts/data/hearth_level_data.gd" id="2_level"]
+[ext_resource type="Resource" path="res://data/items/ember_coal.tres" id="3_coal"]
+
+[sub_resource type="Resource" id="Resource_level_1"]
+script = ExtResource("2_level")
+level = 1
+gold_cost = 0
+ember_cost = 0
+unlock_key = &"HEARTH_UNLOCK_1"
+letter_key = &""
+
+[sub_resource type="Resource" id="Resource_level_2"]
+script = ExtResource("2_level")
+level = 2
+gold_cost = 30
+ember_cost = 5
+unlock_key = &"HEARTH_UNLOCK_2"
+letter_key = &"LETTER_HEARTH_2"
+cook_batch_bonus = 1
+cook_time_factor = 0.6
+
+[sub_resource type="Resource" id="Resource_level_3"]
+script = ExtResource("2_level")
+level = 3
+gold_cost = 80
+ember_cost = 10
+unlock_key = &"HEARTH_UNLOCK_3"
+letter_key = &"LETTER_HEARTH_3"
+customer_slot_bonus = 1
+
+[sub_resource type="Resource" id="Resource_level_4"]
+script = ExtResource("2_level")
+level = 4
+gold_cost = 150
+ember_cost = 18
+unlock_key = &"HEARTH_UNLOCK_4"
+letter_key = &"LETTER_HEARTH_4"
+max_health_bonus = 1
+
+[sub_resource type="Resource" id="Resource_level_5"]
+script = ExtResource("2_level")
+level = 5
+gold_cost = 250
+ember_cost = 28
+unlock_key = &"HEARTH_UNLOCK_5"
+letter_key = &"LETTER_HEARTH_5"
+dodge_distance_factor = 1.45
+
+[resource]
+script = ExtResource("1_table")
+levels = Array[ExtResource("2_level")]([SubResource("Resource_level_1"), SubResource("Resource_level_2"), SubResource("Resource_level_3"), SubResource("Resource_level_4"), SubResource("Resource_level_5")])
+cost_item = ExtResource("3_coal")

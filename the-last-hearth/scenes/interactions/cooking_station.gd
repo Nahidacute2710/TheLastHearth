@@ -11,7 +11,10 @@ const BAR_FILL: Color = Color(0.95, 0.69, 0.29)
 @export var recipe: RecipeData
 
 var _time_left: float = 0.0
+var _cook_time: float = 1.0
 var _cooking: bool = false
+## Dishes in the pot (Hearth Flame level 2 cooks up to 2 per batch).
+var _batch: int = 0
 
 @onready var _interactable: Interactable = $Interactable
 
@@ -40,7 +43,25 @@ func is_cooking() -> bool:
 
 ## 0..1 while cooking.
 func get_progress() -> float:
-	return 1.0 - _time_left / recipe.cook_time if _cooking else 0.0
+	return 1.0 - _time_left / _cook_time if _cooking else 0.0
+
+
+## Dishes the stove would cook now: up to the Hearth Flame batch size, limited by ingredients
+## and stash space. At least 1 when anything can be cooked.
+func get_batch_size() -> int:
+	var batch: int = 0
+	var limit: int = GameState.get_cook_batch_size()
+	while batch < limit and _has_ingredients_for(batch + 1) \
+			and GameState.stash.can_add(recipe.result, recipe.result_count * (batch + 1)):
+		batch += 1
+	return batch
+
+
+func _has_ingredients_for(batches: int) -> bool:
+	for ingredient: RecipeIngredient in recipe.ingredients:
+		if GameState.stash.count_of(ingredient.item) < ingredient.count * batches:
+			return false
+	return true
 
 
 func _draw() -> void:
@@ -56,12 +77,16 @@ func _on_interacted(_actor: Node2D) -> void:
 	if not GameState.stash.can_add(recipe.result, recipe.result_count):
 		EventBus.toast_requested.emit(tr(&"TOAST_STASH_FULL"))
 		return
-	if not recipe.take_ingredients(GameState.stash):
+	if not recipe.can_cook(GameState.stash):
 		var first: RecipeIngredient = recipe.ingredients[0]
 		EventBus.toast_requested.emit(tr(&"TOAST_MISSING_INGREDIENTS") % [first.count, tr(first.item.name_key)])
 		return
+	_batch = maxi(get_batch_size(), 1)
+	for i: int in _batch:
+		recipe.take_ingredients(GameState.stash)
 	_cooking = true
-	_time_left = recipe.cook_time
+	_cook_time = recipe.cook_time * GameState.get_cook_time_factor()
+	_time_left = _cook_time
 	_interactable.enabled = false
 	queue_redraw()
 
@@ -73,7 +98,12 @@ func _finish(announce: bool = true) -> void:
 	queue_redraw()
 	# Space was checked before cooking; if something else filled the stash meanwhile, the dish
 	# still goes in (over the slot limit) so it is never lost.
-	GameState.stash.add_ignoring_limit(recipe.result, recipe.result_count)
+	var made: int = recipe.result_count * _batch
+	GameState.stash.add_ignoring_limit(recipe.result, made)
+	_batch = 0
 	if announce:
-		EventBus.toast_requested.emit(tr(&"TOAST_DISH_COOKED") % tr(recipe.result.name_key))
+		if made > 1:
+			EventBus.toast_requested.emit(tr(&"TOAST_DISHES_COOKED") % [made, tr(recipe.result.name_key)])
+		else:
+			EventBus.toast_requested.emit(tr(&"TOAST_DISH_COOKED") % tr(recipe.result.name_key))
 		EventBus.sfx_requested.emit(&"cook_done")

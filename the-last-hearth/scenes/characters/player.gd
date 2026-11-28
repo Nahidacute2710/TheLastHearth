@@ -36,6 +36,7 @@ func _ready() -> void:
 	_health.died.connect(_on_died)
 	_hurtbox.hurt.connect(_on_hurt)
 	EventBus.max_health_buff_changed.connect(_on_max_health_buff_changed)
+	EventBus.hearth_level_changed.connect(_on_max_health_buff_changed)
 	_health.reset(get_max_health())
 
 
@@ -83,7 +84,8 @@ func dodge(direction: Vector2) -> bool:
 	if state != State.NORMAL or _dodge_cooldown_left > 0.0:
 		return false
 	var dash_direction: Vector2 = direction.normalized() if direction != Vector2.ZERO else Vector2.DOWN
-	_dodge_velocity = dash_direction * data.dodge_speed
+	# Hearth Flame level 5: faster dash for the same time, so it goes further.
+	_dodge_velocity = dash_direction * data.dodge_speed * GameState.get_dodge_distance_factor()
 	state = State.DODGE
 	_state_time_left = data.dodge_duration
 	_dodge_cooldown_left = data.dodge_cooldown
@@ -100,9 +102,9 @@ func get_health() -> HealthComponent:
 	return _health
 
 
-## Base max health plus the food buff from GameState.
+## Base max health, plus the permanent Hearth Flame bonus, plus the food buff (drawn last on the HUD).
 func get_max_health() -> int:
-	return data.max_health + GameState.max_health_buff
+	return data.max_health + GameState.get_hearth_max_health_bonus() + GameState.max_health_buff
 
 
 func heal_full() -> void:
@@ -171,7 +173,8 @@ func _on_hurt(_damage: int, knockback: Vector2, _source: Node2D) -> void:
 	_state_time_left = data.hurt_knockback_time
 
 
-## Buff changes only happen in the tavern (eating) or on the way back, so a full reset is safe.
+## Buff and Hearth Flame changes happen in the tavern (eating, kindling), on the way back, on a new game
+## or a load, so a full reset is safe. (The debug "next level" key can also do it in the mine.)
 func _on_max_health_buff_changed(_amount: int) -> void:
 	if state != State.DEAD:
 		_health.reset(get_max_health())

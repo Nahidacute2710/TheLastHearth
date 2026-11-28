@@ -114,15 +114,17 @@ func test_three_swings_break_the_vein_and_drop_two_or_three_coal() -> void:
 	for child: Node in level().get_node("Entities").get_children():
 		if child is Pickup and child.get("item") == _coal():
 			coal_on_floor += int(child.get("count"))
-	check(coal_on_floor >= 2 and coal_on_floor <= 3, "2–3 Ember Coal dropped (got %d)" % coal_on_floor)
+	# A drop can land under the player and be picked up at once: count the bag too.
+	var dropped: int = coal_on_floor + int(_state().get("bag").call("count_of", _coal()))
+	check(dropped >= 2 and dropped <= 3, "2–3 Ember Coal dropped (got %d)" % dropped)
 	# Walk over the drops: they go to the bag and the HUD counts them.
 	for child: Node in level().get_node("Entities").get_children():
 		if is_instance_valid(child) and child is Pickup and child.get("item") == _coal():
 			player().global_position = (child as Node2D).global_position
 			await wait_physics(4)
-	check_eq(_state().get("bag").call("count_of", _coal()), coal_on_floor, "coal is in the bag")
+	check_eq(_state().get("bag").call("count_of", _coal()), dropped, "all the coal is in the bag")
 	var hud: Node = main.find_child("HUD", true, false)
-	check_eq(hud.call("get_coal_count_text"), "×%d" % coal_on_floor, "HUD counts the coal")
+	check_eq(hud.call("get_coal_count_text"), "×%d" % dropped, "HUD counts the coal")
 
 
 func test_mining_never_hurts_or_triggers_enemies() -> void:

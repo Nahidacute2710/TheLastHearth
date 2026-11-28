@@ -44,6 +44,13 @@ position = Vector2(520, 100)
 [node name="WearyTraveler" parent="Entities" instance=ExtResource("9_customer")]
 position = Vector2(430, 330)
 
+[node name="WearyTraveler2" parent="Entities" instance=ExtResource("9_customer")]
+position = Vector2(270, 330)
+seat = 2
+
+[node name="Table2" parent="Entities" instance=ExtResource("2_obstacle")]
+position = Vector2(224, 320)
+
 [node name="Counter" parent="Entities" instance=ExtResource("2_obstacle")]
 position = Vector2(160, 120)
 

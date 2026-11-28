@@ -230,6 +230,10 @@ func _is_valid_game_state(value: Variant) -> bool:
 		return false
 	if state.has("max_health_buff") and not (state["max_health_buff"] is float or state["max_health_buff"] is int):
 		return false
+	if state.has("hearth_level") and not (state["hearth_level"] is float or state["hearth_level"] is int):
+		return false
+	if state.has("hearth_letters") and not state["hearth_letters"] is Array:
+		return false
 	return true
 
 

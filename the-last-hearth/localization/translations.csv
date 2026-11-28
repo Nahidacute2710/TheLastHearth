@@ -63,3 +63,28 @@ KEY_MOUSE_RIGHT,Right mouse,Chuột phải
 KEY_MOUSE_MIDDLE,Middle mouse,Chuột giữa
 KEY_MOUSE_OTHER,Mouse %d,Chuột %d
 ITEM_EMBER_COAL_NAME,Ember Coal,Than Hồng
+TOAST_DISHES_COOKED,Cooked %d %s,Đã nấu xong %d %s
+PROMPT_TEND_HEARTH,Tend the Hearth,Chăm Ngọn Lửa Gốc
+HEARTH_TITLE,The Hearth,Ngọn Lửa Gốc
+HEARTH_LEVEL,Level %d / %d,Cấp %d / %d
+HEARTH_NEXT_LEVEL,Kindle to level %d,Nhóm lên cấp %d
+HEARTH_UNLOCKS,Unlocks: %s,Mở khóa: %s
+HEARTH_COST_GOLD,Gold: %d / %d,Vàng: %d / %d
+HEARTH_COST_ITEM,%s in stash: %d / %d,%s trong kho: %d / %d
+HEARTH_KINDLE,Kindle,Nhóm lửa
+HEARTH_BLOCK_GOLD,Not enough gold,Chưa đủ vàng
+HEARTH_BLOCK_EMBER,Not enough Ember Coal in the stash,Chưa đủ Than Hồng trong kho
+HEARTH_MAX_LEVEL,The Hearth burns as bright as it can.,Ngọn Lửa Gốc đã cháy rực nhất.
+HEARTH_LETTER_TITLE,The letter,Lá thư
+HEARTH_NO_LETTER,Kindle the fire to read more of the letter.,Nhóm lửa để đọc tiếp lá thư.
+HEARTH_CLOSE,Close,Đóng
+TOAST_HEARTH_KINDLED,The Hearth reached level %d: %s,Ngọn Lửa Gốc lên cấp %d: %s
+HEARTH_UNLOCK_1,A faint fire,Ngọn lửa le lói
+HEARTH_UNLOCK_2,"The stove cooks 2 dishes at once, faster","Bếp nấu 2 món một lần, nhanh hơn"
+HEARTH_UNLOCK_3,A second traveler comes each day,Mỗi ngày có thêm một Lữ Khách
+HEARTH_UNLOCK_4,"+1 max health, for good",+1 máu tối đa vĩnh viễn
+HEARTH_UNLOCK_5,Your dodge dashes further,Né lướt xa hơn
+LETTER_HEARTH_2,"Maren. If the fire has caught again, then the inn still knows you. Do not let it go out, not even on the nights you are tired.","Maren. Nếu lửa đã bén lại, nghĩa là quán vẫn còn nhận ra cô. Đừng để nó tắt, kể cả những đêm cô mệt nhất."
+LETTER_HEARTH_3,"More travelers will come. Not for the stew. Wherever a fire still burns, people still remember their own names.","Khách sẽ đến nhiều hơn. Không phải vì bát súp. Ở đâu còn lửa, ở đó người ta còn nhớ tên mình."
+LETTER_HEARTH_4,"I dug too deep beneath the cellar. Down there the ash falls with no fire to make it. If the silence starts to sound like a voice, come back up.","Tôi đã đào quá sâu dưới tầng hầm. Dưới đó tro vẫn rơi dù chẳng có ngọn lửa nào cháy. Nếu sự im lặng bắt đầu nghe như tiếng người, hãy quay lên."
+LETTER_HEARTH_5,The Hush does not fear fire. It fears what this fire is keeping. Forgive me for leaving you the key.,Tro Lặng không sợ lửa. Nó sợ thứ mà ngọn lửa này đang canh giữ. Hãy tha lỗi cho tôi vì đã để lại chiếc chìa khóa cho cô.
