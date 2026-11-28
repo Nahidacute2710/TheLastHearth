@@ -56,7 +56,7 @@
 
 ### 2.4 Lưu/Tải
 - **Chi tiết:** Xem TECHNICAL_ARCHITECTURE.md mục 6.
-- **MVP:** ✅ 1 slot, tự lưu khi trở về quán, tải khi bấm "Tiếp tục".
+- **MVP:** ✅ 1 slot, tự lưu khi trở về quán, tải khi bấm "Tiếp tục". **Đã làm ở D1:** lưu ngày, vàng, kho, vũ khí, khách đã phục vụ, ngôn ngữ; tự lưu khi về từ mỏ và sau khi giao món.
 
 ### 2.5 Chuyển cảnh & Thời gian
 - **Chi tiết:** `SceneRouter` đổi scene giữa Quán và Dungeon, có fade đen. Bộ đếm ngày nằm trong `GameState`.

@@ -19,3 +19,6 @@ TOAST_CUSTOMER_WAITING,%s is waiting for %s,%s đang chờ %s
 TOAST_CUSTOMER_PAID,%s paid %d gold,%s trả %d vàng
 HUD_DAY,Day %d,Ngày %d
 HUD_GOLD,%d gold,%d vàng
+TOAST_STASH_FULL,The stash is full,Kho đã đầy
+MENU_ERROR_SAVE_CORRUPT,The save file could not be read. A copy was kept as .bak.,Không đọc được file lưu. Đã giữ bản sao .bak.
+MENU_ERROR_SAVE_VERSION,The save file is from an unknown version. A copy was kept as .bak.,File lưu thuộc phiên bản không rõ. Đã giữ bản sao .bak.

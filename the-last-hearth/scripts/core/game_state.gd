@@ -41,6 +41,7 @@ func is_customer_served_today(customer_id: StringName) -> bool:
 
 func mark_customer_served(customer_id: StringName) -> void:
 	customer_served_day[customer_id] = day
+	EventBus.autosave_requested.emit()
 
 
 func add_gold(amount: int) -> void:
@@ -60,7 +61,6 @@ func store_bag_in_stash() -> void:
 		var stored: int = stack.count - not_stored
 		if stored > 0:
 			bag.remove(stack.item, stored)
-	# One toast per item type, using the merged totals of what actually moved.
 
 
 ## Death penalty: the bag is lost except quest items. Equipped gear is kept.
@@ -85,6 +85,7 @@ func _on_level_changed(level_id: StringName) -> void:
 	if from_dungeon and level_id == SceneRouter.TAVERN:
 		_report_stored(_store_and_count())
 		advance_day()
+		EventBus.autosave_requested.emit()
 
 
 func _store_and_count() -> Dictionary[ItemData, int]:
@@ -106,3 +107,33 @@ func _report_stored(moved: Dictionary[ItemData, int]) -> void:
 
 func _on_player_died() -> void:
 	apply_death_penalty()
+
+
+## Saved data (see SaveManager). The bag is not saved: saves only happen in the tavern, where it is empty.
+func to_dict() -> Dictionary:
+	var served: Dictionary = {}
+	for customer_id: StringName in customer_served_day:
+		served[String(customer_id)] = customer_served_day[customer_id]
+	return {
+		"day": day,
+		"gold": gold,
+		"equipped_weapon": String(equipped_weapon.id) if equipped_weapon != null else "",
+		"stash": stash.to_array(),
+		"customer_served_day": served,
+	}
+
+
+## Applies data that SaveManager already validated.
+func from_dict(data: Dictionary) -> void:
+	reset_session()
+	day = maxi(int(data["day"]), 1)
+	gold = maxi(int(data["gold"]), 0)
+	var weapon_id: StringName = StringName(str(data["equipped_weapon"]))
+	equipped_weapon = ItemDB.get_item(weapon_id) as WeaponData if weapon_id != &"" else null
+	stash.load_array(data["stash"] as Array)
+	var served: Dictionary = data.get("customer_served_day", {}) as Dictionary
+	for customer_id: Variant in served:
+		customer_served_day[StringName(str(customer_id))] = int(served[customer_id])
+	EventBus.day_changed.emit(day)
+	EventBus.gold_changed.emit(gold)
+	EventBus.weapon_equipped.emit(equipped_weapon)

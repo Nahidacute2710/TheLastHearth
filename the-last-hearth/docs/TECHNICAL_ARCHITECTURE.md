@@ -140,19 +140,25 @@ Tra cứu từ `id` sang Resource qua một `DataRegistry` (dự kiến nằm �
 
 - **Định dạng:** JSON, ghi vào `user://saves/slot_<n>.json`.
 - **Lý do không dùng `ResourceSaver`/`.tres` cho save:** file `.tres` có thể chứa script nhúng, và việc load một file save do người khác chia sẻ có thể thực thi code. JSON an toàn hơn, dễ đọc khi debug và dễ migrate.
-- **Cấu trúc:**
+- **Cấu trúc (đã làm ở D1, `scripts/save/save_manager.gd`):**
   ```json
   {
     "save_version": 1,
     "game_version": "0.1.0",
-    "timestamp": "2026-11-27T20:00:00",
-    "game_state": { "day": 1, "gold": 0, "flags": {} },
-    "inventory": [ { "id": "cave_mushroom", "qty": 3 } ]
+    "timestamp": "2026-11-28T10:00:00",
+    "game_state": {
+      "day": 2, "gold": 15, "equipped_weapon": "rusty_pickaxe",
+      "stash": [ { "id": "cave_mushroom", "count": 3 } ],
+      "customer_served_day": { "weary_traveler": 2 }
+    },
+    "settings": { "locale": "vi" }
   }
   ```
+- Chỉ tự lưu khi đang ở quán (`EventBus.autosave_requested`: về từ mỏ, sau khi giao món). Không lưu túi và vị trí player.
+- File không đọc được (JSON sai, rỗng, thiếu trường, `save_version` khác) được đổi tên thành `slot_1.json.bak`; menu hiện một dòng lỗi (`SaveManager.last_error_key`).
 - Mỗi hệ thống cần lưu có cặp hàm `to_dict() -> Dictionary` và `from_dict(data: Dictionary) -> void`.
 - `save_version` tăng mỗi khi cấu trúc thay đổi; `SaveManager` có hàm migrate từ phiên bản cũ.
-- Ghi an toàn: ghi vào file tạm `.tmp` trước, xong mới đổi tên đè lên file cũ, để tránh hỏng save khi game crash giữa chừng. Hành vi đổi tên đè file trên Windows sẽ được kiểm thử ở mốc 1.8.
+- Ghi an toàn: ghi vào file tạm `.tmp` trước, xong mới đổi tên đè lên file cũ, để tránh hỏng save khi game crash giữa chừng. Hành vi đổi tên đè file trên Windows: `DirAccess.rename_absolute` đè file đích; test headless chạy trên Linux, cần chủ dự án xác nhận trên Windows khi chơi thử.
 
 ## 7. Physics: Collision Layers — ✅ ĐÃ CHỐT (2026-11-27)
 

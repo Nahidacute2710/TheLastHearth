@@ -1,6 +1,7 @@
 extends Node2D
 ## Stove in the tavern. Interacting cooks the recipe from the tavern stash; the dish goes back into the stash.
 ## Shows a placeholder progress bar while cooking. Leaving the tavern mid-cook finishes the dish at once.
+## Does not start when the stash has no room for the dish.
 
 const BAR_SIZE: Vector2 = Vector2(24.0, 3.0)
 const BAR_OFFSET: Vector2 = Vector2(-12.0, -38.0)
@@ -52,6 +53,9 @@ func _draw() -> void:
 func _on_interacted(_actor: Node2D) -> void:
 	if _cooking or recipe == null:
 		return
+	if not GameState.stash.can_add(recipe.result, recipe.result_count):
+		EventBus.toast_requested.emit(tr(&"TOAST_STASH_FULL"))
+		return
 	if not recipe.take_ingredients(GameState.stash):
 		var first: RecipeIngredient = recipe.ingredients[0]
 		EventBus.toast_requested.emit(tr(&"TOAST_MISSING_INGREDIENTS") % [first.count, tr(first.item.name_key)])
@@ -66,7 +70,7 @@ func _finish() -> void:
 	_cooking = false
 	_interactable.enabled = true
 	queue_redraw()
-	var not_stored: int = GameState.stash.add(recipe.result, recipe.result_count)
-	if not_stored > 0:
-		push_warning("Stash full: %d %s lost." % [not_stored, recipe.result.id])
+	# Space was checked before cooking; if something else filled the stash meanwhile, the dish
+	# still goes in (over the slot limit) so it is never lost.
+	GameState.stash.add_ignoring_limit(recipe.result, recipe.result_count)
 	EventBus.toast_requested.emit(tr(&"TOAST_DISH_COOKED") % tr(recipe.result.name_key))

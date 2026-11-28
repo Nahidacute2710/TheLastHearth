@@ -109,3 +109,47 @@ func clear_except_quest_items() -> void:
 		return
 	_stacks = kept
 	changed.emit()
+
+
+## True when `amount` of `item` fits completely.
+func can_add(item: ItemData, amount: int) -> bool:
+	var space: int = (slot_count - _stacks.size()) * item.max_stack
+	for stack: ItemStack in _stacks:
+		if stack.item == item:
+			space += stack.space_left()
+	return space >= amount
+
+
+## Last-resort add that ignores the slot limit, so an item is never lost. Logs a warning.
+func add_ignoring_limit(item: ItemData, amount: int) -> void:
+	var left: int = add(item, amount)
+	if left <= 0:
+		return
+	push_warning("Inventory over its slot limit: added %d %s anyway." % [left, item.id])
+	while left > 0:
+		var moved: int = mini(left, item.max_stack)
+		_stacks.append(ItemStack.new(item, moved))
+		left -= moved
+	changed.emit()
+
+
+## Save format: [{"id": "cave_mushroom", "count": 3}, ...] (one entry per slot).
+func to_array() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for stack: ItemStack in _stacks:
+		result.append({"id": String(stack.item.id), "count": stack.count})
+	return result
+
+
+## Replaces the content from to_array() data. Unknown ids are skipped with a warning.
+func load_array(entries: Array) -> void:
+	_stacks.clear()
+	for entry: Variant in entries:
+		var data: Dictionary = entry as Dictionary
+		var item: ItemData = ItemDB.get_item(StringName(str(data.get("id", ""))))
+		var amount: int = int(data.get("count", 0))
+		if item == null or amount <= 0:
+			push_warning("Save: skipped unknown inventory entry %s." % str(entry))
+			continue
+		add_ignoring_limit(item, amount)
+	changed.emit()

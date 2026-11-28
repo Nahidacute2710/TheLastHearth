@@ -2,6 +2,14 @@
 
 Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định dạng dựa trên [Keep a Changelog](https://keepachangelog.com/).
 
+## [Chưa phát hành] — CP-D: Lưu/tải và menu
+
+### Thêm
+- D1: `SaveManager` (JSON, file tạm, `.bak` cho file hỏng), `ItemDB`, `to_dict()/from_dict()` của `GameState`, `Inventory.to_array()/load_array()`, tự lưu ở quán + test.
+
+### Sửa
+- D1: bếp không nấu khi kho hết chỗ cho món ("Kho đã đầy"), món không bao giờ bị mất.
+
 ## [Chưa phát hành] — CP-C: Túi đồ, nấu ăn, khách
 
 ### Thêm

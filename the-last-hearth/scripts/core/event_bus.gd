@@ -29,3 +29,6 @@ signal day_changed(day: int)
 
 ## Show a short, already translated message (Toast).
 signal toast_requested(message: String)
+
+## Something worth saving happened in the tavern (SaveManager writes the save).
+signal autosave_requested

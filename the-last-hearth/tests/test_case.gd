@@ -12,8 +12,15 @@ var failures: Array[String] = []
 var main: Node = null
 
 
+const TEST_SAVE_DIR: String = "user://test_saves/"
+
+
 func before_each() -> void:
 	tree.root.get_node("GameState").call("reset_session")
+	var saves: Node = tree.root.get_node("SaveManager")
+	saves.set("save_dir", TEST_SAVE_DIR)
+	saves.call("delete_save")
+	_remove_test_file(saves.call("get_backup_path"))
 
 
 func after_each() -> void:
@@ -23,6 +30,9 @@ func after_each() -> void:
 		main.queue_free()
 		main = null
 	TranslationServer.set_locale("en")
+	var saves: Node = tree.root.get_node("SaveManager")
+	saves.call("delete_save")
+	_remove_test_file(saves.call("get_backup_path"))
 	await tree.process_frame
 	await tree.process_frame
 
@@ -89,3 +99,15 @@ func hold(action: StringName, seconds: float) -> void:
 	Input.action_press(action)
 	await wait(seconds)
 	Input.action_release(action)
+
+
+func _remove_test_file(path: String) -> void:
+	if FileAccess.file_exists(path):
+		DirAccess.remove_absolute(path)
+
+
+func write_save_text(text: String) -> void:
+	DirAccess.make_dir_recursive_absolute(TEST_SAVE_DIR)
+	var file: FileAccess = FileAccess.open(tree.root.get_node("SaveManager").call("get_save_path"), FileAccess.WRITE)
+	file.store_string(text)
+	file.close()

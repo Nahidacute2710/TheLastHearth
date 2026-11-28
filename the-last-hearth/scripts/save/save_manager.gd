@@ -1,5 +1,167 @@
 extends Node
-## Reads and writes JSON saves in user://saves/. Implemented in milestone 1.8.
+## Reads and writes the JSON save (one slot). Writes go to a .tmp file first, then replace the save.
+## A save that cannot be read (bad JSON, empty, missing fields, unknown save_version) is renamed to
+## .bak and reported, never applied, and never crashes the game.
+## Saved: day, gold, stash, equipped weapon, served customers, locale. Not saved: player position, bag.
+
+enum LoadResult { OK, NO_SAVE, CORRUPT, UNSUPPORTED_VERSION }
 
 const SAVE_VERSION: int = 1
 const SAVE_DIR: String = "user://saves/"
+const SAVE_FILE_NAME: String = "slot_1.json"
+const GAME_VERSION_FALLBACK: String = "0.1.0"
+
+## Changeable so tests never touch the real save.
+var save_dir: String = SAVE_DIR
+## Autosave is ignored while false (tests, or before a game has started).
+var autosave_enabled: bool = true
+
+## Translation key describing the last load problem, or &"" (shown by the main menu).
+var last_error_key: StringName = &""
+
+
+func _ready() -> void:
+	EventBus.autosave_requested.connect(_on_autosave_requested)
+
+
+func get_save_path() -> String:
+	return save_dir.path_join(SAVE_FILE_NAME)
+
+
+func get_backup_path() -> String:
+	return get_save_path() + ".bak"
+
+
+func has_save_file() -> bool:
+	return FileAccess.file_exists(get_save_path())
+
+
+func save_game() -> bool:
+	var data: Dictionary = {
+		"save_version": SAVE_VERSION,
+		"game_version": _game_version(),
+		"timestamp": Time.get_datetime_string_from_system(),
+		"game_state": GameState.to_dict(),
+		"settings": {"locale": TranslationServer.get_locale()},
+	}
+	DirAccess.make_dir_recursive_absolute(save_dir)
+	var tmp_path: String = get_save_path() + ".tmp"
+	var file: FileAccess = FileAccess.open(tmp_path, FileAccess.WRITE)
+	if file == null:
+		push_error("SaveManager: cannot write %s (%s)." % [tmp_path, error_string(FileAccess.get_open_error())])
+		return false
+	file.store_string(JSON.stringify(data, "\t"))
+	file.close()
+	var error: Error = DirAccess.rename_absolute(tmp_path, get_save_path())
+	if error != OK:
+		push_error("SaveManager: cannot replace the save (%s)." % error_string(error))
+		return false
+	return true
+
+
+## Reads and validates the save without applying it. Returns {"result": LoadResult, "data": Dictionary}.
+func read_save() -> Dictionary:
+	if not has_save_file():
+		return {"result": LoadResult.NO_SAVE, "data": {}}
+	var text: String = FileAccess.get_file_as_string(get_save_path())
+	var json: JSON = JSON.new()
+	if text.strip_edges().is_empty() or json.parse(text) != OK or not json.data is Dictionary:
+		return {"result": LoadResult.CORRUPT, "data": {}}
+	var data: Dictionary = json.data as Dictionary
+	var version: Variant = data.get("save_version")
+	if not (version is float or version is int):
+		return {"result": LoadResult.CORRUPT, "data": {}}
+	if int(version) != SAVE_VERSION:
+		return {"result": LoadResult.UNSUPPORTED_VERSION, "data": {}}
+	if not _is_valid_game_state(data.get("game_state")):
+		return {"result": LoadResult.CORRUPT, "data": {}}
+	return {"result": LoadResult.OK, "data": data}
+
+
+## Checks the save at boot. A bad file is moved to .bak and last_error_key is set.
+## Returns true when a valid save exists (the menu then offers "Continue").
+func check_save() -> bool:
+	last_error_key = &""
+	var result: LoadResult = read_save()["result"]
+	match result:
+		LoadResult.OK:
+			return true
+		LoadResult.CORRUPT:
+			_backup_bad_save()
+			last_error_key = &"MENU_ERROR_SAVE_CORRUPT"
+		LoadResult.UNSUPPORTED_VERSION:
+			_backup_bad_save()
+			last_error_key = &"MENU_ERROR_SAVE_VERSION"
+	return false
+
+
+## Applies the save to GameState and the locale. Returns the LoadResult.
+func load_game() -> LoadResult:
+	var read: Dictionary = read_save()
+	var result: LoadResult = read["result"]
+	if result != LoadResult.OK:
+		return result
+	var data: Dictionary = read["data"]
+	GameState.from_dict(data["game_state"] as Dictionary)
+	var settings: Dictionary = data.get("settings", {}) as Dictionary
+	var locale: String = str(settings.get("locale", ""))
+	if locale != "":
+		TranslationServer.set_locale(locale)
+	return LoadResult.OK
+
+
+## Applies only the saved locale (so the menu is in the right language before "Continue").
+func apply_saved_locale() -> void:
+	var read: Dictionary = read_save()
+	if read["result"] != LoadResult.OK:
+		return
+	var settings: Dictionary = (read["data"] as Dictionary).get("settings", {}) as Dictionary
+	var locale: String = str(settings.get("locale", ""))
+	if locale != "":
+		TranslationServer.set_locale(locale)
+
+
+func delete_save() -> void:
+	for path: String in [get_save_path(), get_save_path() + ".tmp"]:
+		if FileAccess.file_exists(path):
+			DirAccess.remove_absolute(path)
+
+
+func _backup_bad_save() -> void:
+	if FileAccess.file_exists(get_backup_path()):
+		DirAccess.remove_absolute(get_backup_path())
+	var error: Error = DirAccess.rename_absolute(get_save_path(), get_backup_path())
+	if error != OK:
+		push_error("SaveManager: cannot back up the bad save (%s)." % error_string(error))
+	else:
+		push_warning("SaveManager: unreadable save moved to %s." % get_backup_path())
+
+
+func _is_valid_game_state(value: Variant) -> bool:
+	if not value is Dictionary:
+		return false
+	var state: Dictionary = value as Dictionary
+	for key: String in ["day", "gold"]:
+		if not (state.get(key) is float or state.get(key) is int):
+			return false
+	if not state.get("equipped_weapon") is String or not state.get("stash") is Array:
+		return false
+	var weapon_id: String = state["equipped_weapon"]
+	if weapon_id != "" and not ItemDB.has_item(StringName(weapon_id)):
+		return false
+	for entry: Variant in state["stash"]:
+		if not entry is Dictionary or not (entry as Dictionary).get("id") is String:
+			return false
+	if state.has("customer_served_day") and not state["customer_served_day"] is Dictionary:
+		return false
+	return true
+
+
+func _game_version() -> String:
+	var version: String = str(ProjectSettings.get_setting("application/config/version", ""))
+	return version if version != "" else GAME_VERSION_FALLBACK
+
+
+func _on_autosave_requested() -> void:
+	if autosave_enabled and SceneRouter.current_level_id == SceneRouter.TAVERN:
+		save_game()
