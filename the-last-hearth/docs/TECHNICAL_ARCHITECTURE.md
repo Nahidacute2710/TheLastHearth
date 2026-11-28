@@ -149,7 +149,8 @@ Tra cứu từ `id` sang Resource qua một `DataRegistry` (dự kiến nằm �
     "game_state": {
       "day": 2, "gold": 15, "equipped_weapon": "rusty_pickaxe",
       "stash": [ { "id": "cave_mushroom", "count": 3 } ],
-      "customer_served_day": { "weary_traveler": 2 }
+      "customer_served_day": { "weary_traveler": 2 },
+      "max_health_buff": 0, "hearth_level": 2, "hearth_letters": ["LETTER_HEARTH_2"]
     }
   }
   ```
@@ -180,6 +181,15 @@ Tra cứu từ `id` sang Resource qua một `DataRegistry` (dự kiến nằm �
 - `resources/ui/main_theme.tres` gán toàn project qua `gui/theme/custom`. Font chính `fnt_main.tres` (Galmuri11, 12 px), HUD `fnt_hud.tres` (Galmuri9, 10 px), `spacing_top` chừa chỗ dấu chữ hoa.
 - UI dùng `theme_type_variation` (HudLabel, HudGoldLabel, TitleLabel, ErrorLabel, SlotCountLabel, CompactButton), không dùng LabelSettings hay `font_size` riêng.
 - Chỉ dùng cỡ gốc của font (hoặc bội nguyên), không phóng lẻ.
+
+## 6.4 Ngọn Lửa Gốc (✅ VS-E1)
+
+- Dữ liệu: `HearthTable` (`scripts/data/hearth_table.gd`) chứa mảng `HearthLevelData` (giá vàng, giá Than Hồng, khóa dịch mở khóa, khóa dịch đoạn thư, hiệu ứng cộng thêm). Instance `data/hearth/hearth_levels.tres`. Hiệu ứng của cấp N áp dụng cho mọi cấp trên N.
+- Trạng thái trong `GameState`: `hearth_level`, `hearth_letters`. `kindle_hearth(free)` trừ vàng và Than Hồng trong kho, phát `EventBus.hearth_level_changed` và `EventBus.hearth_kindled`, rồi yêu cầu tự lưu. `get_kindle_block()` trả lý do không nhóm được.
+- Hệ thống đọc hiệu ứng qua `GameState`: bếp (`get_cook_batch_size`, `get_cook_time_factor`), khách (`get_customer_slots`, biến `seat` trong `scenes/tavern/customer.gd`), player (`get_hearth_max_health_bonus`, `get_dodge_distance_factor`).
+- Lò sưởi `HearthFlame` (`scenes/tavern/hearth_flame.tscn`) phát `EventBus.hearth_panel_requested`; `HearthPanel` trong `Main/UILayer` mở panel. Lúc lên cấp, `HearthFlame` phát âm, thông báo và làm lửa bùng lên.
+- Vỉa than `OreVein` (`scenes/dungeon/ore_vein.tscn`): StaticBody2D, hurtbox riêng trên layer EnemyHurtbox, không phải quái. `abandoned_mine.gd` giữ ngẫu nhiên 2–3 trong 4 chỗ (mỗi phòng 1).
+- Mô phỏng kinh tế: `scripts/debug/economy_sim.gd`, test `tests/test_economy.gd`, báo cáo `tests/economy_report.gd`.
 
 ## 7. Physics: Collision Layers — ✅ ĐÃ CHỐT (2026-11-27)
 
@@ -289,6 +299,7 @@ window/stretch/scale_mode="integer"  ; MỚI: chỉ phóng to theo bội số ng
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.7 | VS-E1: mục 6.4 Ngọn Lửa Gốc, vỉa than, mô phỏng kinh tế; save thêm `hearth_level`, `hearth_letters` |
 | 2026-11-28 | 0.6 | VS-A: mục 6.1 cài đặt, 6.2 âm thanh, 6.3 theme; bỏ `settings` khỏi save; `allowed_errors`, physics interpolation |
 | 2026-11-27 | 0.1 | Bản khởi tạo |
 | 2026-11-27 | 0.5 | Thêm mục 9.1 Quy ước scene 2D (mốc 1.2) |

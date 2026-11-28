@@ -67,7 +67,7 @@ Khi một nhân vật/quái có từ 3 file trở lên thì tạo thư mục con
 - SFX: **WAV** 16-bit 44,1 kHz (ngắn, cần độ trễ thấp).
 - Nhạc: **OGG Vorbis** (dài, cần nén). Bật **Loop** trong import cho nhạc nền.
 - Chuẩn hóa âm lượng: SFX đỉnh khoảng −3 dBFS, nhạc khoảng −14 LUFS.
-- SFX gọi bằng id qua bảng `data/audio/sfx_library.tres` (swing, hit, enemy_windup, dodge, pickup, cook_done, coin, ui_click). Thay âm thật: đặt file vào `assets/audio/sfx/`, đổi đường dẫn của id trong bảng, ghi giấy phép vào `CREDITS.md`; không sửa code.
+- SFX gọi bằng id qua bảng `data/audio/sfx_library.tres` (swing, hit, enemy_windup, dodge, pickup, cook_done, coin, ui_click; VS-E1 thêm ore_hit, ore_break, hearth_kindle). Thay âm thật: đặt file vào `assets/audio/sfx/`, đổi đường dẫn của id trong bảng, ghi giấy phép vào `CREDITS.md`; không sửa code.
 - SFX tạm `sfx_<id>_placeholder.wav` sinh bằng `tools/gen_placeholder_sfx.py` (ở gốc repo, chỉ dùng thư viện chuẩn Python, kết quả cố định). Không phát hành.
 
 ### 4.3 Font
@@ -113,6 +113,7 @@ Theo dõi trong bảng ở `assets/ASSET_STATUS.md` (tạo khi có asset thật)
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.5 | VS-E1: 3 SFX tạm mới; placeholder lò sưởi, lửa, ánh sáng, vỉa than, Than Hồng |
 | 2026-11-28 | 0.4 | VS-A: bảng SFX theo id, script SFX tạm, ghi chú import pixel font |
 | 2026-11-28 | 0.3 | Thêm OFL cho font, quy định giấy phép âm thanh, quy trình art PixelLab |
 | 2026-11-27 | 0.1 | Bản khởi tạo |

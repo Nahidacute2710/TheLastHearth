@@ -2,7 +2,21 @@
 
 Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định dạng dựa trên [Keep a Changelog](https://keepachangelog.com/).
 
-## [Chưa phát hành] — Giai đoạn 2 (Vertical Slice), VS-A
+## [Chưa phát hành] — Giai đoạn 2 (Vertical Slice), VS-E1: Ngọn Lửa Gốc
+
+### Thêm
+- E1a: Than Hồng (`ember_coal`); vỉa than trong mỏ (giữ ngẫu nhiên 2–3 trong 4 chỗ, mỗi phòng một chỗ; 3 cú Cuốc Chim; rơi 2–3 Than Hồng); SFX tạm `ore_hit`, `ore_break`, `hearth_kindle`; HUD đếm Than Hồng trong túi; phím debug Shift+F10 (+10 Than Hồng vào kho); test.
+- E1b: 5 cấp Ngọn Lửa Gốc trong `data/hearth/hearth_levels.tres`; nhóm lửa trả vàng + Than Hồng từ kho; cấp 2 bếp nấu 2 bát một lần và nhanh hơn, cấp 3 Lữ Khách thứ hai, cấp 4 +1 máu tối đa vĩnh viễn, cấp 5 né lướt xa hơn; lưu/tải/reset; phím debug Shift+F11 (lên cấp tiếp theo); test.
+- E1c: lò sưởi trong quán (Interactable), panel Ngọn Lửa Gốc (giá có / cần, lý do bị khóa, cấp tối đa, đọc lại thư), ánh lửa to và sáng dần theo cấp (PointLight2D), âm + thông báo khi lên cấp, lá thư người chủ cũ 4 đoạn (bản nháp, EN + VI); test.
+- E1d: mô phỏng nhịp kinh tế trên dữ liệu thật (`EconomySim`, `tests/test_economy.gd`, `tests/economy_report.gd`); tổng 134 test headless.
+
+### Thay đổi
+- E1d: Lữ Khách trả 30 vàng cho một Súp Nấm (trước 15) để nhịp lên cấp khớp mục tiêu.
+
+### Tài liệu
+- Thêm `docs/ECONOMY_BALANCING.md`; STORY_BIBLE mục 2 (lá thư, bản nháp); cập nhật GAMEPLAY_SYSTEMS, TECHNICAL_ARCHITECTURE, ASSET_GUIDELINES, VERTICAL_SLICE_PLAN, DECISION_LOG, CLAUDE.md.
+
+## Giai đoạn 2 (Vertical Slice), VS-A — đã chơi thử đạt 2026-11-28
 
 ### Thêm
 - VSA6: rà soát toàn bộ màn hình EN/VI (menu, quán, mỏ, túi đồ, tạm dừng, cài đặt); tổng 111 test headless.

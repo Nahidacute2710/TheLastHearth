@@ -1,6 +1,6 @@
 # THE LAST HEARTH — Hệ thống Gameplay
 
-> Phiên bản: 0.5 · Cập nhật: 2026-11-27
+> Phiên bản: 0.6 · Cập nhật: 2026-11-28
 > Quy ước nhãn: **✅ ĐÃ CHỐT** = chủ dự án đã xác nhận · **ĐỀ XUẤT** = gợi ý, chưa duyệt · **🧪 CẦN THỬ NGHIỆM** = chốt qua playtest/mockup · **❓** = câu hỏi mở.
 > Mỗi hệ thống ghi rõ: mục đích · đầu vào · đầu ra · liên kết · phạm vi MVP.
 
@@ -105,11 +105,12 @@
 
 ### 4.2 Khách hàng (Customers)
 - **Chi tiết:** Khách đến, ngồi vào chỗ, yêu cầu món. Player mang món đến (tương tác) → nhận tiền. Khách có độ kiên nhẫn; hết kiên nhẫn thì bỏ đi.
-- **MVP:** ✅ 1 khách, xuất hiện cố định mỗi ngày, yêu cầu 1 món. ❌ Kiên nhẫn, danh tiếng, nhiều khách. **Đã làm ở C5:** `CustomerData` + `weary_traveler.tres`; Lữ Khách mỗi ngày 1 lần, chưa có món thì đứng chờ mãi; giao Súp Nấm từ kho nhận 15 vàng (đã chơi thử 2026-11-28).
+- **MVP:** ✅ 1 khách, xuất hiện cố định mỗi ngày, yêu cầu 1 món. ❌ Kiên nhẫn, danh tiếng, nhiều khách. **Đã làm ở C5:** `CustomerData` + `weary_traveler.tres`; Lữ Khách mỗi ngày 1 lần, chưa có món thì đứng chờ mãi; giao Súp Nấm từ kho nhận 15 vàng (đã chơi thử 2026-11-28). **VS-E1:** giá lên 30 vàng 🧪; Ngọn Lửa Gốc cấp 3 mở chỗ cho Lữ Khách thứ hai ở bàn khác (`seat = 2`).
 
 ### 4.3 Kinh tế (Economy)
 - **Chi tiết:** Tiền (`gold`) trong `GameState`. Nguồn thu: phục vụ khách, bán vật phẩm. Chi: mua nguyên liệu, nâng cấp, trang bị.
 - **MVP:** ✅ Chỉ thu tiền từ khách, hiển thị trên HUD. ❌ Cửa hàng, nâng cấp. **Đã làm ở C5:** HUD góc trên phải hiện ngày và vàng.
+- **VS-E1:** chỗ tiêu vàng là Ngọn Lửa Gốc (mục 5.1). Bảng giá và nhịp: `ECONOMY_BALANCING.md`.
 
 ### 4.4 Chế tạo (Crafting)
 - **Chi tiết:** Tương tự nấu ăn nhưng ra trang bị/vật phẩm. Dùng chung khung `RecipeData` với trường `station_type` để phân biệt bếp/lò rèn.
@@ -131,6 +132,12 @@
 - **Vai trò (✅ ĐÃ CHỐT):** cơ chế quan trọng gắn với sự tồn tại và phát triển của quán.
 - **Chi tiết (ĐỀ XUẤT ❓):** Xem GDD mục 5.2. Cấp lửa quyết định giới hạn độ sâu dungeon và sức chứa quán.
 - **MVP:** ❌ (nhưng kiến trúc `GameState` phải chừa chỗ cho nó).
+- **✅ VS-E1 (chủ dự án chốt 2026-11-28, đã làm):** lò sưởi trong quán là Interactable, mở panel nhóm lửa. Tài nguyên **Than Hồng** (`ember_coal`) đào từ 2–3 vỉa than mỗi chuyến (3 cú Cuốc Chim, rơi 2–3), theo luật túi/kho/chết như nấm. 5 cấp, giá lấy vàng + Than Hồng trong kho:
+  - Cấp 2 (30 + 5): bếp nấu 2 bát một lần, nhanh hơn.
+  - Cấp 3 (80 + 10): thêm Lữ Khách thứ hai mỗi ngày.
+  - Cấp 4 (150 + 18): +1 máu tối đa vĩnh viễn.
+  - Cấp 5 (250 + 28): né lướt xa hơn.
+  - Mỗi cấp mở 1 đoạn thư của người chủ cũ (`STORY_BIBLE.md` mục 2). Ánh lửa to và sáng dần theo cấp. Dữ liệu: `data/hearth/hearth_levels.tres`. Cấp và đoạn thư được lưu; Chơi mới về cấp 1.
 
 ### 5.2 Nhiệm vụ (Quests)
 - **Chi tiết:** `QuestData` với các mục tiêu (giết X, thu thập Y, mang Z cho NPC). Theo dõi qua signal `EventBus`.
@@ -154,6 +161,7 @@
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.6 | VS-E1: Ngọn Lửa Gốc 5 cấp, Than Hồng, khách thứ hai, giá Súp 30 |
 | 2026-11-27 | 0.1 | Bản khởi tạo |
 | 2026-11-27 | 0.5 | Chốt: né trong MVP, đòn theo hướng chuột, chết thì tỉnh dậy ở quán máu đầy, sang ngày khi về từ dungeon |
 | 2026-11-27 | 0.4 | Thông số di chuyển khởi đầu của mốc 1.2 |

@@ -1,7 +1,7 @@
 # THE LAST HEARTH — Kế hoạch Vertical Slice (Giai đoạn 2)
 
 > Phiên bản: 0.2 · Cập nhật: 2026-11-28
-> Trạng thái: **✅ ĐÃ DUYỆT (2026-11-28)** cho phạm vi, thứ tự checkpoint và các quyết định ở mục 9. Kế hoạch chi tiết từng checkpoint được lập và duyệt riêng trước khi làm. **VS-A (mục 10) ✅ hoàn thành 2026-11-28, chờ chơi thử.** Tiếp theo: lập kế hoạch VS-E1.
+> Trạng thái: **✅ ĐÃ DUYỆT (2026-11-28)** cho phạm vi, thứ tự checkpoint và các quyết định ở mục 9. Kế hoạch chi tiết từng checkpoint được lập và duyệt riêng trước khi làm. **VS-A (mục 10) ✅ hoàn thành và đã chơi thử đạt 2026-11-28.** **VS-E1 (mục 11) ✅ làm xong 2026-11-28, chờ chơi thử.** Tiếp theo: VS-B (art), cần connector PixelLab.
 > Nguồn phạm vi: `DEVELOPMENT_ROADMAP.md` Giai đoạn 2 và `GAME_DESIGN_DOCUMENT.md`.
 
 ---
@@ -58,7 +58,7 @@ Yêu cầu: đủ chữ có dấu, kể cả dấu chồng (ầ, ẫ, ặ, ổ, 
 ## 7. Boss và chỗ tiêu vàng (✅ ĐÃ CHỐT)
 
 - **Boss "Quản Đốc Rỗng" (Hollow Foreman):** 2 pha; 3 đòn đều có báo trước: đập đất, lao tới, gọi Thợ Mỏ Rỗng. Sang pha 2 khi máu dưới 50%.
-- **Chỗ tiêu vàng:** nâng cấp quán gộp vào Ngọn Lửa Gốc. Dùng vàng + tài nguyên để "nhóm lửa" lên cấp; mỗi cấp mở một thứ. Danh sách 4–5 cấp sẽ đề xuất khi lập kế hoạch VS-E1.
+- **Chỗ tiêu vàng:** nâng cấp quán gộp vào Ngọn Lửa Gốc. Dùng vàng + Than Hồng để "nhóm lửa" lên cấp; mỗi cấp mở một thứ. 5 cấp đã chốt và làm ở VS-E1 (mục 11).
 
 ## 8. Rủi ro
 
@@ -147,10 +147,23 @@ Galmuri11 và Galmuri9 được cắt bớt (subset) chỉ còn chữ Latin, ti�
 5. Theme UI được gán toàn project qua `gui/theme/custom` trong `project.godot` (sửa cấu hình Godot): đồng ý không?
 6. Có thêm tùy chọn toàn màn hình / cửa sổ vào menu cài đặt không? (Chưa có trong yêu cầu, mặc định là không làm.)
 
-## 11. Lịch sử thay đổi
+## 11. VS-E1 — Ngọn Lửa Gốc (✅ THIẾT KẾ CHỦ DỰ ÁN CHỐT, ĐÃ LÀM XONG 2026-11-28)
+
+| Mốc | Nội dung | Commit |
+|---|---|---|
+| E1a ✅ | Than Hồng (`ember_coal`), vỉa than (2–3 mỗi chuyến, phòng khác nhau, 3 cú, rơi 2–3), SFX `ore_hit`/`ore_break`, HUD đếm than, phím debug +10 than | `8af0d50` |
+| E1b ✅ | `HearthTable`/`HearthLevelData`, `GameState.kindle_hearth()`, 4 hiệu ứng mở khóa, lưu/tải/reset, phím debug lên cấp | `5aafde7` |
+| E1c ✅ | Lò sưởi trong quán, panel, ánh lửa theo cấp, âm + thông báo lên cấp, lá thư (bản nháp) EN/VI | `9247b4a` |
+| E1d ✅ | Mô phỏng nhịp (`EconomySim`), giá Súp 30, `docs/ECONOMY_BALANCING.md` | `b0390b7` |
+| E1e ✅ | Rà soát, tài liệu | `docs: complete vs-e1` |
+
+Bảng giá, nhịp và giả định mô phỏng: `docs/ECONOMY_BALANCING.md`. Lá thư: `docs/STORY_BIBLE.md` mục 2. Quyết định nhỏ: `docs/DECISION_LOG.md` (E1a–E1d).
+
+## 12. Lịch sử thay đổi
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.4 | VS-A chơi thử đạt; VS-E1 làm xong (mục 11) |
 | 2026-11-28 | 0.3 | VS-A hoàn thành (VSA1–VSA6), ghi commit từng mốc |
 | 2026-11-28 | 0.2 | Chủ dự án duyệt: ghi quyết định mục 9, thứ tự mới (tách VS-E1/E2), kế hoạch VS-A và font ứng viên |
 | 2026-11-28 | 0.1 | Bản đề xuất |
