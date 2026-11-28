@@ -2,7 +2,15 @@
 
 Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định dạng dựa trên [Keep a Changelog](https://keepachangelog.com/).
 
-## [Chưa phát hành] — Giai đoạn 1 (MVP) hoàn thành, 2026-11-28
+## [Chưa phát hành] — Giai đoạn 2 (Vertical Slice), VS-A
+
+### Thêm
+- VSA0: màn hình thử font `scenes/debug/font_preview.tscn` (toàn bộ chuỗi trong `translations.csv`, đổi font và EN/VI), 4 font ứng viên OFL trong `assets/fonts/candidates/`, `assets/CREDITS.md`, test độ phủ ký tự tiếng Việt.
+
+### Tài liệu
+- Ghi các quyết định Vertical Slice đã duyệt (DECISION_LOG, VERTICAL_SLICE_PLAN, GDD 4.3 và 5.3, ASSET_GUIDELINES, BUG_TRACKER TECH-008); thêm `docs/STORY_BIBLE.md` (Maren); kế hoạch VS-A chờ duyệt.
+
+## Giai đoạn 1 (MVP) hoàn thành, 2026-11-28 — tag `v0.1-mvp`
 
 ### Tài liệu
 - `docs/PHASE1_RETROSPECTIVE.md`: nhìn lại Giai đoạn 1 (việc đã làm, quyết định, lỗi và bài học, nợ kỹ thuật, 76 test).
