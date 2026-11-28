@@ -9,6 +9,8 @@ const _ACTIONS: Array[StringName] = [
 
 var tree: SceneTree = null
 var failures: Array[String] = []
+## Engine errors a test provokes on purpose (substring match). Anything else logged fails the test.
+var allowed_errors: PackedStringArray = []
 var main: Node = null
 
 
@@ -19,7 +21,9 @@ func before_each() -> void:
 	tree.root.get_node("GameState").call("start_new_game")
 	var saves: Node = tree.root.get_node("SaveManager")
 	saves.set("save_dir", TEST_SAVE_DIR)
+	saves.set("settings_dir", TEST_SAVE_DIR)
 	saves.call("delete_save")
+	_remove_test_file(saves.call("get_settings_path"))
 	_remove_test_file(saves.call("get_backup_path"))
 
 
@@ -30,9 +34,11 @@ func after_each() -> void:
 	if main != null:
 		main.queue_free()
 		main = null
-	TranslationServer.set_locale("en")
 	var saves: Node = tree.root.get_node("SaveManager")
+	saves.call("reset_settings")
+	TranslationServer.set_locale("en")
 	saves.call("delete_save")
+	_remove_test_file(saves.call("get_settings_path"))
 	_remove_test_file(saves.call("get_backup_path"))
 	await tree.process_frame
 	await tree.process_frame

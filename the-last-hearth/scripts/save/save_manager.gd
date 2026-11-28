@@ -2,7 +2,10 @@ extends Node
 ## Reads and writes the JSON save (one slot). Writes go to a .tmp file first, then replace the save.
 ## A save that cannot be read (bad JSON, empty, missing fields, unknown save_version) is renamed to
 ## .bak and reported, never applied, and never crashes the game.
-## Saved: day, gold, stash, equipped weapon, served customers, food buff, locale. Not saved: player position, bag.
+## Saved: day, gold, stash, equipped weapon, served customers, food buff. Not saved: player position, bag.
+## Player settings (language, volumes, fullscreen, keys) live apart in user://settings.cfg (GameSettings),
+## so "New Game" never resets them. Saves from before VS-A kept the language in "settings.locale":
+## it is read once, when no settings file exists yet, and moved to settings.cfg.
 
 enum LoadResult { OK, NO_SAVE, CORRUPT, UNSUPPORTED_VERSION }
 
@@ -10,18 +13,94 @@ const SAVE_VERSION: int = 1
 const SAVE_DIR: String = "user://saves/"
 const SAVE_FILE_NAME: String = "slot_1.json"
 const GAME_VERSION_FALLBACK: String = "0.1.0"
+const SETTINGS_DIR: String = "user://"
+const SETTINGS_FILE_NAME: String = "settings.cfg"
 
 ## Changeable so tests never touch the real save.
 var save_dir: String = SAVE_DIR
 ## Autosave is ignored while false (tests, or before a game has started).
 var autosave_enabled: bool = true
+## Changeable so tests never touch the real settings.
+var settings_dir: String = SETTINGS_DIR
+var settings: GameSettings = null
 
 ## Translation key describing the last load problem, or &"" (shown by the main menu).
 var last_error_key: StringName = &""
 
 
 func _ready() -> void:
+	settings = GameSettings.new()
 	EventBus.autosave_requested.connect(_on_autosave_requested)
+
+
+func get_settings_path() -> String:
+	return settings_dir.path_join(SETTINGS_FILE_NAME)
+
+
+## Reads settings.cfg (or migrates the language from an old save) and applies everything.
+## A missing or unreadable file gives defaults and never crashes.
+func load_settings() -> void:
+	var config: ConfigFile = ConfigFile.new()
+	if FileAccess.file_exists(get_settings_path()) and config.load(get_settings_path()) == OK:
+		settings.from_config(config)
+	else:
+		if FileAccess.file_exists(get_settings_path()):
+			push_warning("SaveManager: unreadable settings file, using defaults.")
+		settings.reset_to_defaults()
+		var migrated: String = _locale_from_old_save()
+		if migrated != "":
+			settings.locale = migrated
+		save_settings()
+	settings.apply()
+
+
+func save_settings() -> bool:
+	DirAccess.make_dir_recursive_absolute(settings_dir)
+	var error: Error = settings.to_config().save(get_settings_path())
+	if error != OK:
+		push_error("SaveManager: cannot write settings (%s)." % error_string(error))
+		return false
+	return true
+
+
+## Back to defaults in memory and in the engine, without writing the file (tests).
+func reset_settings() -> void:
+	settings.reset_to_defaults()
+	settings.apply()
+
+
+func set_locale(locale: String) -> void:
+	var code: String = GameSettings.normalize_locale(locale)
+	if code == "":
+		return
+	settings.locale = code
+	settings.apply_locale()
+	save_settings()
+
+
+func set_volume(bus: StringName, linear: float) -> void:
+	settings.volumes[bus] = clampf(linear, 0.0, 1.0)
+	settings.apply_volume(bus)
+	save_settings()
+
+
+func set_fullscreen(enabled: bool) -> void:
+	settings.fullscreen = enabled
+	settings.apply_fullscreen()
+	save_settings()
+
+
+## Returns the action already using the input (nothing changed), or &"" when the binding was saved.
+func rebind_action(action: StringName, event: InputEvent) -> StringName:
+	var conflict: StringName = settings.rebind(action, event)
+	if conflict == &"":
+		save_settings()
+	return conflict
+
+
+func reset_key_bindings() -> void:
+	settings.reset_bindings()
+	save_settings()
 
 
 func get_save_path() -> String:
@@ -42,7 +121,6 @@ func save_game() -> bool:
 		"game_version": _game_version(),
 		"timestamp": Time.get_datetime_string_from_system(),
 		"game_state": GameState.to_dict(),
-		"settings": {"locale": TranslationServer.get_locale()},
 	}
 	DirAccess.make_dir_recursive_absolute(save_dir)
 	var tmp_path: String = get_save_path() + ".tmp"
@@ -95,7 +173,7 @@ func check_save() -> bool:
 	return false
 
 
-## Applies the save to GameState and the locale. Returns the LoadResult.
+## Applies the save to GameState. Returns the LoadResult. Settings are not part of the save.
 func load_game() -> LoadResult:
 	var read: Dictionary = read_save()
 	var result: LoadResult = read["result"]
@@ -103,22 +181,18 @@ func load_game() -> LoadResult:
 		return result
 	var data: Dictionary = read["data"]
 	GameState.from_dict(data["game_state"] as Dictionary)
-	var settings: Dictionary = data.get("settings", {}) as Dictionary
-	var locale: String = str(settings.get("locale", ""))
-	if locale != "":
-		TranslationServer.set_locale(locale)
 	return LoadResult.OK
 
 
-## Applies only the saved locale (so the menu is in the right language before "Continue").
-func apply_saved_locale() -> void:
+## Language stored by saves from before VS-A, or "". The save file itself is left untouched.
+func _locale_from_old_save() -> String:
 	var read: Dictionary = read_save()
 	if read["result"] != LoadResult.OK:
-		return
-	var settings: Dictionary = (read["data"] as Dictionary).get("settings", {}) as Dictionary
-	var locale: String = str(settings.get("locale", ""))
-	if locale != "":
-		TranslationServer.set_locale(locale)
+		return ""
+	var old: Variant = (read["data"] as Dictionary).get("settings")
+	if not old is Dictionary:
+		return ""
+	return GameSettings.normalize_locale(str((old as Dictionary).get("locale", "")))
 
 
 func delete_save() -> void:

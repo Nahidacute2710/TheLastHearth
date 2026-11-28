@@ -42,7 +42,9 @@ func test_save_and_load_round_trip() -> void:
 	check_eq(state.get("stash").call("count_of", load(MUSHROOM_PATH)), 23, "stash mushrooms restored")
 	check_eq(state.get("stash").call("count_of", load(STEW_PATH)), 2, "stash stew restored")
 	check(state.call("is_customer_served_today", &"weary_traveler"), "served customer restored")
-	check(TranslationServer.get_locale().begins_with("vi"), "locale restored")
+	check(TranslationServer.get_locale().begins_with("en"), "loading a save does not change the language")
+	var data: Dictionary = _saves().call("read_save")["data"]
+	check(not data.has("settings"), "the save no longer stores settings")
 
 
 func test_corrupt_save_is_backed_up_and_reported() -> void:

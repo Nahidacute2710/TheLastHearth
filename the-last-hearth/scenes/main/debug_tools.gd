@@ -29,7 +29,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	match key.physical_keycode:
 		KEY_F1:
 			var next_locale: String = "en" if TranslationServer.get_locale().begins_with("vi") else "vi"
-			TranslationServer.set_locale(next_locale)
+			SaveManager.set_locale(next_locale)
 			print("Debug: locale = %s" % next_locale)
 		KEY_F2:
 			SceneRouter.go_to(SceneRouter.DUNGEON, &"entrance")

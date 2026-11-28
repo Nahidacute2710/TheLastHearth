@@ -17,7 +17,7 @@ func _ready() -> void:
 	_main_menu.quit_requested.connect(_on_quit_requested)
 	_pause_menu.main_menu_requested.connect(return_to_menu)
 	get_tree().set_auto_accept_quit(false)
-	SaveManager.apply_saved_locale()
+	SaveManager.load_settings()
 	_main_menu.open()
 
 

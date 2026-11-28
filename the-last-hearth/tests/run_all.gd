@@ -40,8 +40,10 @@ func _run() -> void:
 			await test_case.call(method_name)
 			await test_case.call("after_each")
 			var failures: Array[String] = test_case.get("failures")
+			var allowed: PackedStringArray = test_case.get("allowed_errors")
 			for logged: String in errors.call("take_errors"):
-				failures.append("error logged: " + logged)
+				if not _is_allowed(logged, allowed):
+					failures.append("error logged: " + logged)
 			if failures.is_empty():
 				passed += 1
 				print("PASS %s::%s" % [file_name, method_name])
@@ -53,3 +55,10 @@ func _run() -> void:
 	OS.remove_logger(errors)
 	print("Tests: %d passed, %d failed" % [passed, failed])
 	quit(1 if failed > 0 else 0)
+
+
+func _is_allowed(logged: String, allowed: PackedStringArray) -> bool:
+	for pattern: String in allowed:
+		if logged.contains(pattern):
+			return true
+	return false
