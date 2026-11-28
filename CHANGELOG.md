@@ -2,7 +2,14 @@
 
 Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định dạng dựa trên [Keep a Changelog](https://keepachangelog.com/).
 
-## [Chưa phát hành] — CP-D: Lưu/tải và menu
+## [Chưa phát hành] — Giai đoạn 1 (MVP) hoàn thành, 2026-11-28
+
+### Tài liệu
+- `docs/PHASE1_RETROSPECTIVE.md`: nhìn lại Giai đoạn 1 (việc đã làm, quyết định, lỗi và bài học, nợ kỹ thuật, 76 test).
+- `docs/VERTICAL_SLICE_PLAN.md`: kế hoạch Giai đoạn 2, dạng đề xuất, chưa duyệt.
+- ROADMAP, MVP_SPECIFICATION, CLAUDE.md: đánh dấu Giai đoạn 1 hoàn thành.
+
+## CP-D: Lưu/tải và menu
 
 ### Thêm
 - D3: buff Súp Nấm (ăn ở quán qua panel túi đồ, +2 máu tối đa chuyến kế, HUD ô vàng cam, có lưu); lưu khi tắt bằng nút X nếu đang ở quán; test trọn vòng chơi `test_full_loop.gd`; test bảng dịch (đủ cột vi, khớp `%s`/`%d`).

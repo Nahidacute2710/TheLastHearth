@@ -168,11 +168,15 @@ Trước mọi thay đổi lớn (nhiều file, kiến trúc mới): **trình b�
 
 **CP-A (mốc 1.3 + 1.4): ✅ HOÀN THÀNH** (2026-11-27).
 
-**CP-B (mốc 1.5):** code xong 2026-11-27 (B1–B4: component combat, Cuốc Chim, Thợ Mỏ Rỗng, máu player, né, chết → về quán), chờ chủ dự án chơi thử (gộp với CP-C).
+**CP-B (mốc 1.5): ✅ HOÀN THÀNH** (B1–B4: component combat, Cuốc Chim, Thợ Mỏ Rỗng, máu player, né, chết → về quán; đã chơi thử 2026-11-28).
 
-**CP-C (mốc 1.6 + 1.7):** code xong 2026-11-27 (C1–C5: túi và kho quán, luật chết, Nấm Hang, panel túi đồ, bếp và Súp Nấm, Lữ Khách, vàng và ngày), chờ chủ dự án chơi thử.
+**CP-C (mốc 1.6 + 1.7): ✅ HOÀN THÀNH** (C1–C5: túi và kho quán, luật chết, Nấm Hang, panel túi đồ, bếp và Súp Nấm, Lữ Khách, vàng và ngày; đã chơi thử 2026-11-28).
 
-**CP-D (mốc 1.8 + 1.9):** D1 (save JSON) và D2 (menu chính, menu tạm dừng) code xong 2026-11-28, chờ chủ dự án chơi thử gộp B + C + D1–D2. **D3 chưa làm**, chờ kết quả chơi thử. Kế hoạch checkpoint ở `DEVELOPMENT_ROADMAP.md`.
+**CP-D (mốc 1.8 + 1.9): ✅ HOÀN THÀNH** (2026-11-28): D1 save JSON, D2 menu chính và menu tạm dừng (đã chơi thử), D3 buff Súp Nấm, lưu khi tắt bằng nút X, test trọn vòng (có test, chờ chơi thử).
+
+**Giai đoạn 1 — MVP: ✅ HOÀN THÀNH** (2026-11-28). Nhìn lại ở `the-last-hearth/docs/PHASE1_RETROSPECTIVE.md`.
+
+**Tiếp theo: Giai đoạn 2 — Vertical Slice.** Kế hoạch ở `the-last-hearth/docs/VERTICAL_SLICE_PLAN.md` là **ĐỀ XUẤT, CHƯA DUYỆT**. Không bắt đầu việc nào của Giai đoạn 2 trước khi chủ dự án chốt các quyết định ở mục 9 của file đó.
 
 **Kiểm tra headless phía Claude:** dùng bản Godot 4.7.2 Linux chính thức trên bản sao repo ở cloud (chủ dự án cho phép 2026-11-27).
 

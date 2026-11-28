@@ -34,7 +34,9 @@
 
 ---
 
-## Giai đoạn 1 — MVP Prototype
+## Giai đoạn 1 — MVP Prototype ✅ HOÀN THÀNH (2026-11-28)
+
+> Nhìn lại: [PHASE1_RETROSPECTIVE.md](PHASE1_RETROSPECTIVE.md). Kế hoạch Giai đoạn 2 (đề xuất, chưa duyệt): [VERTICAL_SLICE_PLAN.md](VERTICAL_SLICE_PLAN.md).
 
 **Mục tiêu:** Một vòng gameplay hoàn chỉnh, chơi được, dùng asset tạm. Chi tiết ở [MVP_SPECIFICATION.md](MVP_SPECIFICATION.md).
 
@@ -59,9 +61,9 @@ Từ mốc 1.3, công việc chia thành checkpoint. Mỗi checkpoint kết thú
 | Checkpoint | Mốc roadmap | Mốc nhỏ | Chơi thử được |
 |---|---|---|---|
 | CP-A ✅ hoàn thành 2026-11-27 | 1.3, 1.4 | A1 localization · A2 `Interactable` + prompt · A3 `SceneRouter` + fade · A4 Mỏ Bỏ Hoang graybox + cửa hầm | Quán → xuống mỏ → về quán |
-| CP-B ✅ code xong 2026-11-27, chờ chơi thử (gộp với CP-C) | 1.5 | B1 component máu/hitbox/hurtbox · B2 Cuốc Chim + đòn vung theo chuột · B3 Thợ Mỏ Rỗng · B4 máu player, i-frames, **né**, chết → tỉnh dậy ở quán | Đánh quái, né, bị đánh gục |
-| CP-C ✅ code xong 2026-11-27, chờ chơi thử (gộp với CP-B) | 1.6, 1.7 | C1 inventory + luật chết · C2 Nấm Hang · C3 túi đồ (TECH-006) · C4 bếp + Súp Nấm · C5 Lữ Khách, vàng, ngày | Nhặt nấm, nấu, bán |
-| CP-D 🔶 D1–D2 code xong 2026-11-28, chờ chơi thử; D3 chờ kết quả chơi thử | 1.8, 1.9 | D1 save JSON · D2 menu chính, tự lưu, **menu tạm dừng** · D3 toàn vòng, cân thông số, buff Súp Nấm nếu kịp | Thoát và mở lại vẫn còn dữ liệu |
+| CP-B ✅ hoàn thành (đã chơi thử 2026-11-28) | 1.5 | B1 component máu/hitbox/hurtbox · B2 Cuốc Chim + đòn vung theo chuột · B3 Thợ Mỏ Rỗng · B4 máu player, i-frames, **né**, chết → tỉnh dậy ở quán | Đánh quái, né, bị đánh gục |
+| CP-C ✅ hoàn thành (đã chơi thử 2026-11-28) | 1.6, 1.7 | C1 inventory + luật chết · C2 Nấm Hang · C3 túi đồ (TECH-006) · C4 bếp + Súp Nấm · C5 Lữ Khách, vàng, ngày | Nhặt nấm, nấu, bán |
+| CP-D ✅ hoàn thành 2026-11-28 (D1–D2 đã chơi thử; D3 có test, chờ chơi thử buff và nút X) | 1.8, 1.9 | D1 save JSON · D2 menu chính, tự lưu, **menu tạm dừng** · D3 toàn vòng, buff Súp Nấm, lưu khi tắt bằng nút X | Thoát và mở lại vẫn còn dữ liệu |
 
 **Tiêu chí hoàn thành:** Vòng Quán → Chuẩn bị → Dungeon → Chiến đấu → Thu thập → Về quán chạy được trọn vẹn, có lưu/tải, không crash.
 
@@ -130,6 +132,7 @@ Từ mốc 1.3, công việc chia thành checkpoint. Mỗi checkpoint kết thú
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.4 | Giai đoạn 1 hoàn thành; thêm liên kết nhìn lại và kế hoạch Vertical Slice |
 | 2026-11-27 | 0.1 | Bản khởi tạo |
 | 2026-11-27 | 0.3 | Chia Giai đoạn 1 thành 4 checkpoint |
 | 2026-11-27 | 0.2 | Giai đoạn 0 hoàn thành; chi tiết mốc 1.1; localization theo mốc |

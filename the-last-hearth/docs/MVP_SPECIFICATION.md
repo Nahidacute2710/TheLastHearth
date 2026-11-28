@@ -1,6 +1,7 @@
 # THE LAST HEARTH — Đặc tả MVP
 
-> Phiên bản: 0.4 · Cập nhật: 2026-11-27
+> Phiên bản: 0.5 · Cập nhật: 2026-11-28
+> Trạng thái: **✅ MVP HOÀN THÀNH (2026-11-28).** Nhìn lại ở [PHASE1_RETROSPECTIVE.md](PHASE1_RETROSPECTIVE.md).
 > Quy ước nhãn: **✅ ĐÃ CHỐT** = chủ dự án đã xác nhận · **ĐỀ XUẤT** = gợi ý, chưa duyệt · **🧪 CẦN THỬ NGHIỆM** = chốt qua playtest/mockup · **❓** = câu hỏi mở.
 > MVP = Giai đoạn 1 trong DEVELOPMENT_ROADMAP.md.
 
@@ -104,6 +105,7 @@ tests/               test_inventory.gd · test_save_roundtrip.gd (nếu cài GUT
 
 | Ngày | Phiên bản | Nội dung |
 |---|---|---|
+| 2026-11-28 | 0.5 | MVP hoàn thành: toàn bộ nội dung mục MVP đã làm, có test headless |
 | 2026-11-27 | 0.1 | Bản khởi tạo |
 | 2026-11-27 | 0.4 | Né và menu tạm dừng vào MVP; đòn theo hướng chuột; buff Súp Nấm ở D3 nếu kịp |
 | 2026-11-27 | 0.3 | Cập nhật luật chết theo bảng mất/giữ |
