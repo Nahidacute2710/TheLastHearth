@@ -10,4 +10,4 @@ id = &"weary_traveler"
 name_key = &"CUSTOMER_WEARY_TRAVELER_NAME"
 sprite = ExtResource("2_sprite")
 wanted_item = ExtResource("3_stew")
-payment = 15
+payment = 30

@@ -39,18 +39,18 @@ func test_serving_stew_pays_gold_and_traveler_returns_next_day() -> void:
 	player().global_position = TRAVELER_POS
 	await wait_physics(5)
 	await tap(&"interact")
-	check_eq(_state().get("gold"), 15, "traveler pays 15 gold")
+	check_eq(_state().get("gold"), 30, "traveler pays 30 gold")
 	check_eq(_state().get("stash").call("count_of", stew), 1, "one stew taken from the stash")
 	check(not _traveler().call("is_present"), "traveler leaves after being served")
-	check_eq(_display().call("get_gold_text"), "15 gold", "HUD gold updates")
-	check(_messages().has("Weary Traveler paid 15 gold"), "payment message")
+	check_eq(_display().call("get_gold_text"), "30 gold", "HUD gold updates")
+	check(_messages().has("Weary Traveler paid 30 gold"), "payment message")
 	router().call("go_to", &"dungeon", &"entrance")
 	await wait(0.8)
 	router().call("go_to", &"tavern", &"cellar_door")
 	await wait(0.8)
 	check(_traveler().call("is_present"), "traveler is back the next day")
 	check_eq(_display().call("get_day_text"), "Day 2", "HUD shows day 2")
-	check_eq(_state().get("gold"), 15, "gold is kept")
+	check_eq(_state().get("gold"), 30, "gold is kept")
 
 
 func test_traveler_does_not_return_on_same_day() -> void:

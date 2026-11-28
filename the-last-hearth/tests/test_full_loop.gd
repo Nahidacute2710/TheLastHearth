@@ -111,8 +111,8 @@ func test_full_mvp_loop() -> void:
 
 	# Serve the traveler.
 	await _interact_at(TRAVELER_POS)
-	check_eq(_state().get("gold"), 15, "paid 15 gold")
-	check_eq(display.call("get_gold_text"), "15 gold", "HUD gold")
+	check_eq(_state().get("gold"), 30, "paid 30 gold")
+	check_eq(display.call("get_gold_text"), "30 gold", "HUD gold")
 	check_eq(_state().get("stash").call("count_of", stew), 0, "both stews used")
 
 	# Save (main menu from the tavern), wipe memory like a fresh start, reload.
@@ -126,13 +126,13 @@ func test_full_mvp_loop() -> void:
 	await wait(0.4)
 	check_eq(level().name, &"TavernMainHall", "reloaded into the tavern")
 	check_eq(_state().get("day"), 2, "day after reload")
-	check_eq(_state().get("gold"), 15, "gold after reload")
+	check_eq(_state().get("gold"), 30, "gold after reload")
 	check(_state().get("stash").call("is_empty"), "stash after reload (all used)")
 	check_eq(_state().get("equipped_weapon"), load("res://data/items/rusty_pickaxe.tres"), "weapon after reload")
 	check_eq(_state().get("max_health_buff"), 2, "buff after reload")
 	check(_state().call("is_customer_served_today", &"weary_traveler"), "traveler already served today")
 	check_eq(display.call("get_day_text"), "Day 2", "HUD day after reload")
-	check_eq(display.call("get_gold_text"), "15 gold", "HUD gold after reload")
+	check_eq(display.call("get_gold_text"), "30 gold", "HUD gold after reload")
 	check_eq(hud.get("max_health"), 7, "HUD 7 pips after reload")
 	check_eq(hud.get("buff_pips"), 2, "HUD buff pips after reload")
 	check_eq(hud.call("get_item_count_text"), "×0", "HUD bag count after reload")

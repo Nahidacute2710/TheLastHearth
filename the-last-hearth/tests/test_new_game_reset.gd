@@ -55,6 +55,9 @@ func _play_a_while() -> void:
 	state.get("bag").call("add", load(MUSHROOM_PATH), 2)
 	state.get("stash").call("add", load(STEW_PATH), 1)
 	check(state.call("eat_from_stash", load(STEW_PATH)), "ate a stew")
+	# VS-E1: Hearth Flame level 3 (second traveler, letter parts 2–3).
+	state.call("kindle_hearth", true)
+	state.call("kindle_hearth", true)
 
 
 func test_new_game_after_playing_resets_everything() -> void:
@@ -62,7 +65,7 @@ func test_new_game_after_playing_resets_everything() -> void:
 	TranslationServer.set_locale("vi")
 	await _play_a_while()
 	var state: Node = _state()
-	check(state.get("equipped_weapon") != null and state.get("gold") == 55 and state.get("day") == 3, "precondition: played state")
+	check(state.get("equipped_weapon") != null and state.get("gold") == 70 and state.get("day") == 3 and state.get("hearth_level") == 3, "precondition: played state")
 	await _back_to_menu()
 	_press(_menu(), "NewGameButton")
 	check(_menu().call("is_confirm_open"), "asks before overwriting")
@@ -76,6 +79,10 @@ func test_new_game_after_playing_resets_everything() -> void:
 	check(not state.call("owns_item_id", &"rusty_pickaxe"), "pickaxe no longer owned")
 	check((state.get("customer_served_day") as Dictionary).is_empty(), "served customers reset")
 	check_eq(state.get("max_health_buff"), 0, "food buff reset")
+	check_eq(state.get("hearth_level"), 1, "Hearth Flame back to level 1")
+	check((state.get("hearth_letters") as Array).is_empty(), "letter parts hidden again")
+	check(not level().find_child("WearyTraveler2", true, false).call("is_present"), "no second traveler")
+	check_eq(_hud().call("get_coal_count_text"), "×0", "HUD coal count reset")
 	check_eq(_hud().get("max_health"), 5, "HUD health back to 5 pips")
 	check_eq(_hud().get("buff_pips"), 0, "HUD shows no buff pips")
 	var rack: Node = level().find_child("WeaponRack", true, false)
@@ -93,6 +100,8 @@ func test_new_game_after_playing_resets_everything() -> void:
 	check_eq(saved["equipped_weapon"], "", "save has no weapon")
 	check_eq((saved["customer_served_day"] as Dictionary).size(), 0, "save has no served customers")
 	check_eq(int(saved["max_health_buff"]), 0, "save has no food buff")
+	check_eq(int(saved["hearth_level"]), 1, "save has Hearth level 1")
+	check_eq((saved["hearth_letters"] as Array).size(), 0, "save has no letter parts")
 
 
 func test_continue_after_menu_replaces_state_with_the_save() -> void:

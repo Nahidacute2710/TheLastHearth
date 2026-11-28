@@ -97,7 +97,7 @@ func test_autosave_on_return_from_mine_and_after_serving_not_in_mine() -> void:
 	await wait_physics(5)
 	await tap(&"interact")
 	saved = _saves().call("read_save")["data"]
-	check_eq(int(saved["game_state"]["gold"]), 15, "autosave after serving the traveler")
+	check_eq(int(saved["game_state"]["gold"]), 30, "autosave after serving the traveler")
 
 
 func test_stove_refuses_when_stash_has_no_room_for_the_dish() -> void:
