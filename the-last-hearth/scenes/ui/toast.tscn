@@ -2,11 +2,6 @@
 
 [ext_resource type="Script" path="res://scenes/ui/toast.gd" id="1_script"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_toast"]
-font_size = 8
-outline_size = 3
-outline_color = Color(0.0862745, 0.0784314, 0.109804, 1)
-
 [node name="Toast" type="VBoxContainer"]
 anchors_preset = 7
 anchor_left = 0.5
@@ -22,4 +17,3 @@ grow_vertical = 0
 mouse_filter = 2
 alignment = 2
 script = ExtResource("1_script")
-label_settings = SubResource("LabelSettings_toast")

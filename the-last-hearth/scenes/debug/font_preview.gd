@@ -1,21 +1,19 @@
 class_name FontPreview
 extends Control
-## Debug screen (VS-A): shows every string of translations.csv with each candidate pixel font,
-## at the game's 640x360 resolution, so the owner can pick a font by eye.
+## Debug screen (VS-A): shows every string of translations.csv with the game's fonts (as used by the
+## UI theme), at the game's 640x360 resolution, to check Vietnamese text by eye.
 ## Keys: left/right change font, accept toggles EN/VI, up/down scroll, cancel quits.
 
 const CSV_PATH: String = "res://localization/translations.csv"
 const DIACRITICS_SAMPLE: String = "ầ ẫ ặ ổ ự ỡ ẳ ễ ị ỹ   Ầ Ẫ Ặ Ổ Ự Ỡ Ẳ Ễ Ị Ỹ   Đ đ Ơ ơ Ư ư Ă ă Â â Ê ê Ô ô"
 const CANDIDATES: Array[Dictionary] = [
-	{"name": "Galmuri11", "path": "res://assets/fonts/candidates/fnt_galmuri11.ttf", "size": 12, "gap": 3, "license": "SIL OFL 1.1"},
-	{"name": "Galmuri9", "path": "res://assets/fonts/candidates/fnt_galmuri9.ttf", "size": 10, "gap": 3, "license": "SIL OFL 1.1"},
-	{"name": "Tiny5", "path": "res://assets/fonts/candidates/fnt_tiny5.ttf", "size": 8, "gap": 5, "license": "SIL OFL 1.1"},
-	{"name": "VT323", "path": "res://assets/fonts/candidates/fnt_vt323.ttf", "size": 16, "gap": 1, "license": "SIL OFL 1.1"},
+	{"name": "Galmuri11 (main)", "path": "res://resources/ui/fnt_main.tres", "size": 12, "gap": 0, "license": "SIL OFL 1.1"},
+	{"name": "Galmuri9 (HUD)", "path": "res://resources/ui/fnt_hud.tres", "size": 10, "gap": 0, "license": "SIL OFL 1.1"},
 ]
 ## Capital words with stacked marks: shows whether marks collide with the line above.
 const CAPITALS_SAMPLE: String = "QUẢN ĐỐC RỖNG  CỬA HẦM  NGỌN LỬA GỐC  ẨM ƯỚT  Ở ĐÂY"
-## Space above the first row, so marks above the font's ascent are not clipped by the scroll area.
-const TOP_PADDING: int = 10
+## Space above the first row (the game fonts already reserve room for capital marks).
+const TOP_PADDING: int = 2
 const LANGUAGES: Array[String] = ["EN", "VI"]
 const SCROLL_STEP: int = 24
 const TEXT_COLOR: Color = Color(0.92, 0.88, 0.8)
@@ -90,13 +88,9 @@ func get_row_font() -> Font:
 	return _label_settings.font
 
 
-## Loads a candidate as a crisp pixel font (no antialiasing, hinting or subpixel positioning).
-static func load_candidate_font(path: String) -> FontFile:
-	var font: FontFile = load(path) as FontFile
-	font.antialiasing = TextServer.FONT_ANTIALIASING_NONE
-	font.hinting = TextServer.HINTING_NONE
-	font.subpixel_positioning = TextServer.SUBPIXEL_POSITIONING_DISABLED
-	return font
+## Loads one of the game fonts (a FontVariation over a FontFile imported without antialiasing).
+static func load_preview_font(path: String) -> Font:
+	return load(path) as Font
 
 
 ## CSV rows without the header: [key, en, vi].
@@ -120,7 +114,7 @@ func _read_csv_rows() -> Array[PackedStringArray]:
 
 func _rebuild() -> void:
 	var candidate: Dictionary = CANDIDATES[_font_index]
-	_label_settings.font = load_candidate_font(candidate["path"])
+	_label_settings.font = load_preview_font(candidate["path"])
 	_label_settings.font_size = candidate["size"]
 	_list.add_theme_constant_override(&"separation", candidate["gap"])
 	_header.text = "%s  %d px  %s  [%s]   <- -> font   Enter EN/VI   Up/Down scroll   Esc quit" % [

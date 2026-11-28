@@ -9,8 +9,6 @@ const SLOT_SIZE: Vector2 = Vector2(20.0, 20.0)
 const SLOT_COLOR: Color = Color(0.16, 0.13, 0.15)
 const SLOT_BORDER: Color = Color(0.0862745, 0.0784314, 0.109804)
 
-@export var label_settings: LabelSettings
-
 @onready var _bag_grid: GridContainer = %BagGrid
 @onready var _stash_grid: GridContainer = %StashGrid
 @onready var _item_name: Label = %ItemName
@@ -114,10 +112,12 @@ func _make_slot() -> Control:
 	var count: Label = Label.new()
 	count.name = "Count"
 	count.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
-	count.label_settings = label_settings
+	count.theme_type_variation = &"SlotCountLabel"
 	count.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	count.position = Vector2(0.0, 8.0)
-	count.size = Vector2(19.0, 12.0)
+	count.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+	count.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	count.offset_right = -1.0
+	count.offset_bottom = 2.0
 	count.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	slot.add_child(count)
 	return slot

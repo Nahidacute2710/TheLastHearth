@@ -5,8 +5,6 @@ const SHOW_TIME: float = 2.0
 const FADE_TIME: float = 0.4
 const MAX_LINES: int = 4
 
-@export var label_settings: LabelSettings
-
 
 func _ready() -> void:
 	EventBus.items_stored.connect(_on_items_stored)
@@ -20,7 +18,6 @@ func show_message(message: String) -> void:
 		oldest.queue_free()
 	var line: Label = Label.new()
 	line.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
-	line.label_settings = label_settings
 	line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	line.text = message
 	add_child(line)

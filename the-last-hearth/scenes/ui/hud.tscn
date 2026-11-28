@@ -3,11 +3,6 @@
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_script"]
 [ext_resource type="Resource" path="res://data/items/cave_mushroom.tres" id="2_mushroom"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_hud"]
-font_size = 8
-outline_size = 3
-outline_color = Color(0.0862745, 0.0784314, 0.109804, 1)
-
 [node name="HUD" type="Control"]
 layout_mode = 3
 anchors_preset = 0
@@ -36,4 +31,4 @@ offset_top = 13.0
 offset_right = 55.0
 offset_bottom = 25.0
 auto_translate_mode = 2
-label_settings = SubResource("LabelSettings_hud")
+theme_type_variation = &"HudLabel"

@@ -2,28 +2,6 @@
 
 [ext_resource type="Script" path="res://scenes/ui/inventory_panel.gd" id="1_script"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_title"]
-font_size = 8
-outline_size = 3
-outline_color = Color(0.0862745, 0.0784314, 0.109804, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_count"]
-font_size = 8
-outline_size = 2
-outline_color = Color(0.0862745, 0.0784314, 0.109804, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-bg_color = Color(0.1, 0.085, 0.11, 0.94)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.45, 0.36, 0.28, 1)
-content_margin_left = 8.0
-content_margin_top = 6.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-
 [node name="InventoryPanel" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -33,7 +11,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_script")
-label_settings = SubResource("LabelSettings_count")
 
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -46,7 +23,6 @@ mouse_filter = 2
 
 [node name="Frame" type="PanelContainer" parent="Center"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="Rows" type="VBoxContainer" parent="Center/Frame"]
 layout_mode = 2
@@ -55,7 +31,6 @@ theme_override_constants/separation = 4
 [node name="BagTitle" type="Label" parent="Center/Frame/Rows"]
 layout_mode = 2
 text = "UI_INVENTORY_BAG"
-label_settings = SubResource("LabelSettings_title")
 
 [node name="BagGrid" type="GridContainer" parent="Center/Frame/Rows"]
 unique_name_in_owner = true
@@ -67,7 +42,6 @@ columns = 6
 [node name="StashTitle" type="Label" parent="Center/Frame/Rows"]
 layout_mode = 2
 text = "UI_INVENTORY_STASH"
-label_settings = SubResource("LabelSettings_title")
 
 [node name="StashGrid" type="GridContainer" parent="Center/Frame/Rows"]
 unique_name_in_owner = true
@@ -81,7 +55,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 auto_translate_mode = 2
-label_settings = SubResource("LabelSettings_title")
 
 [node name="EatButton" type="Button" parent="Center/Frame/Rows"]
 unique_name_in_owner = true
@@ -89,4 +62,3 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 auto_translate_mode = 2
-theme_override_font_sizes/font_size = 8

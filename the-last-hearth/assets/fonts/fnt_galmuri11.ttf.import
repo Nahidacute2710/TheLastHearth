@@ -2,28 +2,28 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://kexuqtk8h2gk"
-path="res://.godot/imported/fnt_vt323.ttf-45940a0a9f22da0ae33c7062d50c28a5.fontdata"
+uid="uid://cfq8tyybfhsep"
+path="res://.godot/imported/fnt_galmuri11.ttf-55877f0d194f486328819dce0154ed89.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/candidates/fnt_vt323.ttf"
-dest_files=["res://.godot/imported/fnt_vt323.ttf-45940a0a9f22da0ae33c7062d50c28a5.fontdata"]
+source_file="res://assets/fonts/fnt_galmuri11.ttf"
+dest_files=["res://.godot/imported/fnt_galmuri11.ttf-55877f0d194f486328819dce0154ed89.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
-allow_system_fallback=true
+allow_system_fallback=false
 force_autohinter=false
 modulate_color_glyphs=false
-hinting=3
-subpixel_positioning=4
+hinting=0
+subpixel_positioning=0
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null

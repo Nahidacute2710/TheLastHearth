@@ -5,6 +5,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 ## [Chưa phát hành] — Giai đoạn 2 (Vertical Slice), VS-A
 
 ### Thêm
+- VSA1: font Galmuri11 (12 px, chữ chính) và Galmuri9 (10 px, HUD), tắt antialiasing/hinting, chừa dòng cho dấu chữ hoa; theme UI chung `resources/ui/main_theme.tres` gán toàn project; xóa font ứng viên Tiny5, VT323; test cỡ chữ, độ phủ ký tự và chiều cao dòng.
 - VSA0: màn hình thử font `scenes/debug/font_preview.tscn` (toàn bộ chuỗi trong `translations.csv`, đổi font và EN/VI), 4 font ứng viên OFL trong `assets/fonts/candidates/`, `assets/CREDITS.md`, test độ phủ ký tự tiếng Việt.
 
 ### Tài liệu

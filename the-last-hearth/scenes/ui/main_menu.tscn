@@ -2,22 +2,6 @@
 
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_script"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_title"]
-font_size = 16
-outline_size = 4
-outline_color = Color(0.0862745, 0.0784314, 0.109804, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_text"]
-font_size = 8
-outline_size = 3
-outline_color = Color(0.0862745, 0.0784314, 0.109804, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_error"]
-font_size = 8
-font_color = Color(0.95, 0.45, 0.35, 1)
-outline_size = 3
-outline_color = Color(0.0862745, 0.0784314, 0.109804, 1)
-
 [node name="MainMenu" type="Control"]
 process_mode = 3
 layout_mode = 3
@@ -52,14 +36,14 @@ theme_override_constants/separation = 6
 [node name="Title" type="Label" parent="Center/Rows"]
 layout_mode = 2
 text = "GAME_TITLE"
-label_settings = SubResource("LabelSettings_title")
+theme_type_variation = &"TitleLabel"
 horizontal_alignment = 1
 
 [node name="ErrorLabel" type="Label" parent="Center/Rows"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-label_settings = SubResource("LabelSettings_error")
+theme_type_variation = &"ErrorLabel"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -72,21 +56,18 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "MENU_CONTINUE"
 
 [node name="NewGameButton" type="Button" parent="Center/Rows/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "MENU_NEW_GAME"
 
 [node name="QuitButton" type="Button" parent="Center/Rows/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "MENU_QUIT"
 
 [node name="Confirm" type="VBoxContainer" parent="Center/Rows"]
@@ -98,7 +79,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 text = "MENU_CONFIRM_OVERWRITE"
-label_settings = SubResource("LabelSettings_text")
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -110,12 +90,10 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "MENU_YES"
 
 [node name="ConfirmNo" type="Button" parent="Center/Rows/Confirm/ConfirmButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "MENU_NO"
