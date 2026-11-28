@@ -5,6 +5,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 ## [Chưa phát hành] — Giai đoạn 2 (Vertical Slice), VS-A
 
 ### Thêm
+- VSA5: bật physics interpolation (TECH-008), camera player chạy ở chế độ physics, reset interpolation khi dịch chuyển tức thời; test.
 - VSA4: bus Master/Music/SFX; `AudioDirector` trong Main phát âm theo id qua `EventBus.sfx_requested`; 8 SFX tạm tự sinh (`tools/gen_placeholder_sfx.py`): swing, hit, enemy_windup, dodge, pickup, cook_done, coin, ui_click; bảng âm `data/audio/sfx_library.tres`; test.
 - VSA3: menu cài đặt (từ menu chính và menu tạm dừng): ngôn ngữ, âm lượng Master/Music/SFX, toàn màn hình, đổi 8 phím (báo trùng phím, Esc hủy, khôi phục mặc định); 26 khóa dịch mới; test.
 - VSA2: `user://settings.cfg` (ngôn ngữ, âm lượng 3 bus, toàn màn hình, phím) qua `GameSettings` trong `SaveManager`; ngôn ngữ chuyển ra khỏi save ván chơi (save cũ được đọc một lần để chuyển, không bị sửa); Chơi mới không đổi cài đặt; test.

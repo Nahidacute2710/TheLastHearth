@@ -40,6 +40,8 @@ func place_player(spawn_id: StringName) -> void:
 		return
 	_player.global_position = marker.global_position
 	_player.velocity = Vector2.ZERO
+	# Physics interpolation (TECH-008): a teleport must not be drawn as a slide from the old position.
+	_player.reset_physics_interpolation()
 
 
 ## get_used_rect() is in tile coordinates; convert to pixels before using it for the camera.
@@ -73,6 +75,7 @@ func get_player() -> Player:
 func add_enemy(enemy: Node2D, at: Vector2) -> void:
 	_entities.add_child(enemy)
 	enemy.global_position = at
+	enemy.reset_physics_interpolation()
 	if enemy.has_method(&"set_target"):
 		enemy.call(&"set_target", _player)
 

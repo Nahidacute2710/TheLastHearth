@@ -36,7 +36,7 @@
 | TECH-003 | Chưa đặt `stretch/scale_mode = integer` | Low | Verified | 2026-11-27 | Đã đặt `window/stretch/scale_mode="integer"` (mốc 1.1). Chủ dự án đã kiểm tra trong editor 2026-11-27. |
 | TECH-006 | Phím Tab của `inventory` trùng `ui_focus_next` | Low | Fixed | 2026-11-27 | Khi một `Control` có focus, Tab chuyển focus thay vì mở inventory. **Đã sửa ở C3:** `InventoryPanel` đọc action `inventory` trong `_input` và gọi `set_input_as_handled()`, các ô không nhận focus. Có test `test_tab_and_i_keys_toggle_and_tab_does_not_move_focus`. |
 | TECH-009 | Bộ chạy test báo PASS cho test bị SCRIPT ERROR giữa chừng | Medium | Fixed | 2026-11-28 | Lỗi script dừng hàm test (coroutine) mà không thêm thất bại nào. **Sửa ở D3:** `tests/error_counter.gd` (`Logger`) đếm ERROR/SCRIPT ERROR trong lúc chạy; test có lỗi bị đánh trượt kèm nội dung lỗi. Rà lại: 75 test cũ không có lỗi ẩn nào ngoài test mới đang viết. |
-| TECH-008 | Chưa bật physics interpolation; chuyển động có thể kém mượt trên màn hình 120/144 Hz | Low | Open | 2026-11-27 | Physics chạy 60 tick/giây, màn hình tần số cao vẽ nhiều frame hơn nên vị trí có thể bị giật. Cách xử lý dự kiến: bật `physics/common/physics_interpolation` (sửa `project.godot`). **2026-11-28: chủ dự án duyệt làm ở VS-A**, kèm bước kiểm tra camera có rung không. |
+| TECH-008 | Chưa bật physics interpolation; chuyển động có thể kém mượt trên màn hình 120/144 Hz | Low | Fixed (chờ chơi thử) | 2026-11-27 | Physics chạy 60 tick/giây, màn hình tần số cao vẽ nhiều frame hơn nên vị trí có thể bị giật. Cách xử lý dự kiến: bật `physics/common/physics_interpolation` (sửa `project.godot`). **2026-11-28: chủ dự án duyệt làm ở VS-A**, kèm bước kiểm tra camera có rung không. **Sửa ở VSA5:** bật `physics/common/physics_interpolation`; Camera2D của player chạy ở chế độ physics (Godot yêu cầu khi bật interpolation); gọi `reset_physics_interpolation()` khi đặt player vào điểm xuất hiện và khi đặt quái. Cần chơi thử trên màn hình 120/144 Hz. |
 | TECH-007 | Quy tắc đuôi dòng chưa thống nhất (CRLF/LF lẫn lộn) | Low | Fixed | 2026-11-27 | Đã thêm `.gitattributes` ở gốc repo (`* text=auto eol=lf`) và chạy `git add --renormalize .`: không file nào trong index phải đổi (index vốn đã là LF). Commit `chore: normalize line endings`. |
 | TECH-005 | Git LFS chưa được thiết lập | Low | Open (hoãn có chủ đích) | 2026-11-27 | **Quyết định 2026-11-27:** chưa thiết lập. Điều kiện xem xét lại ở ASSET_GUIDELINES.md mục 7 (file > 50 MB, tổng nhị phân > ~500 MB, hoặc bắt đầu commit file nguồn lớn). |
 
@@ -113,6 +113,7 @@ Copy mẫu này khi lỗi cần mô tả dài:
 | Ngày | Nội dung |
 |---|---|
 | 2026-11-27 | Bản khởi tạo: TECH-001 đến TECH-004 |
+| 2026-11-28 | Sửa TECH-008 (VSA5), chờ chơi thử |
 | 2026-11-27 | Thêm TECH-008 (physics interpolation) |
 | 2026-11-27 | Sửa TECH-007 (`.gitattributes` gốc) |
 | 2026-11-27 | Thêm TECH-007 (đuôi dòng CRLF/LF) |
