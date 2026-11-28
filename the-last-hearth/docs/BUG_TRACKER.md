@@ -30,6 +30,7 @@
 
 | ID | Tiêu đề | Mức | Trạng thái | Phát hiện | Ghi chú |
 |---|---|---|---|---|---|
+| BUG-001 | Chơi mới sau khi về menu chính: HUD vẫn hiện vàng và ngày của ván cũ | High | Fixed | 2026-11-28 | Tái hiện: chơi tới vàng > 0, ngày > 1 → Esc → Về menu chính → Chơi mới → xác nhận. **Nguyên nhân:** file save và `GameState` trong bộ nhớ đều đúng (ngày 1, 0 vàng); `reset_session()` gán lại biến nhưng không phát `day_changed`/`gold_changed`/`weapon_equipped`, nên `DayGoldDisplay` (sống suốt game trong `Main`) giữ số cũ. **Sửa:** một hàm duy nhất `GameState.start_new_game()` xóa toàn bộ phiên và phát lại mọi signal; `from_dict()` dùng chung phần xóa + phát. Kèm sửa: về menu từ quán khi đang nấu thì lưu sau khi bếp nấu xong (trước đây save thiếu món, mất nguyên liệu). Test `test_new_game_reset.gd`. |
 | TECH-001 | `export_presets.cfg` bị liệt kê trong `.gitignore` ở gốc repo | Low | Fixed | 2026-11-27 | Đã bỏ ignore (mốc 1.1, chưa commit). File chưa tồn tại nên chưa có gì để kiểm tra; khi tạo preset đầu tiên phải mở file kiểm tra trước khi commit. |
 | TECH-002 | Có hai file `.gitignore` (gốc repo và `the-last-hearth/`) với nội dung chồng lấn | Low | Fixed | 2026-11-27 | Đã gộp về `.gitignore` gốc và xóa file con (mốc 1.1, chưa commit). Đã chạy `git check-ignore`: `.godot/` và `android/` vẫn bị ignore. |
 | TECH-003 | Chưa đặt `stretch/scale_mode = integer` | Low | Verified | 2026-11-27 | Đã đặt `window/stretch/scale_mode="integer"` (mốc 1.1). Chủ dự án đã kiểm tra trong editor 2026-11-27. |

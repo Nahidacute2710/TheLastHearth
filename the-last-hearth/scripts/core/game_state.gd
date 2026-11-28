@@ -68,8 +68,18 @@ func apply_death_penalty() -> void:
 	bag.clear_except_quest_items()
 
 
-## Clears all session data (new game, tests).
-func reset_session() -> void:
+## The ONLY way to start a new game: resets every part of the session (day, gold, bag, stash,
+## equipped weapon, served customers, level tracking) and notifies every listener (HUD, weapon rack...).
+## Settings such as the locale are not session data and are kept.
+## In-progress cooking lives in the tavern level, which is unloaded before a new game starts.
+func start_new_game() -> void:
+	_clear_session()
+	_notify_session_changed()
+
+
+## Wipes session fields without notifying. Used by start_new_game() and from_dict().
+## Any new session field must be cleared here (a test checks the common ones).
+func _clear_session() -> void:
 	equipped_weapon = null
 	bag.clear()
 	stash.clear()
@@ -77,6 +87,13 @@ func reset_session() -> void:
 	gold = 0
 	customer_served_day.clear()
 	_last_level_id = &""
+
+
+## Pushes the whole state to listeners after a reset or a load (bag/stash emit their own `changed`).
+func _notify_session_changed() -> void:
+	EventBus.day_changed.emit(day)
+	EventBus.gold_changed.emit(gold)
+	EventBus.weapon_equipped.emit(equipped_weapon)
 
 
 func _on_level_changed(level_id: StringName) -> void:
@@ -123,9 +140,10 @@ func to_dict() -> Dictionary:
 	}
 
 
-## Applies data that SaveManager already validated.
+## Applies data that SaveManager already validated. Replaces the whole session: nothing from the
+## game that was running is kept.
 func from_dict(data: Dictionary) -> void:
-	reset_session()
+	_clear_session()
 	day = maxi(int(data["day"]), 1)
 	gold = maxi(int(data["gold"]), 0)
 	var weapon_id: StringName = StringName(str(data["equipped_weapon"]))
@@ -134,6 +152,4 @@ func from_dict(data: Dictionary) -> void:
 	var served: Dictionary = data.get("customer_served_day", {}) as Dictionary
 	for customer_id: Variant in served:
 		customer_served_day[StringName(str(customer_id))] = int(served[customer_id])
-	EventBus.day_changed.emit(day)
-	EventBus.gold_changed.emit(gold)
-	EventBus.weapon_equipped.emit(equipped_weapon)
+	_notify_session_changed()

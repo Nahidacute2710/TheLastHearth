@@ -19,10 +19,10 @@ func _button(node_name: String) -> Button:
 
 func _save_with_day(day: int) -> void:
 	var state: Node = tree.root.get_node("GameState")
-	state.call("reset_session")
+	state.call("start_new_game")
 	state.set("day", day)
 	_saves().call("save_game")
-	state.call("reset_session")
+	state.call("start_new_game")
 
 
 func _key(keycode: Key) -> void:

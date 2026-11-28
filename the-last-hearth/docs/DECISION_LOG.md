@@ -83,4 +83,6 @@
 | 2026-11-28 | D2 | Tên món hiện ở một dòng dưới hai lưới khi rê chuột vào ô; bấm chuột trái chọn ô thì tên giữ lại khi rời chuột | Dễ thấy hơn tooltip mặc định | Claude |
 | 2026-11-28 | D2 | Phím debug: Shift+F9 xóa file save | Theo yêu cầu; tránh F5–F8 | Claude |
 | 2026-11-28 | D2 | Tên game giữ "The Last Hearth" ở cả hai ngôn ngữ (khóa `GAME_TITLE`) | Tên riêng; chủ dự án có thể đổi cột vi | Claude |
+| 2026-11-28 | BUG-001 | `GameState.start_new_game()` là đường duy nhất để bắt đầu ván mới: xóa ngày, vàng, túi, kho, vũ khí, khách đã phục vụ, theo dõi level, rồi phát lại toàn bộ signal. Ngôn ngữ không bị reset. Chưa có buff nên chưa có gì để xóa; món đang nấu nằm trong level quán, được nấu xong khi quán bị gỡ, rồi bị xóa cùng kho | Theo yêu cầu sửa tận gốc | Chủ dự án |
+| 2026-11-28 | BUG-001 | Về menu chính từ quán: gỡ level trước rồi mới lưu | Nồi đang nấu được nấu xong khi quán rời cây scene, nên món có trong save | Claude |
 | 2026-11-27 | Kế hoạch | Kiểm tra headless bằng bản Godot 4.7.2 Linux chính thức trên bản sao project ở cloud | Không động vào máy chủ dự án | Chủ dự án |

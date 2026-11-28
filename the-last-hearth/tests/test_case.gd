@@ -16,7 +16,7 @@ const TEST_SAVE_DIR: String = "user://test_saves/"
 
 
 func before_each() -> void:
-	tree.root.get_node("GameState").call("reset_session")
+	tree.root.get_node("GameState").call("start_new_game")
 	var saves: Node = tree.root.get_node("SaveManager")
 	saves.set("save_dir", TEST_SAVE_DIR)
 	saves.call("delete_save")

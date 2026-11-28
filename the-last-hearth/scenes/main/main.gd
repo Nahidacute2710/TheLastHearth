@@ -18,7 +18,7 @@ func _ready() -> void:
 
 ## Fresh session in the tavern. Overwrites the save right away (the menu asked first).
 func start_new_game() -> void:
-	GameState.reset_session()
+	GameState.start_new_game()
 	_main_menu.close()
 	SceneRouter.start(_level_root, SceneRouter.TAVERN)
 	SaveManager.save_game()
@@ -36,9 +36,11 @@ func continue_game() -> void:
 ## From the pause menu. Saves only in the tavern; leaving from the mine loses the run.
 func return_to_menu() -> void:
 	get_tree().paused = false
-	if SceneRouter.current_level_id == SceneRouter.TAVERN:
-		SaveManager.save_game()
+	var in_tavern: bool = SceneRouter.current_level_id == SceneRouter.TAVERN
+	# Unload first: a pot still cooking finishes when the tavern leaves the tree, so the save includes it.
 	SceneRouter.unload()
+	if in_tavern:
+		SaveManager.save_game()
 	_main_menu.open()
 
 

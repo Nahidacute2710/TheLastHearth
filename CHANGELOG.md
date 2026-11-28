@@ -9,6 +9,7 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 - D1: `SaveManager` (JSON, file tạm, `.bak` cho file hỏng), `ItemDB`, `to_dict()/from_dict()` của `GameState`, `Inventory.to_array()/load_array()`, tự lưu ở quán + test.
 
 ### Sửa
+- BUG-001: Chơi mới sau khi về menu chính không cập nhật HUD vàng/ngày; thêm `GameState.start_new_game()` reset toàn bộ phiên; về menu từ quán khi đang nấu không còn làm mất món trong save + test.
 - D1: bếp không nấu khi kho hết chỗ cho món ("Kho đã đầy"), món không bao giờ bị mất.
 
 ## [Chưa phát hành] — CP-C: Túi đồ, nấu ăn, khách

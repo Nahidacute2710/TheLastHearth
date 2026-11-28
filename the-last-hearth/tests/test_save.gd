@@ -33,7 +33,7 @@ func test_save_and_load_round_trip() -> void:
 	TranslationServer.set_locale("vi")
 	check(_saves().call("save_game"), "save succeeds")
 	check(not FileAccess.file_exists(_saves().call("get_save_path") + ".tmp"), "no .tmp left behind")
-	state.call("reset_session")
+	state.call("start_new_game")
 	TranslationServer.set_locale("en")
 	check_eq(_saves().call("load_game"), 0, "load returns OK")
 	check_eq(state.get("day"), 4, "day restored")
