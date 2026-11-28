@@ -53,6 +53,8 @@ func _play_a_while() -> void:
 	state.call("advance_day")
 	state.call("add_gold", 40)
 	state.get("bag").call("add", load(MUSHROOM_PATH), 2)
+	state.get("stash").call("add", load(STEW_PATH), 1)
+	check(state.call("eat_from_stash", load(STEW_PATH)), "ate a stew")
 
 
 func test_new_game_after_playing_resets_everything() -> void:
@@ -73,6 +75,9 @@ func test_new_game_after_playing_resets_everything() -> void:
 	check(state.get("equipped_weapon") == null, "equipped weapon reset")
 	check(not state.call("owns_item_id", &"rusty_pickaxe"), "pickaxe no longer owned")
 	check((state.get("customer_served_day") as Dictionary).is_empty(), "served customers reset")
+	check_eq(state.get("max_health_buff"), 0, "food buff reset")
+	check_eq(_hud().get("max_health"), 5, "HUD health back to 5 pips")
+	check_eq(_hud().get("buff_pips"), 0, "HUD shows no buff pips")
 	var rack: Node = level().find_child("WeaponRack", true, false)
 	check(rack.get_node("WeaponSprite").get("visible"), "rack shows the pickaxe again")
 	check(rack.get_node("Interactable").get("enabled"), "pickaxe can be taken again")
@@ -87,6 +92,7 @@ func test_new_game_after_playing_resets_everything() -> void:
 	check_eq((saved["stash"] as Array).size(), 0, "save has an empty stash")
 	check_eq(saved["equipped_weapon"], "", "save has no weapon")
 	check_eq((saved["customer_served_day"] as Dictionary).size(), 0, "save has no served customers")
+	check_eq(int(saved["max_health_buff"]), 0, "save has no food buff")
 
 
 func test_continue_after_menu_replaces_state_with_the_save() -> void:

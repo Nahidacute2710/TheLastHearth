@@ -37,9 +37,9 @@
 ### 2.1 Di chuyển (Movement)
 - **Mục đích:** Điều khiển nhân vật mượt, chính xác.
 - **Chi tiết:** `CharacterBody2D`, 8 hướng, có gia tốc và giảm tốc ngắn để có cảm giác "nặng" vừa phải. Tốc độ lấy từ biến export, không hard-code.
-- **Thông số khởi đầu (🧪 CẦN THỬ NGHIỆM, từ B4 nằm trong `data/characters/innkeeper.tres`, Resource `PlayerData`):** `max_speed` 80 px/s (khoảng 5 tile/giây), `acceleration` 800 px/s² (đạt tốc độ tối đa sau khoảng 0,1 giây), `friction` 1000 px/s² (dừng sau khoảng 0,08 giây). Hướng đọc bằng `Input.get_vector()` nên đi chéo không nhanh hơn đi thẳng. Camera trong Player, `position_smoothing` tắt ở 1.2.
+- **Thông số khởi đầu (✅ đã chơi thử 2026-11-28, từ B4 nằm trong `data/characters/innkeeper.tres`, Resource `PlayerData`):** `max_speed` 80 px/s (khoảng 5 tile/giây), `acceleration` 800 px/s² (đạt tốc độ tối đa sau khoảng 0,1 giây), `friction` 1000 px/s² (dừng sau khoảng 0,08 giây). Hướng đọc bằng `Input.get_vector()` nên đi chéo không nhanh hơn đi thẳng. Camera trong Player, `position_smoothing` tắt ở 1.2.
 - **Liên kết:** Chiến đấu (đứng khựng khi tấn công), Tương tác.
-- **MVP:** ✅ Đi bộ 8 hướng (mốc 1.2). ✅ Né (`dodge`, Space) ở mốc B4 (✅ ĐÃ CHỐT 2026-11-27): lướt ngắn theo hướng đang di chuyển, đứng yên thì lướt theo hướng chuột; có i-frames và cooldown, dùng chung cơ chế tắt hurtbox với i-frames khi bị đánh. **Đã làm ở B4:** 220 px/s trong 0,18 s, bất tử 0,22 s, cooldown 0,6 s 🧪; không vung cuốc khi đang né.
+- **MVP:** ✅ Đi bộ 8 hướng (mốc 1.2). ✅ Né (`dodge`, Space) ở mốc B4 (✅ ĐÃ CHỐT 2026-11-27): lướt ngắn theo hướng đang di chuyển, đứng yên thì lướt theo hướng chuột; có i-frames và cooldown, dùng chung cơ chế tắt hurtbox với i-frames khi bị đánh. **Đã làm ở B4:** 220 px/s trong 0,18 s, bất tử 0,22 s, cooldown 0,6 s (đã chơi thử 2026-11-28); không vung cuốc khi đang né.
 
 ### 2.2 Tương tác (Interaction)
 - **Mục đích:** Một cách thống nhất để player tương tác với mọi đối tượng.
@@ -52,7 +52,7 @@
 - **Chi tiết:** Class `Inventory` (`RefCounted`) giữ danh sách `ItemStack {item: ItemData, quantity: int}`. API: `add_item`, `remove_item`, `has_item`, `get_quantity`, signal `changed`. Logic tách khỏi UI. Inventory thuộc `GameState`, nên tồn tại xuyên suốt khi chuyển cảnh.
 - **MVP:** ✅ Danh sách đơn giản, số ô giới hạn, UI hiển thị dạng lưới. ✅ Kho quán (chủ dự án chốt ở CP-C). ❌ Kéo thả, phân loại. **Đã làm ở C3:** Tab/I mở panel hiện túi (12 ô) và kho (30 ô), thế giới tạm dừng khi panel mở.
 - **Hệ quả của luật chết (✅ ĐÃ CHỐT, bảng ở GDD mục 6):** khi chết, mất mọi thứ player đang mang trong chuyến (loot, tài nguyên, tiền nhặt được, đồ tiêu hao, trang bị chưa mặc); giữ trang bị đang mặc và vật phẩm cốt truyện/quest. Vì vậy inventory phải phân biệt được: *đồ cất ở quán*, *đồ đang mang theo*, *slot trang bị đang mặc*, và cờ *vật phẩm quest* trên `ItemData`.
-- **Cách làm (✅ ĐÃ CHỐT 2026-11-27, làm ở C1):** `GameState.bag` (túi, 12 ô 🧪) chỉ chứa đồ trong chuyến; `GameState.stash` (kho quán, 30 ô 🧪). Về quán an toàn: túi tự cất vào kho, hiện thông báo `TOAST_ITEMS_STORED`. Chết: túi bị xóa trừ vật phẩm có `ItemData.is_quest_item`; `equipped_weapon` và kho không đổi. Class `Inventory` có `add` (trả về số không vừa), `remove` (đủ hoặc không lấy gì), `count_of`, `get_stacks`, `get_totals`.
+- **Cách làm (✅ ĐÃ CHỐT 2026-11-27, làm ở C1):** `GameState.bag` (túi, 12 ô (đã chơi thử 2026-11-28)) chỉ chứa đồ trong chuyến; `GameState.stash` (kho quán, 30 ô (đã chơi thử 2026-11-28)). Về quán an toàn: túi tự cất vào kho, hiện thông báo `TOAST_ITEMS_STORED`. Chết: túi bị xóa trừ vật phẩm có `ItemData.is_quest_item`; `equipped_weapon` và kho không đổi. Class `Inventory` có `add` (trả về số không vừa), `remove` (đủ hoặc không lấy gì), `count_of`, `get_stacks`, `get_totals`.
 
 ### 2.4 Lưu/Tải
 - **Chi tiết:** Xem TECHNICAL_ARCHITECTURE.md mục 6.
@@ -71,25 +71,25 @@
 - **Chi tiết:**
   - `HitboxComponent` (Area2D gây sát thương) và `HurtboxComponent` (Area2D nhận sát thương) → `HealthComponent` (máu, signal `died`, `health_changed`). **Đã làm ở B1** (`scripts/components/`): hitbox chỉ dò khi `activate(duration)`, trúng mỗi hurtbox tối đa 1 lần mỗi lần kích hoạt; `HurtboxComponent.start_invulnerability()` tắt `monitorable` nên hitbox không thấy hurtbox (dùng chung cho i-frames khi bị đánh và khi né).
   - Đòn đánh theo **hướng chuột** (✅ ĐÃ CHỐT 2026-11-27). **Đã làm ở B2:** `WeaponPivot` (script `PlayerAttack`) xoay theo hướng chuột, hiện vệt vung placeholder và bật hitbox trong `hit_active_time`. Lấy Cuốc Chim ở giá treo cạnh nắp hầm (`GameState.equipped_weapon`). Trúng đòn thì hit-stop: `Level.hit_stop()` tắt xử lý `%Entities` trong thời gian ngắn, không dùng `Engine.time_scale` nên fade và UI không bị ảnh hưởng. Không rung màn hình ở MVP (✅ chốt).
-  - Có cooldown, knockback, i-frames ngắn sau khi bị đánh. **Đã làm ở B4:** player 5 máu, bị đánh thì bất tử 0,8 s (nhấp nháy) và bị đẩy lùi 0,15 s 🧪; HUD ô máu góc trên trái. Quái không gây sát thương khi chạm thân.
+  - Có cooldown, knockback, i-frames ngắn sau khi bị đánh. **Đã làm ở B4:** player 5 máu, bị đánh thì bất tử 0,8 s (nhấp nháy) và bị đẩy lùi 0,15 s (đã chơi thử 2026-11-28); HUD ô máu góc trên trái. Quái không gây sát thương khi chạm thân.
   - Phản hồi: nháy trắng, hitstop, rung camera.
 - **Đầu vào:** `WeaponData`. **Đầu ra:** Signal chết → rơi đồ, nhiệm vụ.
 - **MVP:** ✅ 1 vũ khí cận chiến, đánh 1 hướng. ❌ Combo, kỹ năng, vũ khí tầm xa.
 - **Khi player chết (✅ ĐÃ CHỐT):** màn hình fade, tỉnh dậy trong quán với máu đầy, áp dụng bảng mất/giữ ở GDD mục 6. Không thêm hình phạt khác khi chưa được duyệt. **Đã làm ở B4:** chờ 0,6 s, fade, tỉnh dậy ở điểm `default` trong quán, giữ vũ khí đã trang bị; bảng mất đồ làm ở CP-C.
-- **Chỉ số** (máu, sát thương, cooldown, knockback, i-frames): 🧪 CẦN THỬ NGHIỆM, đặt trong Resource `.tres`.
+- **Chỉ số** (máu, sát thương, cooldown, knockback, i-frames): ✅ đã chơi thử 2026-11-28, giữ nguyên giá trị; nằm trong Resource `.tres`.
 
 ### 3.2 Quái vật (Enemy AI)
 - **Chi tiết:** State machine đơn giản: `Idle → Chase → Attack → Hurt → Dead`. Chỉ số lấy từ `EnemyData`.
-- **Đã làm ở B3 (Thợ Mỏ Rỗng):** `Idle → Chase → WindUp → Attack → Recover`, cộng `Hurt` và `Dead`. Chạm thân **không** gây sát thương (✅ chốt); chỉ đòn sau khi lấy đà mới gây sát thương. Lúc lấy đà, quái đứng yên và nháy đỏ cam; hướng đòn khóa từ lúc bắt đầu lấy đà nên người chơi né sang bên được. Bị đánh trúng thì ngắt lấy đà, bị đẩy lùi, nháy trắng. Chết thì emit `EventBus.enemy_died`, mờ dần rồi bị xóa. Mỏ có 10 con: R1 2, R2 3, R4 3, R3 2 🧪.
+- **Đã làm ở B3 (Thợ Mỏ Rỗng):** `Idle → Chase → WindUp → Attack → Recover`, cộng `Hurt` và `Dead`. Chạm thân **không** gây sát thương (✅ chốt); chỉ đòn sau khi lấy đà mới gây sát thương. Lúc lấy đà, quái đứng yên và nháy đỏ cam; hướng đòn khóa từ lúc bắt đầu lấy đà nên người chơi né sang bên được. Bị đánh trúng thì ngắt lấy đà, bị đẩy lùi, nháy trắng. Chết thì emit `EventBus.enemy_died`, mờ dần rồi bị xóa. Mỏ có 10 con: R1 2, R2 3, R4 3, R3 2 (đã chơi thử 2026-11-28).
 - **MVP:** ✅ 1 loại quái cận chiến, đuổi theo khi thấy player, tấn công khi lại gần. ❌ Pathfinding phức tạp (MVP dùng di chuyển thẳng hoặc `NavigationAgent2D` cơ bản).
 
 ### 3.3 Rơi đồ (Loot)
 - **Chi tiết:** `EnemyData.loot_table` gồm các cặp `{item, chance, min_qty, max_qty}`. Khi chết, sinh `Pickup` trên mặt đất; player chạm vào thì nhặt.
-- **MVP:** ✅ 1 loại tài nguyên, tỉ lệ rơi cố định. **Đã làm ở C2:** tên thực tế là `EnemyData.loot: Array[LootEntry]` (`item`, `chance`, `min_count`, `max_count`); Thợ Mỏ Rỗng rơi 1 Nấm Hang 50% 🧪; 4 nấm mọc sẵn trong mỏ 🧪.
+- **MVP:** ✅ 1 loại tài nguyên, tỉ lệ rơi cố định. **Đã làm ở C2:** tên thực tế là `EnemyData.loot: Array[LootEntry]` (`item`, `chance`, `min_count`, `max_count`); Thợ Mỏ Rỗng rơi 1 Nấm Hang 50% (đã chơi thử 2026-11-28); 4 nấm mọc sẵn trong mỏ (đã chơi thử 2026-11-28).
 
 ### 3.4 Sinh dungeon
 - **Chi tiết dài hạn:** Ghép các phòng thiết kế sẵn (room templates) theo graph, có phòng chiến đấu, phòng thưởng, phòng boss.
-- **MVP:** ❌ Chỉ 1 khu vực thiết kế tay. **Đã làm ở A4:** Mỏ Bỏ Hoang graybox gồm 4 phòng 24×21 tile xếp 2×2, nối nhau bằng lối đi rộng 3 tile theo đường R1 → R2 → R4 → R3; có cột đá; thang ở phòng đầu là lối vào và lối ra về quán 🧪.
+- **MVP:** ❌ Chỉ 1 khu vực thiết kế tay. **Đã làm ở A4:** Mỏ Bỏ Hoang graybox gồm 4 phòng 24×21 tile xếp 2×2, nối nhau bằng lối đi rộng 3 tile theo đường R1 → R2 → R4 → R3; có cột đá; thang ở phòng đầu là lối vào và lối ra về quán (đã chơi thử 2026-11-28).
 
 ### 3.5 Boss
 - **MVP:** ❌ (Vertical Slice).
@@ -101,11 +101,11 @@
 ### 4.1 Nấu ăn (Cooking)
 - **Mục đích:** Biến tài nguyên dungeon thành giá trị (tiền + buff).
 - **Chi tiết:** Tương tác với bếp → chọn công thức có đủ nguyên liệu → trừ nguyên liệu → sau `cook_time` nhận món. Dữ liệu từ `RecipeData`.
-- **MVP:** ✅ 1 công thức, 1 bếp, nấu xong ngay hoặc chờ vài giây. **Đã làm ở C4:** `RecipeData` (`ingredients: Array[RecipeIngredient]`, `result`, `cook_time`), `data/recipes/mushroom_stew.tres` (2 Nấm Hang → 1 Súp Nấm, 1,5 s 🧪). Nguyên liệu lấy từ kho quán, món nằm trong kho đến khi giao.
+- **MVP:** ✅ 1 công thức, 1 bếp, nấu xong ngay hoặc chờ vài giây. **Đã làm ở C4:** `RecipeData` (`ingredients: Array[RecipeIngredient]`, `result`, `cook_time`), `data/recipes/mushroom_stew.tres` (2 Nấm Hang → 1 Súp Nấm, 1,5 s (đã chơi thử 2026-11-28)). Nguyên liệu lấy từ kho quán, món nằm trong kho đến khi giao.
 
 ### 4.2 Khách hàng (Customers)
 - **Chi tiết:** Khách đến, ngồi vào chỗ, yêu cầu món. Player mang món đến (tương tác) → nhận tiền. Khách có độ kiên nhẫn; hết kiên nhẫn thì bỏ đi.
-- **MVP:** ✅ 1 khách, xuất hiện cố định mỗi ngày, yêu cầu 1 món. ❌ Kiên nhẫn, danh tiếng, nhiều khách. **Đã làm ở C5:** `CustomerData` + `weary_traveler.tres`; Lữ Khách mỗi ngày 1 lần, chưa có món thì đứng chờ mãi; giao Súp Nấm từ kho nhận 15 vàng 🧪.
+- **MVP:** ✅ 1 khách, xuất hiện cố định mỗi ngày, yêu cầu 1 món. ❌ Kiên nhẫn, danh tiếng, nhiều khách. **Đã làm ở C5:** `CustomerData` + `weary_traveler.tres`; Lữ Khách mỗi ngày 1 lần, chưa có món thì đứng chờ mãi; giao Súp Nấm từ kho nhận 15 vàng (đã chơi thử 2026-11-28).
 
 ### 4.3 Kinh tế (Economy)
 - **Chi tiết:** Tiền (`gold`) trong `GameState`. Nguồn thu: phục vụ khách, bán vật phẩm. Chi: mua nguyên liệu, nâng cấp, trang bị.
@@ -142,7 +142,7 @@
 
 ### 5.4 Buff từ món ăn
 - **Chi tiết:** Ăn món trước khi xuống dungeon → buff tạm thời trong chuyến đi (ví dụ +máu tối đa).
-- **MVP:** ❓ 🧪 Nên có nếu kịp, vì đây là liên kết "Quán → Dungeon" rõ ràng nhất. Đề xuất: món duy nhất của MVP vừa bán được cho khách, vừa có thể ăn để +máu.
+- **MVP:** ✅ Đã làm ở D3 (2026-11-28): ở quán, chọn Súp Nấm trong kho (panel túi đồ) → "Ăn" → +2 máu tối đa (`ItemData.buff_max_health`) cho chuyến xuống mỏ kế tiếp; HUD thêm 2 ô màu vàng cam; mất khi về quán hoặc khi chết; mỗi chuyến 1 lần; có trong save (`max_health_buff`). Món duy nhất của MVP vừa bán được vừa ăn được.
 
 ### 5.5 Ngôn ngữ (Localization)
 - **✅ ĐÃ CHỐT:** hỗ trợ tiếng Anh và tiếng Việt. Mọi văn bản hiển thị (UI, tên vật phẩm, thoại) dùng khóa dịch, không viết cứng trong script. Kiến trúc ở TECHNICAL_ARCHITECTURE.md mục 5.1.

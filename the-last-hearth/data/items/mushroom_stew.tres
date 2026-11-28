@@ -9,4 +9,5 @@ id = &"mushroom_stew"
 name_key = &"ITEM_MUSHROOM_STEW_NAME"
 icon = ExtResource("2_icon")
 max_stack = 10
+buff_max_health = 2
 sell_price = 10

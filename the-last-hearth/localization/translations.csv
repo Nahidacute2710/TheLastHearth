@@ -32,3 +32,7 @@ MENU_NO,No,Không
 PAUSE_TITLE,Paused,Tạm dừng
 PAUSE_RESUME,Resume,Tiếp tục
 PAUSE_MAIN_MENU,Main menu,Về menu chính
+UI_EAT_FOOD,Eat (+%d max health next run),Ăn (+%d máu tối đa chuyến tới)
+UI_EAT_ALREADY,Already ate this run,Đã ăn cho chuyến này
+UI_EAT_TAVERN_ONLY,Eat in the tavern,Chỉ ăn được ở quán
+TOAST_ATE_FOOD,Ate %s: +%d max health next run,Đã ăn %s: +%d máu tối đa chuyến tới

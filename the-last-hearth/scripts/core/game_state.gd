@@ -12,6 +12,9 @@ var bag: Inventory = Inventory.new(BAG_SLOTS)
 var stash: Inventory = Inventory.new(STASH_SLOTS)
 var day: int = 1
 var gold: int = 0
+## Extra max health from food eaten in the tavern, for the next dungeon run (0 = none).
+## Cleared when the player comes back to the tavern (safe or dead). One meal per run.
+var max_health_buff: int = 0
 ## Customer id -> last day it was served.
 var customer_served_day: Dictionary[StringName, int] = {}
 
@@ -42,6 +45,29 @@ func is_customer_served_today(customer_id: StringName) -> bool:
 func mark_customer_served(customer_id: StringName) -> void:
 	customer_served_day[customer_id] = day
 	EventBus.autosave_requested.emit()
+
+
+## True when `item` can be eaten now: it is food, it is in the stash, the player is in the tavern
+## and has not eaten this run yet.
+func can_eat(item: ItemData) -> bool:
+	return item != null and item.buff_max_health > 0 and max_health_buff == 0 \
+		and SceneRouter.current_level_id == SceneRouter.TAVERN and stash.count_of(item) > 0
+
+
+## Eats one `item` from the stash. Returns false (and changes nothing) when can_eat() is false.
+func eat_from_stash(item: ItemData) -> bool:
+	if not can_eat(item) or not stash.remove(item, 1):
+		return false
+	_set_max_health_buff(item.buff_max_health)
+	EventBus.autosave_requested.emit()
+	return true
+
+
+func _set_max_health_buff(amount: int) -> void:
+	if max_health_buff == amount:
+		return
+	max_health_buff = amount
+	EventBus.max_health_buff_changed.emit(max_health_buff)
 
 
 func add_gold(amount: int) -> void:
@@ -86,6 +112,7 @@ func _clear_session() -> void:
 	day = 1
 	gold = 0
 	customer_served_day.clear()
+	max_health_buff = 0
 	_last_level_id = &""
 
 
@@ -94,6 +121,7 @@ func _notify_session_changed() -> void:
 	EventBus.day_changed.emit(day)
 	EventBus.gold_changed.emit(gold)
 	EventBus.weapon_equipped.emit(equipped_weapon)
+	EventBus.max_health_buff_changed.emit(max_health_buff)
 
 
 func _on_level_changed(level_id: StringName) -> void:
@@ -101,6 +129,7 @@ func _on_level_changed(level_id: StringName) -> void:
 	_last_level_id = level_id
 	if from_dungeon and level_id == SceneRouter.TAVERN:
 		_report_stored(_store_and_count())
+		_set_max_health_buff(0)
 		advance_day()
 		EventBus.autosave_requested.emit()
 
@@ -124,6 +153,7 @@ func _report_stored(moved: Dictionary[ItemData, int]) -> void:
 
 func _on_player_died() -> void:
 	apply_death_penalty()
+	_set_max_health_buff(0)
 
 
 ## Saved data (see SaveManager). The bag is not saved: saves only happen in the tavern, where it is empty.
@@ -137,6 +167,7 @@ func to_dict() -> Dictionary:
 		"equipped_weapon": String(equipped_weapon.id) if equipped_weapon != null else "",
 		"stash": stash.to_array(),
 		"customer_served_day": served,
+		"max_health_buff": max_health_buff,
 	}
 
 
@@ -152,4 +183,5 @@ func from_dict(data: Dictionary) -> void:
 	var served: Dictionary = data.get("customer_served_day", {}) as Dictionary
 	for customer_id: Variant in served:
 		customer_served_day[StringName(str(customer_id))] = int(served[customer_id])
+	max_health_buff = maxi(int(data.get("max_health_buff", 0)), 0)
 	_notify_session_changed()

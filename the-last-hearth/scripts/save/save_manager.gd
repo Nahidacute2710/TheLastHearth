@@ -2,7 +2,7 @@ extends Node
 ## Reads and writes the JSON save (one slot). Writes go to a .tmp file first, then replace the save.
 ## A save that cannot be read (bad JSON, empty, missing fields, unknown save_version) is renamed to
 ## .bak and reported, never applied, and never crashes the game.
-## Saved: day, gold, stash, equipped weapon, served customers, locale. Not saved: player position, bag.
+## Saved: day, gold, stash, equipped weapon, served customers, food buff, locale. Not saved: player position, bag.
 
 enum LoadResult { OK, NO_SAVE, CORRUPT, UNSUPPORTED_VERSION }
 
@@ -153,6 +153,8 @@ func _is_valid_game_state(value: Variant) -> bool:
 		if not entry is Dictionary or not (entry as Dictionary).get("id") is String:
 			return false
 	if state.has("customer_served_day") and not state["customer_served_day"] is Dictionary:
+		return false
+	if state.has("max_health_buff") and not (state["max_health_buff"] is float or state["max_health_buff"] is int):
 		return false
 	return true
 

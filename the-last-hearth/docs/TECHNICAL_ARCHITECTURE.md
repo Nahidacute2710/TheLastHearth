@@ -231,7 +231,7 @@ window/stretch/scale_mode="integer"  ; MỚI: chỉ phóng to theo bội số ng
 
 - Với `scale_mode = integer`, Godot làm tròn xuống hệ số phóng to gần nhất và thêm viền đen phần dư: 1280×720 → 2×, 1920×1080 → 3×, 2560×1440 → 4×, 3840×2160 → 6×. Màn 1366×768 → 2× (viền đen quanh 1280×720).
 - Lý do: mỗi pixel nghệ thuật luôn hiện bằng đúng N×N pixel màn hình, không có pixel to nhỏ không đều.
-- 🧪 Cần thử ở mốc 1.2 khi có chuyển động: `rendering/2d/snap/snap_2d_transforms_to_pixel` để tránh sprite rung khi camera di chuyển ở tọa độ lẻ.
+- `rendering/2d/snap/snap_2d_transforms_to_pixel`: chưa bật. Đã thử ở mốc 1.2 và qua các lần chơi thử đến 2026-11-28, không thấy rung hình.
 - Cân nhắc `stretch/mode = "viewport"` nếu muốn mọi thứ, kể cả UI và chuyển động, khớp lưới pixel tuyệt đối. Đánh đổi là chữ UI và chuyển động camera kém mượt hơn. Nên thử cả hai ở MVP rồi mới chốt.
 - ✅ Đã bật cảnh báo `debug/gdscript/warnings/untyped_declaration = 1` (Warn).
 

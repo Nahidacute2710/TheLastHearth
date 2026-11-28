@@ -2,7 +2,8 @@ extends Control
 ## Bag + tavern stash panel. The `inventory` action (Tab, I) opens and closes it; `pause` (Esc) closes it.
 ## The world is paused while it is open. Input is read in _input and marked handled, so Tab never
 ## reaches GUI focus navigation (TECH-006). No control in the panel can take focus.
-## Hovering or clicking a slot shows the item name below the grids.
+## Hovering or clicking a slot shows the item name below the grids. Selecting food in the stash
+## (in the tavern) shows an Eat button.
 
 const SLOT_SIZE: Vector2 = Vector2(20.0, 20.0)
 const SLOT_COLOR: Color = Color(0.16, 0.13, 0.15)
@@ -13,9 +14,10 @@ const SLOT_BORDER: Color = Color(0.0862745, 0.0784314, 0.109804)
 @onready var _bag_grid: GridContainer = %BagGrid
 @onready var _stash_grid: GridContainer = %StashGrid
 @onready var _item_name: Label = %ItemName
+@onready var _eat_button: Button = %EatButton
 
-var _selected_name_key: StringName = &""
-var _slot_name_keys: Dictionary[Control, StringName] = {}
+var _selected_slot: Control = null
+var _slot_items: Dictionary[Control, ItemData] = {}
 
 
 func _ready() -> void:
@@ -23,6 +25,8 @@ func _ready() -> void:
 	hide()
 	GameState.bag.changed.connect(_refresh)
 	GameState.stash.changed.connect(_refresh)
+	_eat_button.focus_mode = Control.FOCUS_NONE
+	_eat_button.pressed.connect(_on_eat_pressed)
 
 
 func _input(event: InputEvent) -> void:
@@ -38,9 +42,8 @@ func _input(event: InputEvent) -> void:
 
 
 func open() -> void:
+	_selected_slot = null
 	_refresh()
-	_selected_name_key = &""
-	_show_name(&"")
 	show()
 	get_tree().paused = true
 
@@ -68,6 +71,8 @@ func get_slot_texts(which: StringName) -> PackedStringArray:
 func _refresh() -> void:
 	_fill(_bag_grid, GameState.bag)
 	_fill(_stash_grid, GameState.stash)
+	_show_item(_selected_item())
+	_update_eat_button()
 
 
 func _fill(grid: GridContainer, inventory: Inventory) -> void:
@@ -81,11 +86,11 @@ func _fill(grid: GridContainer, inventory: Inventory) -> void:
 		if i < stacks.size():
 			icon.texture = stacks[i].item.icon
 			count.text = str(stacks[i].count) if stacks[i].count > 1 or stacks[i].item.max_stack > 1 else ""
-			_slot_name_keys[slot] = stacks[i].item.name_key
+			_slot_items[slot] = stacks[i].item
 		else:
 			icon.texture = null
 			count.text = ""
-			_slot_name_keys[slot] = &""
+			_slot_items[slot] = null
 
 
 func _make_slot() -> Control:
@@ -133,12 +138,33 @@ func select_slot(which: StringName, index: int) -> void:
 	_select(grid.get_child(index) as Control)
 
 
+func is_eat_button_visible() -> bool:
+	return _eat_button.visible
+
+
+func is_eat_button_enabled() -> bool:
+	return _eat_button.visible and not _eat_button.disabled
+
+
+func get_eat_button_text() -> String:
+	return _eat_button.text
+
+
+func press_eat_button() -> void:
+	if is_eat_button_enabled():
+		_eat_button.pressed.emit()
+
+
+func _selected_item() -> ItemData:
+	return _slot_items.get(_selected_slot, null) if _selected_slot != null else null
+
+
 func _on_slot_hovered(slot: Control) -> void:
-	_show_name(_slot_name_keys.get(slot, &""))
+	_show_item(_slot_items.get(slot, null))
 
 
 func _on_slot_unhovered() -> void:
-	_show_name(_selected_name_key)
+	_show_item(_selected_item())
 
 
 func _on_slot_gui_input(event: InputEvent, slot: Control) -> void:
@@ -148,9 +174,33 @@ func _on_slot_gui_input(event: InputEvent, slot: Control) -> void:
 
 
 func _select(slot: Control) -> void:
-	_selected_name_key = _slot_name_keys.get(slot, &"")
-	_show_name(_selected_name_key)
+	_selected_slot = slot
+	_show_item(_selected_item())
+	_update_eat_button()
 
 
-func _show_name(name_key: StringName) -> void:
-	_item_name.text = tr(name_key) if name_key != &"" else ""
+func _show_item(item: ItemData) -> void:
+	_item_name.text = tr(item.name_key) if item != null else ""
+
+
+## Eat button: only for food selected in the stash grid. Disabled with a reason when it cannot be eaten.
+func _update_eat_button() -> void:
+	var item: ItemData = _selected_item()
+	var in_stash: bool = _selected_slot != null and _selected_slot.get_parent() == _stash_grid
+	_eat_button.visible = item != null and in_stash and item.buff_max_health > 0
+	if not _eat_button.visible:
+		return
+	_eat_button.disabled = not GameState.can_eat(item)
+	if not _eat_button.disabled:
+		_eat_button.text = tr(&"UI_EAT_FOOD") % item.buff_max_health
+	elif GameState.max_health_buff > 0:
+		_eat_button.text = tr(&"UI_EAT_ALREADY")
+	else:
+		_eat_button.text = tr(&"UI_EAT_TAVERN_ONLY")
+
+
+func _on_eat_pressed() -> void:
+	var item: ItemData = _selected_item()
+	if item != null and GameState.eat_from_stash(item):
+		EventBus.toast_requested.emit(tr(&"TOAST_ATE_FOOD") % [tr(item.name_key), item.buff_max_health])
+	_refresh()

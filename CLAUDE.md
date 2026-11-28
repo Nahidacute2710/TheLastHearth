@@ -110,6 +110,9 @@ PowerShell (từ `the-last-hearth/`): `& "D:\Godot_v4.7.2\Godot_v4.7.2-stable_wi
 
 - **Sau MỖI mốc:** chạy `--import`, `--quit-after 120` và `run_all.gd`; đọc output tìm `ERROR` / `SCRIPT ERROR` / `Parse Error` / `WARNING` / `FAIL`.
 - Mỗi mốc mới phải thêm test cho phần logic kiểm tra được.
+- **Quy tắc từ BUG-001 (chủ dự án chốt 2026-11-28):** mọi test làm thay đổi trạng thái game (ngày, vàng, túi, kho, máu, buff, vũ khí, save/load, chơi mới...) phải kiểm tra **cả HUD/UI hiển thị đúng**, không chỉ kiểm tra dữ liệu trong bộ nhớ. Lý do: BUG-001 có dữ liệu và file save đúng nhưng HUD sai, test chỉ kiểm tra dữ liệu nên không bắt được.
+- `run_all.gd` đánh trượt test có `ERROR` / `SCRIPT ERROR` (TECH-009). Lỗi cố ý trong test phải tránh hoặc dùng API không in lỗi.
+- Test không được đụng save thật: `test_case.gd` đặt `SaveManager.save_dir` về `user://test_saves/`.
 - Test viết ở `tests/test_<đối tượng>.gd`, kế thừa `res://tests/test_case.gd`, mỗi hàm test tên `test_*`. Trong test, truy cập autoload qua `tree.root.get_node("SceneRouter")` (hàm `router()`), không dùng tên autoload trực tiếp.
 - Unit test: bộ chạy tự viết `tests/run_all.gd` (không addon). GUT chưa cài; cài phải được duyệt.
 - Những gì không kiểm chứng được qua headless (cảm giác điều khiển, hiển thị, animation) phải ghi rõ trong báo cáo là **"cần kiểm tra thủ công trong editor"**.

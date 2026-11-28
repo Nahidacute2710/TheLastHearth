@@ -35,7 +35,8 @@ func _ready() -> void:
 	_health.health_changed.connect(_on_health_changed)
 	_health.died.connect(_on_died)
 	_hurtbox.hurt.connect(_on_hurt)
-	_health.reset(data.max_health)
+	EventBus.max_health_buff_changed.connect(_on_max_health_buff_changed)
+	_health.reset(get_max_health())
 
 
 func _physics_process(delta: float) -> void:
@@ -98,6 +99,11 @@ func get_health() -> HealthComponent:
 	return _health
 
 
+## Base max health plus the food buff from GameState.
+func get_max_health() -> int:
+	return data.max_health + GameState.max_health_buff
+
+
 func heal_full() -> void:
 	if state != State.DEAD:
 		_health.reset()
@@ -158,6 +164,12 @@ func _on_hurt(_damage: int, knockback: Vector2, _source: Node2D) -> void:
 	velocity = knockback
 	state = State.KNOCKBACK
 	_state_time_left = data.hurt_knockback_time
+
+
+## Buff changes only happen in the tavern (eating) or on the way back, so a full reset is safe.
+func _on_max_health_buff_changed(_amount: int) -> void:
+	if state != State.DEAD:
+		_health.reset(get_max_health())
 
 
 func _on_died() -> void:

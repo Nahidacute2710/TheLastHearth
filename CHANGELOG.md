@@ -5,10 +5,12 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 ## [Chưa phát hành] — CP-D: Lưu/tải và menu
 
 ### Thêm
+- D3: buff Súp Nấm (ăn ở quán qua panel túi đồ, +2 máu tối đa chuyến kế, HUD ô vàng cam, có lưu); lưu khi tắt bằng nút X nếu đang ở quán; test trọn vòng chơi `test_full_loop.gd`; test bảng dịch (đủ cột vi, khớp `%s`/`%d`).
 - D2: menu chính (Tiếp tục / Chơi mới có xác nhận / Thoát, dòng báo lỗi save), menu tạm dừng (Esc), `SceneRouter.unload()`, tên món trong túi đồ khi rê chuột hoặc chọn, phím debug Shift+F9 xóa save + test.
 - D1: `SaveManager` (JSON, file tạm, `.bak` cho file hỏng), `ItemDB`, `to_dict()/from_dict()` của `GameState`, `Inventory.to_array()/load_array()`, tự lưu ở quán + test.
 
 ### Sửa
+- TECH-009: bộ chạy test đánh trượt test có ERROR / SCRIPT ERROR.
 - BUG-001: Chơi mới sau khi về menu chính không cập nhật HUD vàng/ngày; thêm `GameState.start_new_game()` reset toàn bộ phiên; về menu từ quán khi đang nấu không còn làm mất món trong save + test.
 - D1: bếp không nấu khi kho hết chỗ cho món ("Kho đã đầy"), món không bao giờ bị mất.
 

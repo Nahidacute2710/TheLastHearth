@@ -21,7 +21,7 @@ Quản lý quán → Chuẩn bị → Đi dungeon → Chiến đấu → Thu th�
 ## 2. Nội dung MVP
 
 > ✅ = đã chốt (2026-11-27): nhân vật chính cố định, Thợ Mỏ Rỗng, Cuốc Chim, Nấm Hang, Súp Nấm. Các mục không có ✅ vẫn là ĐỀ XUẤT.
-> Mọi con số cân bằng (máu, sát thương, số nguyên liệu, tỉ lệ rơi, số quái mỗi phòng) là 🧪 CẦN THỬ NGHIỆM.
+> Mọi con số cân bằng (máu, sát thương, số nguyên liệu, tỉ lệ rơi, số quái mỗi phòng) đã được chơi thử đạt ngày 2026-11-28; giá trị thực tế nằm trong các file `.tres` và `docs/DECISION_LOG.md`.
 
 | Thành phần | Số lượng | Đề xuất cụ thể |
 |---|---|---|
@@ -32,7 +32,7 @@ Quản lý quán → Chuẩn bị → Đi dungeon → Chiến đấu → Thu th�
 | Vũ khí | 1 | ✅ **Cuốc Chim** (`rusty_pickaxe`): cận chiến, vung theo hướng chuột ✅ |
 | Tài nguyên | 1 | ✅ **Nấm Hang** (`cave_mushroom`): rơi từ quái và mọc ở góc dungeon |
 | Khách hàng NPC | 1 | **Lữ Khách** (`weary_traveler`): đến mỗi ngày, gọi 1 món |
-| Công thức | 1 | ✅ **Súp Nấm** (`mushroom_stew`) = 3 Nấm Hang (số lượng 🧪) |
+| Công thức | 1 | ✅ **Súp Nấm** (`mushroom_stew`) = 2 Nấm Hang (đã chơi thử 2026-11-28) |
 
 ## 3. Kịch bản chơi mẫu (người chơi trải nghiệm thế nào)
 
@@ -47,7 +47,7 @@ Quản lý quán → Chuẩn bị → Đi dungeon → Chiến đấu → Thu th�
 8. **Quản lý quán:** Nấu Súp Nấm → mang cho Lữ Khách → nhận vàng. Ngày tăng thêm 1.
 9. Thoát game, mở lại → "Tiếp tục" → mọi thứ còn nguyên.
 
-**Liên kết Quán → Dungeon trong MVP (✅ làm ở mốc D3 nếu vòng chơi đã ổn, nếu không thì để Vertical Slice):** Player cũng có thể **tự ăn** Súp Nấm trước khi xuống hầm để được +2 máu tối đa (🧪) trong chuyến đó. Điều này tạo lựa chọn thật sự đầu tiên: *bán lấy tiền hay ăn để đi sâu hơn?*
+**Liên kết Quán → Dungeon trong MVP (✅ đã làm ở D3, 2026-11-28):** Player cũng có thể **tự ăn** Súp Nấm trước khi xuống hầm để được +2 máu tối đa trong chuyến đó. Điều này tạo lựa chọn thật sự đầu tiên: *bán lấy tiền hay ăn để đi sâu hơn?*
 
 ## 4. Hệ thống trong MVP & tiêu chí chấp nhận
 

@@ -32,3 +32,6 @@ signal toast_requested(message: String)
 
 ## Something worth saving happened in the tavern (SaveManager writes the save).
 signal autosave_requested
+
+## Extra max health from food changed (player, HUD). 0 = no buff.
+signal max_health_buff_changed(amount: int)

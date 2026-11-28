@@ -3,8 +3,11 @@ extends SceneTree
 ## Usage (from the-last-hearth/): godot --headless --path . -s res://tests/run_all.gd
 ## Runs every res://tests/test_*.gd. Each test file extends res://tests/test_case.gd and
 ## defines methods named test_*. Exit code is 1 when any test fails.
+## A test also fails when it logs an engine or script error (a SCRIPT ERROR would otherwise
+## stop the test function silently and count as a pass).
 
 const TESTS_DIR: String = "res://tests/"
+const ErrorCounter: GDScript = preload("res://tests/error_counter.gd")
 
 
 func _initialize() -> void:
@@ -12,6 +15,8 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	var errors: Logger = ErrorCounter.new() as Logger
+	OS.add_logger(errors)
 	var files: PackedStringArray = []
 	for file_name: String in DirAccess.get_files_at(TESTS_DIR):
 		if file_name.begins_with("test_") and file_name.ends_with(".gd"):
@@ -35,6 +40,8 @@ func _run() -> void:
 			await test_case.call(method_name)
 			await test_case.call("after_each")
 			var failures: Array[String] = test_case.get("failures")
+			for logged: String in errors.call("take_errors"):
+				failures.append("error logged: " + logged)
 			if failures.is_empty():
 				passed += 1
 				print("PASS %s::%s" % [file_name, method_name])
@@ -43,5 +50,6 @@ func _run() -> void:
 				print("FAIL %s::%s" % [file_name, method_name])
 				for message: String in failures:
 					print("	- " + message)
+	OS.remove_logger(errors)
 	print("Tests: %d passed, %d failed" % [passed, failed])
 	quit(1 if failed > 0 else 0)
