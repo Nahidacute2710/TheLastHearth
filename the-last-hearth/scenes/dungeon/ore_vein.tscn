@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeon/ore_vein.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/environments/mine/env_coal_vein_placeholder.png" id="2_sprite"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="3_health"]
+[ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
+[ext_resource type="Script" path="res://scripts/data/loot_entry.gd" id="5_loot"]
+[ext_resource type="Resource" path="res://data/items/ember_coal.tres" id="6_coal"]
+
+[sub_resource type="Resource" id="Resource_coal_drop"]
+script = ExtResource("5_loot")
+item = ExtResource("6_coal")
+chance = 1.0
+min_count = 2
+max_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_base"]
+size = Vector2(24, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(26, 20)
+
+[node name="OreVein" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1_script")
+loot = SubResource("Resource_coal_drop")
+
+[node name="SpriteRoot" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="Sprite" type="Sprite2D" parent="SpriteRoot"]
+unique_name_in_owner = true
+texture = ExtResource("2_sprite")
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_base")
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_health")
+max_health = 3
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_hurtbox")
+health = NodePath("../Health")
+hit_sfx = &"ore_hit"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_hurt")

@@ -7,6 +7,7 @@ const ITEM_PATHS: Dictionary[StringName, String] = {
 	&"rusty_pickaxe": "res://data/items/rusty_pickaxe.tres",
 	&"cave_mushroom": "res://data/items/cave_mushroom.tres",
 	&"mushroom_stew": "res://data/items/mushroom_stew.tres",
+	&"ember_coal": "res://data/items/ember_coal.tres",
 }
 
 

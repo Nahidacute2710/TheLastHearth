@@ -9,6 +9,9 @@
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_cook_done_placeholder.wav" id="7_cook_done"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_coin_placeholder.wav" id="8_coin"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_ui_click_placeholder.wav" id="9_ui_click"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_ore_hit_placeholder.wav" id="10_ore_hit"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_ore_break_placeholder.wav" id="11_ore_break"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_hearth_kindle_placeholder.wav" id="12_hearth_kindle"]
 
 [resource]
 script = ExtResource("1_script")
@@ -20,6 +23,9 @@ sounds = Dictionary[StringName, AudioStream]({
 &"pickup": ExtResource("6_pickup"),
 &"cook_done": ExtResource("7_cook_done"),
 &"coin": ExtResource("8_coin"),
-&"ui_click": ExtResource("9_ui_click")
+&"ui_click": ExtResource("9_ui_click"),
+&"ore_hit": ExtResource("10_ore_hit"),
+&"ore_break": ExtResource("11_ore_break"),
+&"hearth_kindle": ExtResource("12_hearth_kindle")
 })
 volume_db = Dictionary[StringName, float]({})

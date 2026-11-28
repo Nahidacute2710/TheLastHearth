@@ -1,6 +1,6 @@
 extends Control
 ## Minimal HUD: health pips (top-left; pips from the food buff are drawn in another colour) and the
-## Cave Mushroom count in the bag. No words, so nothing to translate.
+## Cave Mushroom and Ember Coal counts in the bag. No words, so nothing to translate.
 
 const PIP_SIZE: Vector2 = Vector2(7.0, 7.0)
 const PIP_GAP: float = 2.0
@@ -12,6 +12,8 @@ const OUTLINE_COLOR: Color = Color(0.0862745, 0.0784314, 0.109804)
 
 ## Item counted next to the icon (Cave Mushroom in the MVP).
 @export var tracked_item: ItemData
+## Second counted item (Ember Coal, VS-E1).
+@export var coal_item: ItemData
 
 var current_health: int = 0
 var max_health: int = 0
@@ -20,6 +22,8 @@ var buff_pips: int = 0
 
 @onready var _item_icon: TextureRect = %ItemIcon
 @onready var _item_count: Label = %ItemCount
+@onready var _coal_icon: TextureRect = %CoalIcon
+@onready var _coal_count: Label = %CoalCount
 
 
 func _ready() -> void:
@@ -28,11 +32,16 @@ func _ready() -> void:
 	buff_pips = GameState.max_health_buff
 	GameState.bag.changed.connect(_refresh_item_count)
 	_item_icon.texture = tracked_item.icon if tracked_item != null else null
+	_coal_icon.texture = coal_item.icon if coal_item != null else null
 	_refresh_item_count()
 
 
 func get_item_count_text() -> String:
 	return _item_count.text
+
+
+func get_coal_count_text() -> String:
+	return _coal_count.text
 
 
 func _draw() -> void:
@@ -49,6 +58,8 @@ func _draw() -> void:
 func _refresh_item_count() -> void:
 	var amount: int = GameState.bag.count_of(tracked_item) if tracked_item != null else 0
 	_item_count.text = "×%d" % amount
+	var coal: int = GameState.bag.count_of(coal_item) if coal_item != null else 0
+	_coal_count.text = "×%d" % coal
 
 
 func _on_player_health_changed(current: int, maximum: int) -> void:

@@ -7,6 +7,8 @@ extends Area2D
 signal hurt(damage: int, knockback: Vector2, source: Node2D)
 
 @export var health: HealthComponent
+## Sound the attacker plays when its hit lands here (an ore vein clinks instead of the flesh hit).
+@export var hit_sfx: StringName = &"hit"
 
 ## Debug god mode: never takes damage, independent of i-frames.
 var debug_invulnerable: bool = false

@@ -151,7 +151,9 @@ func _update_visual(delta: float) -> void:
 
 
 func _on_attack_landed(hurtbox: HurtboxComponent) -> void:
-	EventBus.sfx_requested.emit(&"hit")
+	# The ore vein plays its own sounds (ore_hit / ore_break).
+	if hurtbox.hit_sfx == &"hit":
+		EventBus.sfx_requested.emit(&"hit")
 	attack_landed.emit(hurtbox)
 
 

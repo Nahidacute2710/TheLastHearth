@@ -121,6 +121,46 @@ def ui_click(rng):
     return [tone(1800, t) * math.exp(-t * 200) * 0.4 for t in (i / RATE for i in range(int(length * RATE)))]
 
 
+def ore_hit(rng):
+    # Pickaxe on rock: bright metallic clink (two inharmonic partials) over a short gritty burst.
+    length = 0.18
+    out = []
+    for i in range(int(length * RATE)):
+        t = i / RATE
+        clink = 0.5 * math.sin(2 * math.pi * 2350 * t) + 0.35 * math.sin(2 * math.pi * 3710 * t)
+        grit = noise(rng) * math.exp(-t * 90)
+        out.append((clink * math.exp(-t * 28) + 0.6 * grit) * envelope(t, length, 0.001, 0.1) * 0.55)
+    return out
+
+
+def ore_break(rng):
+    # Rock crumbling: low thump plus a longer rumble of filtered noise.
+    length = 0.45
+    raw = render(length, lambda t: noise(rng))
+    rumble = lowpass(raw, 0.12)
+    out = []
+    for i, s in enumerate(rumble):
+        t = i / RATE
+        thump = math.sin(2 * math.pi * (90 - 60 * t) * t) * math.exp(-t * 14)
+        out.append((0.7 * thump + 1.6 * s * math.exp(-t * 6)) * envelope(t, length, 0.002, 0.2) * 0.6)
+    return out
+
+
+def hearth_kindle(rng):
+    # Fire catching: rising filtered whoosh, then a warm major chord that swells.
+    length = 1.1
+    out, last = [], 0.0
+    for i in range(int(length * RATE)):
+        t = i / RATE
+        amount = 0.02 + 0.25 * min(t / 0.5, 1.0)
+        last += amount * (noise(rng) - last)
+        whoosh = last * min(t / 0.4, 1.0) * math.exp(-max(t - 0.4, 0.0) * 4)
+        chord_env = min(max(t - 0.25, 0.0) / 0.25, 1.0) * math.exp(-max(t - 0.5, 0.0) * 3)
+        chord = sum(math.sin(2 * math.pi * f * t) for f in (262, 330, 392, 523)) / 4
+        out.append((1.4 * whoosh + 0.6 * chord * chord_env) * envelope(t, length, 0.01, 0.3) * 0.6)
+    return out
+
+
 SOUNDS = {
     "swing": swing,
     "hit": hit,
@@ -130,6 +170,9 @@ SOUNDS = {
     "cook_done": cook_done,
     "coin": coin,
     "ui_click": ui_click,
+    "ore_hit": ore_hit,
+    "ore_break": ore_break,
+    "hearth_kindle": hearth_kindle,
 }
 
 

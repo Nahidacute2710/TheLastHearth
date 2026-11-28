@@ -6,6 +6,7 @@ extends Resource
 ## Ids the game plays. A test checks that each one has a stream.
 const IDS: Array[StringName] = [
 	&"swing", &"hit", &"enemy_windup", &"dodge", &"pickup", &"cook_done", &"coin", &"ui_click",
+	&"ore_hit", &"ore_break", &"hearth_kindle",
 ]
 
 @export var sounds: Dictionary[StringName, AudioStream] = {}
