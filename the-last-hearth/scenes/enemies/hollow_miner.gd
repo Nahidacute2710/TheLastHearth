@@ -104,6 +104,7 @@ func _start_windup() -> void:
 		_attack_direction = Vector2.RIGHT
 	_attack_pivot.rotation = _attack_direction.angle()
 	_change_state(State.WINDUP)
+	EventBus.sfx_requested.emit(&"enemy_windup")
 
 
 func _start_attack() -> void:

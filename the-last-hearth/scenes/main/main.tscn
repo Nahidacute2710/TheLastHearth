@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="8_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/main_menu.tscn" id="9_menu"]
 [ext_resource type="PackedScene" path="res://scenes/ui/settings_menu.tscn" id="10_settings"]
+[ext_resource type="Script" path="res://scenes/main/audio_director.gd" id="11_audio"]
+[ext_resource type="Resource" path="res://data/audio/sfx_library.tres" id="12_sfx"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_script")
@@ -39,6 +41,11 @@ unique_name_in_owner = true
 
 [node name="SettingsMenu" parent="UILayer" instance=ExtResource("10_settings")]
 unique_name_in_owner = true
+
+[node name="Audio" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("11_audio")
+library = ExtResource("12_sfx")
 
 [node name="DebugTools" type="Node" parent="."]
 script = ExtResource("3_debug")

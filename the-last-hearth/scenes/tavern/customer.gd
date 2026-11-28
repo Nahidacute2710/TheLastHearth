@@ -24,6 +24,7 @@ func _on_interacted(_actor: Node2D) -> void:
 		EventBus.toast_requested.emit(tr(&"TOAST_CUSTOMER_WAITING") % [tr(data.name_key), tr(data.wanted_item.name_key)])
 		return
 	GameState.add_gold(data.payment)
+	EventBus.sfx_requested.emit(&"coin")
 	GameState.mark_customer_served(data.id)
 	EventBus.toast_requested.emit(tr(&"TOAST_CUSTOMER_PAID") % [tr(data.name_key), data.payment])
 	_refresh()

@@ -5,10 +5,14 @@ Ghi các thay đổi theo mốc phát triển. Mới nhất ở trên. Định d
 ## [Chưa phát hành] — Giai đoạn 2 (Vertical Slice), VS-A
 
 ### Thêm
+- VSA4: bus Master/Music/SFX; `AudioDirector` trong Main phát âm theo id qua `EventBus.sfx_requested`; 8 SFX tạm tự sinh (`tools/gen_placeholder_sfx.py`): swing, hit, enemy_windup, dodge, pickup, cook_done, coin, ui_click; bảng âm `data/audio/sfx_library.tres`; test.
 - VSA3: menu cài đặt (từ menu chính và menu tạm dừng): ngôn ngữ, âm lượng Master/Music/SFX, toàn màn hình, đổi 8 phím (báo trùng phím, Esc hủy, khôi phục mặc định); 26 khóa dịch mới; test.
 - VSA2: `user://settings.cfg` (ngôn ngữ, âm lượng 3 bus, toàn màn hình, phím) qua `GameSettings` trong `SaveManager`; ngôn ngữ chuyển ra khỏi save ván chơi (save cũ được đọc một lần để chuyển, không bị sửa); Chơi mới không đổi cài đặt; test.
 - VSA1: font Galmuri11 (12 px, chữ chính) và Galmuri9 (10 px, HUD), tắt antialiasing/hinting, chừa dòng cho dấu chữ hoa; theme UI chung `resources/ui/main_theme.tres` gán toàn project; xóa font ứng viên Tiny5, VT323; test cỡ chữ, độ phủ ký tự và chiều cao dòng.
 - VSA0: màn hình thử font `scenes/debug/font_preview.tscn` (toàn bộ chuỗi trong `translations.csv`, đổi font và EN/VI), 4 font ứng viên OFL trong `assets/fonts/candidates/`, `assets/CREDITS.md`, test độ phủ ký tự tiếng Việt.
+
+### Sửa
+- VSA4: rời quán khi nồi đang nấu không còn hiện thông báo "Đã nấu xong" ở màn hình khác.
 
 ### Tài liệu
 - Ghi các quyết định Vertical Slice đã duyệt (DECISION_LOG, VERTICAL_SLICE_PLAN, GDD 4.3 và 5.3, ASSET_GUIDELINES, BUG_TRACKER TECH-008); thêm `docs/STORY_BIBLE.md` (Maren); kế hoạch VS-A chờ duyệt.

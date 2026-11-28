@@ -38,6 +38,7 @@ func attack_towards(direction: Vector2) -> bool:
 	_swing_left = weapon.swing_duration
 	_swing_sprite.visible = true
 	_cooldown_left = weapon.attack_cooldown
+	EventBus.sfx_requested.emit(&"swing")
 	return true
 
 

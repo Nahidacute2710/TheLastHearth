@@ -88,6 +88,7 @@ func dodge(direction: Vector2) -> bool:
 	_state_time_left = data.dodge_duration
 	_dodge_cooldown_left = data.dodge_cooldown
 	_hurtbox.start_invulnerability(data.dodge_invulnerability)
+	EventBus.sfx_requested.emit(&"dodge")
 	return true
 
 
@@ -150,6 +151,7 @@ func _update_visual(delta: float) -> void:
 
 
 func _on_attack_landed(hurtbox: HurtboxComponent) -> void:
+	EventBus.sfx_requested.emit(&"hit")
 	attack_landed.emit(hurtbox)
 
 
@@ -160,6 +162,7 @@ func _on_health_changed(current: int, maximum: int) -> void:
 func _on_hurt(_damage: int, knockback: Vector2, _source: Node2D) -> void:
 	if state == State.DEAD:
 		return
+	EventBus.sfx_requested.emit(&"hit")
 	_hurtbox.start_invulnerability(data.hurt_invulnerability)
 	velocity = knockback
 	state = State.KNOCKBACK

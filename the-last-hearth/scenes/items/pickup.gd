@@ -28,6 +28,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if not body is Player or item == null:
 		return
 	var left: int = GameState.bag.add(item, count)
+	if left < count:
+		EventBus.sfx_requested.emit(&"pickup")
 	if left == 0:
 		set_deferred(&"monitoring", false)
 		queue_free()

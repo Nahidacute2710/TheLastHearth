@@ -35,3 +35,6 @@ signal autosave_requested
 
 ## Extra max health from food changed (player, HUD). 0 = no buff.
 signal max_health_buff_changed(amount: int)
+
+## Play a sound effect by id (AudioDirector; ids listed in SfxLibrary.IDS).
+signal sfx_requested(id: StringName)

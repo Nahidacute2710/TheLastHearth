@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="SfxLibrary" format=3]
+
+[ext_resource type="Script" path="res://scripts/audio/sfx_library.gd" id="1_script"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_swing_placeholder.wav" id="2_swing"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_hit_placeholder.wav" id="3_hit"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_enemy_windup_placeholder.wav" id="4_enemy_windup"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_dodge_placeholder.wav" id="5_dodge"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_pickup_placeholder.wav" id="6_pickup"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_cook_done_placeholder.wav" id="7_cook_done"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_coin_placeholder.wav" id="8_coin"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_ui_click_placeholder.wav" id="9_ui_click"]
+
+[resource]
+script = ExtResource("1_script")
+sounds = Dictionary[StringName, AudioStream]({
+&"swing": ExtResource("2_swing"),
+&"hit": ExtResource("3_hit"),
+&"enemy_windup": ExtResource("4_enemy_windup"),
+&"dodge": ExtResource("5_dodge"),
+&"pickup": ExtResource("6_pickup"),
+&"cook_done": ExtResource("7_cook_done"),
+&"coin": ExtResource("8_coin"),
+&"ui_click": ExtResource("9_ui_click")
+})
+volume_db = Dictionary[StringName, float]({})

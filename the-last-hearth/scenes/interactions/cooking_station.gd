@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 
 func _exit_tree() -> void:
 	if _cooking:
-		_finish()
+		_finish(false)
 
 
 func is_cooking() -> bool:
@@ -66,11 +66,14 @@ func _on_interacted(_actor: Node2D) -> void:
 	queue_redraw()
 
 
-func _finish() -> void:
+## `announce` is false when the tavern is being unloaded (no toast or sound then).
+func _finish(announce: bool = true) -> void:
 	_cooking = false
 	_interactable.enabled = true
 	queue_redraw()
 	# Space was checked before cooking; if something else filled the stash meanwhile, the dish
 	# still goes in (over the slot limit) so it is never lost.
 	GameState.stash.add_ignoring_limit(recipe.result, recipe.result_count)
-	EventBus.toast_requested.emit(tr(&"TOAST_DISH_COOKED") % tr(recipe.result.name_key))
+	if announce:
+		EventBus.toast_requested.emit(tr(&"TOAST_DISH_COOKED") % tr(recipe.result.name_key))
+		EventBus.sfx_requested.emit(&"cook_done")
